@@ -23,10 +23,52 @@
       "/Users/luciofra/.toolbox/bin"
     ];
 
-    home.packages = with pkgs; [
-      rnix-lsp
-      nixpkgs-fmt
-    ];
+
+    home.packages =
+      with pkgs;
+      [
+        vscode
+        rustup
+        python38
+        protobuf
+        iterm2
+        openssl
+        pkg-config
+        git
+        cmake
+        ninja
+        gh
+        nodePackages.conventional-changelog-cli
+        wget
+        autoconf
+        automake
+        autoconf-archive
+        libtool
+        unzip
+        m4
+
+        coreutils
+        findutils
+        gawk
+        git
+        gnugrep
+        gnused
+        gnutar
+        gnutls
+
+        starship
+        zsh
+
+        rust-analyzer
+        tmux
+
+        fzf
+        ripgrep
+        fd
+
+        rnix-lsp
+        nixpkgs-fmt
+      ];
 
     imports = [
       ./zsh.nix

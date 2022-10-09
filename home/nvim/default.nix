@@ -1,4 +1,12 @@
 { pkgs, ... }: {
+  home = {
+    sessionVariables = rec {
+      EDITOR = "nvim";
+      VISUAL = EDITOR;
+    };
+    shellAliases = { vi = "nvim"; vim = "nvim"; };
+  };
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -6,13 +14,17 @@
     extraConfig = builtins.readFile ./init.vim;
 
     plugins = with pkgs.vimPlugins; [
+      # LSP
       nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
       cmp-vsnip
       cmp-path
       cmp-buffer
+
+      # Rust
       rust-tools-nvim
+
       vim-vsnip
       popup-nvim
       plenary-nvim
@@ -41,9 +53,4 @@
       })
     ];
   };
-
-  # xdg.enable = true;
-
-  # xdg.configFile."nvim/lua".source = ./lua;
-  # xdg.configFile."nvim/init.lua".source = ./init.lua;
 }

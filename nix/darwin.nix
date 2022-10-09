@@ -1,48 +1,10 @@
 { pkgs, ... }:
 {
   environment.systemPackages =
-    with pkgs;
-    [
-      vscode
-      rustup
-      python38
-      protobuf
-      iterm2
-      openssl
-      pkg-config
-      git
-      cmake
-      ninja
-      gh
-      nodePackages.conventional-changelog-cli
-      wget
-      autoconf
-      automake
-      autoconf-archive
-      libtool
-      unzip
-      m4
-
-      coreutils
-      findutils
-      gawk
-      git
-      gnugrep
-      gnused
-      gnutar
-      gnutls
-
+    with pkgs; [
       neovim
-      starship
-      zsh
-
-      rust-analyzer
-      tmux
-
-      fzf
-      ripgrep
-      fd
     ];
+
 
   users.users.luciofra = {
     name = "luciofra";
