@@ -57,7 +57,7 @@
   programs.zsh.enable = true;
 
   imports = [
-    ./home-manager.nix
+    ../home
   ];
 
   nix = {

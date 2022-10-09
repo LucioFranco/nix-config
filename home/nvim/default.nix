@@ -3,9 +3,6 @@
     enable = true;
     viAlias = true;
 
-    # extraConfig = ''
-    # '';
-    # extraConfig = "lua require('init')";
     extraConfig = builtins.readFile ./init.vim;
 
     plugins = with pkgs.vimPlugins; [
