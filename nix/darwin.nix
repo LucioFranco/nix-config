@@ -2,7 +2,7 @@
 {
   environment.systemPackages =
     with pkgs;
-    [ 
+    [
       vscode
       rustup
       python38
@@ -43,7 +43,7 @@
       ripgrep
       fd
     ];
-  
+
   users.users.luciofra = {
     name = "luciofra";
     home = "/Users/luciofra";

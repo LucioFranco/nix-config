@@ -37,6 +37,7 @@ tnoremap <Esc> <C-\><C-n>
 " See https://github.com/simrat39/rust-tools.nvim#configuration
 lua <<EOF
 local nvim_lsp = require'lspconfig'
+nvim_lsp.rnix.setup({})
 
 local opts = {
     tools = { -- rust-tools options

@@ -1,28 +1,28 @@
 { pkgs, ... }: {
-    programs.git = {
-      enable = true;
-      includes = [
-        # github config
-        {
-          condition = "gitdir/i:~/code/";
-          contents = {
-            user = {
-              name = "Lucio Franco";
-              email = "luciofranco14@gmail.com";
-            };
+  programs.git = {
+    enable = true;
+    includes = [
+      # github config
+      {
+        condition = "gitdir/i:~/code/";
+        contents = {
+          user = {
+            name = "Lucio Franco";
+            email = "luciofranco14@gmail.com";
           };
-        }
+        };
+      }
 
-        # Amazon config
-        {
-          condition = "gitdir/i:~/workplace/";
-          contents = {
-            user = {
-              name = "Lucio Franco";
-              email = "foo";
-            };
+      # Amazon config
+      {
+        condition = "gitdir/i:~/workplace/";
+        contents = {
+          user = {
+            name = "Lucio Franco";
+            email = "foo";
           };
-        }
-      ];
-    };
+        };
+      }
+    ];
+  };
 }
