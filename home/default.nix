@@ -76,6 +76,7 @@
       ./git.nix
       ./fzf.nix
       ./nvim
+      ./alacritty.nix
     ];
   };
 }
