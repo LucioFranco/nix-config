@@ -40,7 +40,16 @@
       vim-gitgutter
       vim-fugitive
 
+      vim-commentary
+
+      # Diagnostics
+      dressing-nvim
+      trouble-nvim
+      fidget-nvim
+      nvim-web-devicons
+
       # Theme: Solarized light
+      jellybeans-vim
       (pkgs.vimUtils.buildVimPlugin rec {
         pname = "solarized-nvim";
         version = "07-08-2022";

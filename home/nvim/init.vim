@@ -22,6 +22,11 @@ set textwidth=80
 syntax enable
 set background=light
 colorscheme solarized
+"colorscheme jellybeans
+"
+"" Treat :W as :w for when typos happen
+command! W w
+command! Wa wa
 
 let mapleader="\<Space>"
 nnoremap <leader>v :vsplit<CR>
@@ -32,6 +37,8 @@ nnoremap <C-p> :Files<Cr>
 " Allow esc to be used in term mode
 tnoremap <Esc> <C-\><C-n>
 
+set termguicolors
+
 " Configure LSP through rust-tools.nvim plugin.
 " rust-tools will configure and enable certain LSP features for us.
 " See https://github.com/simrat39/rust-tools.nvim#configuration
@@ -41,10 +48,11 @@ nvim_lsp.rnix.setup({})
 
 local opts = {
     tools = { -- rust-tools options
-        autoSetHints = true,
+        --autoSetHints = true,
         reload_workspace_from_cargo_toml = true,
         --hover_with_actions = true,
         inlay_hints = {
+            auto = false,
             show_parameter_hints = false,
             parameter_hints_prefix = "",
             other_hints_prefix = "",
@@ -55,18 +63,10 @@ local opts = {
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
     server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        -- on_attach = on_attach,
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
             ["rust-analyzer"] = {
-                -- enable clippy on save
-                checkOnSave = {
-                    --command = "clippy"
-                    --features = "all"
-                    --cargo.features = "all"
-                },
                 cargo = {
                     features = "all"
                 }
@@ -77,6 +77,26 @@ local opts = {
 
 
 require('rust-tools').setup(opts)
+
+
+require('trouble').setup({})
+
+require('fidget').setup({
+  text = {
+    spinner = "moon",
+  }
+})
+
+require('dressing').setup({
+  input = {
+    enabled = true,
+  },
+  select = {
+    enabled = true,
+  },
+})
+
+require('nvim-web-devicons').setup({})
 EOF
 
 " Set format on save
@@ -93,6 +113,8 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> grr   <cmd>RustRunnables<CR>
 
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
@@ -108,6 +130,13 @@ nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
 " this removes the jitter when warnings/errors flow in
 set signcolumn=yes
 
+" Trouble keybinds
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>Trouble workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>Trouble document_diagnostics<cr>
+nnoremap <leader>xq <cmd>Trouble quickfix<cr>
+nnoremap <leader>xl <cmd>Trouble loclist<cr>
+nnoremap xR <cmd>Trouble lsp_references<cr>
 
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration

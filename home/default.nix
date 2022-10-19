@@ -70,6 +70,8 @@
         nixpkgs-fmt
       ];
 
+
+
     imports = [
       ./zsh.nix
       ./starship.nix
@@ -77,6 +79,7 @@
       ./fzf.nix
       ./nvim
       ./alacritty.nix
+      ./tmux.nix
     ];
   };
 }
