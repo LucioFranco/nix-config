@@ -10,6 +10,9 @@
             name = "Lucio Franco";
             email = "luciofranco14@gmail.com";
           };
+          push = {
+            autoSetupRemote = true;
+          };
         };
       }
 
