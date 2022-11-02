@@ -22,6 +22,8 @@
       cmp-path
       cmp-buffer
 
+      nvim-navic
+
       # Rust
       rust-tools-nvim
 
@@ -47,6 +49,9 @@
       trouble-nvim
       fidget-nvim
       nvim-web-devicons
+
+      # tmux
+      vim-tmux-navigator
 
       # Theme: Solarized light
       jellybeans-vim

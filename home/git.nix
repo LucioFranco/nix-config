@@ -28,4 +28,14 @@
       }
     ];
   };
+
+    home.shellAliases = rec {
+      ga = "git add";
+      gca = "git commit --add";
+      gc = "git commit";
+      gs = "git status";
+      gd = "git diff";
+      gdc = "git diff --cached";
+      gch = "git checkout";
+    };
 }

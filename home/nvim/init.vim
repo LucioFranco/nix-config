@@ -46,6 +46,14 @@ lua <<EOF
 local nvim_lsp = require'lspconfig'
 nvim_lsp.rnix.setup({})
 
+local navic = require("nvim-navic")
+
+nvim_lsp.rust_analyzer.setup({
+  on_attach = function(client, bufnr)
+    navic.attach(client, bufnr)
+  end
+})
+
 local opts = {
     tools = { -- rust-tools options
         --autoSetHints = true,
