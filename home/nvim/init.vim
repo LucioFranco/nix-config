@@ -15,6 +15,7 @@ set shiftwidth=2
 set expandtab
 
 set relativenumber
+set number
 
 set textwidth=80
 

@@ -3,4 +3,4 @@
 HOST=f84d8997aa5c
 
 nix build --extra-experimental-features nix-command --extra-experimental-features flakes .#darwinConfigurations.$HOST.system
-./result/sw/bin/darwin-rebuild switch --flake .#$HOST
+./result/sw/bin/darwin-rebuild switch --flake .#$HOST $@

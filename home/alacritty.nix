@@ -5,9 +5,8 @@
     settings = {
       window.decorations = "none";
       font = {
-        size = 12.0;
+        size = 12.5;
         normal = {
-          #family = "FiraCode Nerd Font Regular";
           family = "Hack Nerd Font Mono";
         };
       };
