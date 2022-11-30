@@ -62,7 +62,7 @@
           owner = "shaunsingh";
           repo = "solarized.nvim";
           rev = "34c2245a6ddfd85766f6127768f6b04b0ae2f84a";
-          sha256 = "f6/OLa0RvDWByktwTyeLpe3p9BNlgzNHjcFHUNVQJq4=";
+          hash = "sha256-f6/OLa0RvDWByktwTyeLpe3p9BNlgzNHjcFHUNVQJq4=";
         };
       })
     ];

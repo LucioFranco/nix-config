@@ -103,6 +103,10 @@
 
         rnix-lsp
         nixpkgs-fmt
+
+        neovide
+
+        vscode
       ];
   };
 }
