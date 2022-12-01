@@ -31,7 +31,7 @@
 
   home.shellAliases = rec {
     ga = "git add";
-    gca = "git commit --add";
+    gca = "git commit -a";
     gc = "git commit";
     gs = "git status";
     gd = "git diff";
