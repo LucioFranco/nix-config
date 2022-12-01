@@ -25,6 +25,8 @@
         };
       }
     ];
+
+    ignores = [ ".DS_Store" ];
   };
 
   home.shellAliases = rec {
