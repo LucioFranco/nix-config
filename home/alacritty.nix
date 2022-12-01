@@ -6,9 +6,7 @@
       window.decorations = "none";
       font = {
         size = 12.5;
-        normal = {
-          family = "Hack Nerd Font Mono";
-        };
+        normal = { family = "Hack Nerd Font Mono"; };
       };
 
       colors = {

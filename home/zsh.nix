@@ -8,7 +8,6 @@
       bbb = "brazil-build-recursive";
     };
 
-
     # oh-my-zsh = {
     #     enable = true;
     #     plugins = ["git"];

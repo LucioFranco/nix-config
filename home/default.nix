@@ -28,10 +28,7 @@
       PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     };
 
-    home.sessionPath = [
-      "${config.home.homeDirectory}/.toolbox/bin"
-    ];
-
+    home.sessionPath = [ "${config.home.homeDirectory}/.toolbox/bin" ];
 
     # Disable hm's darwin linking logic that conflicts with the custom
     # activation script below.
@@ -44,69 +41,65 @@
     #
     # Ref: https://github.com/nix-community/home-manager/issues/1341#issuecomment-1190875080
     home.activation = lib.mkIf pkgs.stdenv.isDarwin {
-      copyApplications =
-        let
-          apps = pkgs.buildEnv {
-            name = "home-manager-applications";
-            paths = config.home.packages;
-            pathsToLink = "/Applications";
-          };
-        in
-        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          baseDir="$HOME/Applications/Home Manager Apps"
-          if [ -e "$baseDir" ]; then
-            echo "Removing $baseDir"
-            rm -rf "$baseDir" || rm -rf "$baseDir"
-          fi
-          mkdir -p "$baseDir"
-          for appFile in ${apps}/Applications/*; do
-            target="$baseDir/$(basename "$appFile")"
-            $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-            $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-          done
-        '';
+      copyApplications = let
+        apps = pkgs.buildEnv {
+          name = "home-manager-applications";
+          paths = config.home.packages;
+          pathsToLink = "/Applications";
+        };
+      in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        baseDir="$HOME/Applications/Home Manager Apps"
+        if [ -e "$baseDir" ]; then
+          echo "Removing $baseDir"
+          rm -rf "$baseDir" || rm -rf "$baseDir"
+        fi
+        mkdir -p "$baseDir"
+        for appFile in ${apps}/Applications/*; do
+          target="$baseDir/$(basename "$appFile")"
+          $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
+          $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
+        done
+      '';
     };
 
-    home.packages =
-      with pkgs;
-      [
-        rustup
-        python38
-        protobuf
-        openssl
-        pkg-config
-        git
-        cmake
-        ninja
-        gh
-        nodePackages.conventional-changelog-cli
-        wget
-        autoconf
-        automake
-        autoconf-archive
-        libtool
-        unzip
-        m4
+    home.packages = with pkgs; [
+      rustup
+      python38
+      protobuf
+      openssl
+      pkg-config
+      git
+      cmake
+      ninja
+      gh
+      nodePackages.conventional-changelog-cli
+      wget
+      autoconf
+      automake
+      autoconf-archive
+      libtool
+      unzip
+      m4
 
-        coreutils
-        findutils
-        gawk
-        gnugrep
-        gnused
-        gnutar
-        gnutls
+      coreutils
+      findutils
+      gawk
+      gnugrep
+      gnused
+      gnutar
+      gnutls
 
-        rust-analyzer
+      rust-analyzer
 
-        ripgrep
-        fd
+      ripgrep
+      fd
 
-        rnix-lsp
-        nixpkgs-fmt
+      rnix-lsp
+      nixfmt
 
-        neovide
+      neovide
 
-        vscode
-      ];
+      vscode
+    ];
   };
 }

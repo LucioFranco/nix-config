@@ -4,7 +4,10 @@
       EDITOR = "nvim";
       VISUAL = EDITOR;
     };
-    shellAliases = { vi = "nvim"; vim = "nvim"; };
+    shellAliases = {
+      vi = "nvim";
+      vim = "nvim";
+    };
   };
 
   programs.neovim = {

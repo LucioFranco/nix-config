@@ -11,9 +11,7 @@
     keyMode = "vi";
     prefix = "C-b";
 
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-    ];
+    plugins = with pkgs.tmuxPlugins; [ vim-tmux-navigator ];
 
     extraConfig = ''
       set-option -g status-position top

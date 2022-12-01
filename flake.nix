@@ -2,9 +2,7 @@
   description = "Lucio's darwin setup";
 
   inputs = {
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
+    nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -24,10 +22,7 @@
         inherit system;
         config.allowUnfree = true;
       };
-      modules = [
-        ./nix/darwin.nix
-        home-manager.darwinModules.home-manager
-      ];
+      modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
     };
   };
 }
