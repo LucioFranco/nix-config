@@ -100,6 +100,9 @@
       neovide
 
       vscode
+      
+      helix
+      zellij
     ];
   };
 }
