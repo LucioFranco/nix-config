@@ -55,7 +55,18 @@
       nvim-web-devicons
 
       # tmux
-      vim-tmux-navigator
+      # There seems to be some sort of bug with this plugin
+      # so pin it to the last working version.
+      (pkgs.vimUtils.buildVimPlugin rec {
+        pname = "vim-tmux-navigator";
+        version = "2022-10-15";
+        src = pkgs.fetchFromGitHub {
+          owner = "christoomey";
+          repo = "vim-tmux-navigator";
+          rev = "bd4c38be5b4882991494cf77c0601a55bc45eebf";
+          sha256 = "17yqy79p5i54wkg1wmb32v84s05rfaywx7qzayzs5q485zap4813";
+        };
+      })
 
       # Theme: Solarized light
       jellybeans-vim

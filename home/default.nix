@@ -25,10 +25,13 @@
       OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
       PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
 
-      NPM_CONFIG_PREFIX="${config.home.homeDirectory}/.npm_global";
+      NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.npm_global";
     };
 
-    home.sessionPath = [ "${config.home.homeDirectory}/.toolbox/bin" "${config.home.homeDirectory}/.npm_global/bin"];
+    home.sessionPath = [
+      "${config.home.homeDirectory}/.toolbox/bin"
+      "${config.home.homeDirectory}/.npm_global/bin"
+    ];
 
     # Disable hm's darwin linking logic that conflicts with the custom
     # activation script below.
@@ -102,7 +105,7 @@
       neovide
 
       vscode
-      
+
       helix
       zellij
 
