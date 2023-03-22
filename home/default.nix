@@ -110,6 +110,10 @@
 
       pulumi
       pulumiPackages.pulumi-language-python
+      aws-iam-authenticator
+      awscli2
+      kubectl
+      kubernetes-helm
 
       nodePackages.pyright
     ];
