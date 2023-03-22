@@ -27,8 +27,8 @@
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
 
-      set -g allow-rename on
-      set-window-option -g automatic-rename
+      set-option -g status-interval 1
+      set-option -g automatic-rename on
       set-option -g automatic-rename-format '#{b:pane_current_path}'
 
       setw -g monitor-activity on

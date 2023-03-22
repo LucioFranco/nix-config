@@ -4,6 +4,7 @@
 
     settings = {
       window.decorations = "none";
+      window.option_as_alt = true;
       font = {
         size = 12.5;
         normal = { family = "Hack Nerd Font Mono"; };

@@ -44,6 +44,7 @@
       # UI
       vim-gitgutter
       vim-fugitive
+      nerdtree
 
       vim-commentary
 

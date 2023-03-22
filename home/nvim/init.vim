@@ -35,6 +35,12 @@ nnoremap <leader>v :vsplit<CR>
 " Ctrl-p with fzf
 nnoremap <C-p> :Files<Cr>
 
+" Nerdtree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
 " Allow esc to be used in term mode
 tnoremap <Esc> <C-\><C-n>
 
@@ -46,6 +52,15 @@ set termguicolors
 lua <<EOF
 local nvim_lsp = require'lspconfig'
 nvim_lsp.rnix.setup({})
+nvim_lsp.pyright.setup({
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic"
+      }
+    }     
+  }
+})
 
 local navic = require("nvim-navic")
 
