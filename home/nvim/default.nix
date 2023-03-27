@@ -26,6 +26,8 @@
       cmp-buffer
       cmp-nvim-lsp
 
+      lsp_lines-nvim
+
       nvim-navic
 
       # Rust
