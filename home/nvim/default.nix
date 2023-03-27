@@ -24,6 +24,7 @@
       cmp-vsnip
       cmp-path
       cmp-buffer
+      cmp-nvim-lsp
 
       nvim-navic
 
