@@ -24,5 +24,10 @@
       };
       modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
     };
+
+    homeConfigurations."wsl" = home-manager.lib.homeManagerConfiguration rec {
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      modules = [ ./home/default2.nix ];
+    };
   };
 }
