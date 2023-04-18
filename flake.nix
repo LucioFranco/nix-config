@@ -1,5 +1,5 @@
 {
-  description = "Lucio's darwin setup";
+  description = "Lucio's nix config";
 
   inputs = {
     nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
@@ -16,7 +16,7 @@
   };
 
   outputs = { self, darwin, nixpkgs, home-manager }@inputs: {
-    darwinConfigurations."f84d8997aa5c" = darwin.lib.darwinSystem rec {
+    darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;
@@ -25,9 +25,9 @@
       modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
     };
 
-    homeConfigurations."wsl" = home-manager.lib.homeManagerConfiguration rec {
+    homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration rec {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      modules = [ ./home/default2.nix ];
+      modules = [ ./nix/wsl.nix ];
     };
   };
 }

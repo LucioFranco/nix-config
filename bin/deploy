@@ -2,8 +2,16 @@
 
 HOST=wsl
 
-#nix build --extra-experimental-features nix-command --extra-experimental-features flakes .#homeConfigurations.$HOST.system
-#./result/sw/bin/darwin-rebuild switch --flake .#$HOST $@
-
-nix build .#homeConfigurations.$HOST.activationPackage
-./result/bin/home-manager switch --flake .#wsl
+case "$1" in
+  wsl) 
+    nix build .#homeConfigurations.wsl.activationPackage
+    ./result/bin/home-manger switch --flake .#wsl
+    ;;
+  workbook) 
+    nix build .#darwinConfigurations.workbook.system
+    ./result/sw/bin/darwin-rebuild switch --flake .#workbook
+    ;;
+  *)
+    echo "argument $1"
+    ;;
+esac

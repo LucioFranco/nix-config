@@ -1,7 +1,11 @@
 { pkgs, config, lib, ... }: {
-  # imports = [ ../home ];
+  home-manager.users.luciofra = { config, ... }: {
+    home.username = "luciofra";
 
-  # home-manager.users.luciofra =
+    imports = [ ../home ];
+  };
+
+  home-manager.verbose = true;
 
   users.users.luciofra = {
     name = "luciofra";
