@@ -22,25 +22,25 @@ jobs:
           nix build -L --keep-going \
             .\#checks.x86_64-linux.pre-commit-check
 
-  build-shell:
-    name: build-shell (${{ matrix.system }})
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        system: ["x86_64-linux"]
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          lfs: false
-      - uses: DeterminateSystems/nix-installer-action@v2
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: build-shell
-        run: |
-          nix run nixpkgs\#nix-build-uncached -- \
-            --keep-going \
-            -A "devShells.${{ matrix.system }}.default.inputDerivation"
+  # build-shell:
+  #   name: build-shell (${{ matrix.system }})
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       system: ["x86_64-linux"]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         lfs: false
+  #     - uses: DeterminateSystems/nix-installer-action@v2
+  #       with:
+  #         github_access_token: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: build-shell
+  #       run: |
+  #         nix run nixpkgs\#nix-build-uncached -- \
+  #           --keep-going \
+  #           -A "devShells.${{ matrix.system }}.default.inputDerivation"
   gen-hosts:
     runs-on: ubuntu-latest
     outputs:
@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJson('[{"host":"wsl","system":"x86_64-linux"},{"host":"gha-mac","system":"x86_64-darwin"}]') }}
+        host: ${{ fromJSON('[{"host":"wsl","system":"x86_64-linux"},{"host":"gha-mac","system":"x86_64-darwin"}]') }}
     steps:
       - uses: actions/checkout@v3
         with:
