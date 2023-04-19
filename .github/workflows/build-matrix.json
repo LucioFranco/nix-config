@@ -1,10 +1,12 @@
 [
   {
     "host": "wsl",
-    "system": "x86_64-linux"
+    "system": "x86_64-linux",
+    "ghHost": "ubuntu-latest"
   },
   {
     "host": "gha-mac",
-    "system": "x86_64-darwin"
+    "system": "x86_64-darwin",
+    "ghHost": "macos-latest"
   }
 ]
