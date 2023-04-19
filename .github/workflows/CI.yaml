@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJson([{"host":"wsl","system":"x86_64-linux"},{"host":"gha-mac","system":"x86_64-darwin"}]) }}
+        host: ${{ fromJson("[{\"host\":\"wsl\",\"system\":\"x86_64-linux\"},{\"host\":\"gha-mac\",\"system\":\"x86_64-darwin\"}]") }}
     steps:
       - uses: actions/checkout@v3
         with:
