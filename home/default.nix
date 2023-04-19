@@ -60,6 +60,16 @@
     '';
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+  };
+
   home.packages = with pkgs; [
     rustup
     python38
