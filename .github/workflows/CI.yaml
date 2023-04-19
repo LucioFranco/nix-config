@@ -55,7 +55,7 @@ jobs:
           echo $JSON
 
           echo "hosts=$JSON" >> $GITHUB_OUTPUT
-          echo $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
 
   build-host:
     name: build-${{ matrix.host.host }}
