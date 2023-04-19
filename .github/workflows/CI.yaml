@@ -1,0 +1,23 @@
+name: ci
+on:
+  push:
+    branches:
+      - master
+      - try
+  pull_request:
+jobs:
+  lints:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: false
+      - uses: cachix/install-nix-action@v20
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: parse
+        run: nix-instantiate --json --parse ./**/*.nix
+      - name: lints
+        run: |
+          nix build -L --keep-going \
+            .\#checks.x86_64-linux.pre-commit-check
