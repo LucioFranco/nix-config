@@ -43,6 +43,12 @@
           type = "homeManager";
           hostPlatform = "x86_64-linux";
         };
+
+        # CI test hosts 
+        gha-mac = {
+          type = "darwin";
+          hostPlatform = "x86_64-darwin";
+        };
       };
 
       darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
