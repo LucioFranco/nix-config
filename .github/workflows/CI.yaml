@@ -22,8 +22,8 @@ jobs:
           nix build -L --keep-going \
             .\#checks.x86_64-linux.pre-commit-check
   build-host:
-    name: build-${{ matrix.host.name }}
-    runs-on: ${{ matrix.host.ghSystem }}
+    name: build-${{ matrix.host }}
+    runs-on: ubuntu-latest
     needs: get-hosts
     strategy:
       fail-fast: false
@@ -40,4 +40,4 @@ jobs:
         run: |
           nix run nixpkgs#nix-build-uncached -- \
             --keep-going \
-            -A packages.${{ matrix.host.hostPlatform }}.wsl
+            -A packages.${{ matrix.host }}.wsl
