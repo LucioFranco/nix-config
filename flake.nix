@@ -60,6 +60,15 @@
         modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
       };
 
+      darwinConfigurations.gha-mac = darwin.lib.darwinSystem rec {
+        system = "x86_64-darwin";
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
+      };
+
       homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration rec {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [ ./nix/wsl.nix ];
