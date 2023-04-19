@@ -45,13 +45,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.get-hosts.outputs.hosts }}
-    - uses: actions/checkout@v3
-      with:
-        lfs: false
-    - id: gen-hosts
-      run: |
-        JSON=$(cat ./.github/workflows/build-matrix.json)
-        echo "hosts=$JSON" >> "$GITHUB_OUTPUT"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: false
+      - id: gen-hosts
+        run: |
+          JSON=$(cat ./.github/workflows/build-matrix.json)
+          echo "hosts=$JSON" >> "$GITHUB_OUTPUT"
 
   build-host:
     name: build-${{ matrix.host.host }}
