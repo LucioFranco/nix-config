@@ -10,8 +10,7 @@ with self.pkgs.${system};
     hooks = {
       # actionlint.enable = true;
       # luacheck.enable = true;
-      # nixpkgs-fmt.enable = true;
-      nixfmt.enable = true;
+      nixpkgs-fmt.enable = true;
       shellcheck = {
         enable = false;
         types_or = lib.mkForce [ ];

@@ -95,7 +95,7 @@
     fd
 
     rnix-lsp
-    nixfmt
+    nixpkgs-fmt
 
     neovide
 
