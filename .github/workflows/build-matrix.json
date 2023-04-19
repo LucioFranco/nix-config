@@ -1,12 +1,14 @@
-[
-  {
-    "host": "wsl",
-    "system": "x86_64-linux",
-    "ghHost": "ubuntu-latest"
-  },
-  {
-    "host": "gha-mac",
-    "system": "x86_64-darwin",
-    "ghHost": "macos-latest"
-  }
-]
+{
+  "include": [
+    {
+      "host": "wsl",
+      "system": "x86_64-linux",
+      "ghHost": "ubuntu-latest"
+    },
+    {
+      "host": "gha-mac",
+      "system": "x86_64-darwin",
+      "ghHost": "macos-latest"
+    }
+  ]
+}
