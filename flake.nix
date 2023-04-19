@@ -31,7 +31,11 @@
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
     let
-      forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-darwin"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
     in {
       hosts = {
         workbook = {
