@@ -51,7 +51,10 @@ jobs:
           lfs: false
       - id: gen-hosts
         run: |
-          echo "hosts=$(cat "./.github/workflows/build-matrix.json")" >> "$GITHUB_OUTPUT"
+          JSON=$(cat ./.github/workflows/build-matrix.json)
+          echo $JSON
+
+          echo "hosts=$JSON" >> $GITHUB_OUTPUT
 
   build-host:
     name: build-${{ matrix.host.host }}
