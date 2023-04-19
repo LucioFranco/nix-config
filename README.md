@@ -3,5 +3,5 @@
 To deploy this config:
 
 ```
-./bin/deploy
+./bin/deploy <host> 
 ```
