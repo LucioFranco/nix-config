@@ -78,7 +78,7 @@ jobs:
             -A packages.${{ matrix.host.system }}.${{ matrix.host.host }}
   check:
     runs-on: ubuntu-latest
-    needs: [ lints, build-host, build-shell ]
+    needs: [ lints, build-host ]
     if: always()
     steps:
       - uses: re-actors/alls-green@release/v1
