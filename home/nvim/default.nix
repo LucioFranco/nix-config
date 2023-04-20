@@ -60,16 +60,16 @@
       # tmux
       # There seems to be some sort of bug with this plugin
       # so pin it to the last working version.
-      (pkgs.vimUtils.buildVimPlugin rec {
-        pname = "vim-tmux-navigator";
-        version = "2022-10-15";
-        src = pkgs.fetchFromGitHub {
-          owner = "christoomey";
-          repo = "vim-tmux-navigator";
-          rev = "bd4c38be5b4882991494cf77c0601a55bc45eebf";
-          sha256 = "17yqy79p5i54wkg1wmb32v84s05rfaywx7qzayzs5q485zap4813";
-        };
-      })
+      # (pkgs.vimUtils.buildVimPlugin rec {
+      #   pname = "vim-tmux-navigator";
+      #   version = "2022-10-15";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "christoomey";
+      #     repo = "vim-tmux-navigator";
+      #     rev = "bd4c38be5b4882991494cf77c0601a55bc45eebf";
+      #     sha256 = "17yqy79p5i54wkg1wmb32v84s05rfaywx7qzayzs5q485zap4813";
+      #   };
+      # })
 
       # Theme: Solarized light
       jellybeans-vim
@@ -82,6 +82,19 @@
           rev = "34c2245a6ddfd85766f6127768f6b04b0ae2f84a";
           hash = "sha256-f6/OLa0RvDWByktwTyeLpe3p9BNlgzNHjcFHUNVQJq4=";
         };
+      })
+
+      (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+        pname = "smart-splits.nvim";
+        version = "2023-04-20";
+        src = pkgs.fetchFromGitHub {
+          owner = "mrjones2014";
+          repo = "smart-splits.nvim";
+          rev = "04a075670bbe3bee6616472e2ae5cf3aa61c3eeb";
+          hash = "sha256-l8oKTnL8LCuQ9SY0XuFsaPgpme3a/OpxaPSjO7yYdrU=";
+        };
+
+        dependencies = [ pkgs.luajitPackages.luacheck ];
       })
     ];
   };
