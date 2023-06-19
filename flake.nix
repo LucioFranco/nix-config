@@ -26,17 +26,23 @@
       inputs.flake-compat.follows = "flake-compat";
     };
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs, home-manager, nixos-generators, ... }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-darwin"
         "x86_64-darwin"
         "x86_64-linux"
       ];
-    in {
+    in
+    {
       hosts = {
         workbook = {
           type = "darwin";
@@ -78,7 +84,32 @@
         modules = [ ./nix/wsl.nix ];
       };
 
-      nixosConfigurations = { };
+      nixosConfigurations = {
+        vbox = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/nixos.nix
+            home-manager.nixosModules.home-manager
+          ];
+        };
+
+        iso = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/nixos.nix
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ];
+        };
+      };
+
+      vbox = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        modules = [
+          ./nix/nixos.nix
+        ];
+
+        format = "virtualbox";
+      };
 
       pkgs = forAllSystems (localSystem:
         import nixpkgs {
