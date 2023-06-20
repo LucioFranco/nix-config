@@ -48,7 +48,7 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      xtermenable = false;
+      xterm.enable = false;
     };
 
     displayManager = {
