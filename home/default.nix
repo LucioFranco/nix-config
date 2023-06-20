@@ -101,7 +101,7 @@
     gnutar
     gnutls
 
-    rust-analyzer
+    #rust-analyzer
 
     ripgrep
     fd
