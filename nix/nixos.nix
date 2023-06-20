@@ -38,7 +38,7 @@
 
   boot.loader.grub.fsIdentifier = "provided";
 
-  users.user.lucio = {
+  users.users.lucio = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     uid = 1001;
