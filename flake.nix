@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
 
+    nixos-hardware = {
+      url = "github:nixos/nixos-hardware";
+    };
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,9 +36,22 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    nur = {
+      url = "github:nix-community/nur";
+    };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, nixos-generators, ... }@inputs:
+  outputs =
+    { self
+    , darwin
+    , nixpkgs
+    , home-manager
+    , nixos-generators
+    , nixos-hardware
+    , nur
+    , ...
+    }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-darwin"
@@ -100,6 +117,16 @@
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ];
         };
+
+        thinkpad = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            nur.nixosModules.nur
+            ./nix/nixos.nix
+            home-manager.nixosModules.home-manager
+            nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
+          ];
+        };
       };
 
       vbox = nixos-generators.nixosGenerate {
@@ -114,7 +141,7 @@
       pkgs = forAllSystems (localSystem:
         import nixpkgs {
           inherit localSystem;
-          # overlays = [ self.overlays.default ];
+          overlays = [ nur.overlay ];
           config.allowUnfree = true;
           config.allowAliases = true;
         });
