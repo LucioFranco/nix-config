@@ -1,5 +1,4 @@
 { pkgs, config, lib, ... }: {
-  #home.stateVersion = "23.11";
   # home.username = "lucio";
   # home.homeDirectory = "/home/lucio";
 
@@ -11,7 +10,10 @@
     ./nvim
     ./alacritty.nix
     ./tmux.nix
+    ./zellij.nix
   ];
+
+  fonts.fontconfig.enable = true;
 
   home.sessionVariables = {
     # openssl config
@@ -124,5 +126,7 @@
     kubernetes-helm
 
     nodePackages.pyright
+
+    nerdfonts
   ];
 }
