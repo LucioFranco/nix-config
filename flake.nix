@@ -110,14 +110,6 @@
           ];
         };
 
-        iso = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./nix/nixos.nix
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ];
-        };
-
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -127,15 +119,6 @@
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
           ];
         };
-      };
-
-      vbox = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        modules = [
-          ./nix/nixos.nix
-        ];
-
-        format = "virtualbox";
       };
 
       pkgs = forAllSystems (localSystem:

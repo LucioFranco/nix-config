@@ -3,7 +3,6 @@
     ../hardware/thinkpad-hardware.nix
   ];
 
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -28,11 +27,27 @@
     wayland.windowManager.sway = {
       enable = true;
 
-      extraConfig = ''
-        input "*" {
-          xkb_options ctrl:nocaps
-        }
-      '';
+      config = {
+        bars = [{
+          command = "${pkgs.waybar}/bin/waybar";
+        }];
+
+        # keybindings =
+        #   let
+        #     modifier = config.wayland.windowManager.sway.config.modifier;
+        #   in
+        #   lib.mkOptionDefault { 
+        #     "${modifier}+
+        #   };
+
+        input = {
+          "*" = {
+            xkb_options = "ctrl:nocaps";
+          };
+        };
+
+        terminal = "${pkgs.alacritty}/bin/alacritty";
+      };
 
       systemd.enable = true;
     };
@@ -79,30 +94,11 @@
     kanshi
 
     wl-clipboard
+    waybar
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "lucio" ];
-
-  # boot.growPartition = true;
-  # boot.loader.grub.device = "/dev/sda";
-
-  # swapDevices = [{
-  #   device = "/var/swap";
-  #   size = 2048;
-  # }];
-
-  # fileSystems = {
-  #   "/" = {
-  #     device = "/dev/disk/by-label/nixos";
-  #     autoResize = true;
-  #     fsType = "ext4";
-  #   };
-  # };
-
-  # virtualisation.virtualbox.guest.enable = true;
-
-  # boot.loader.grub.fsIdentifier = "provided";
 
   users.users.lucio = {
     isNormalUser = true;
@@ -113,21 +109,4 @@
   };
 
   programs.zsh.enable = true;
-
-  # services.xserver = {
-  #   enable = true;
-  #   desktopManager = {
-  #     xterm.enable = false;
-  #   };
-
-  #   displayManager = {
-  #     defaultSession = "none+i3";
-  #     gdm.enable = true;
-  #   };
-
-  #   windowManager.i3 = {
-  #     enable = true;
-  #     extraPackages = with pkgs; [ dmenu i3status i3lock ];
-  #   };
-  # };
 }
