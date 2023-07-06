@@ -80,11 +80,14 @@
 
       darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
+        # pkgs = import nixpkgs:! {
+        #   inherit system;
+        #   config.allowUnfree = true;
+        # };
+        modules = [
+          ./nix/darwin.nix
+          home-manager.darwinModules.home-manager
+        ];
       };
 
       darwinConfigurations.gha-mac = darwin.lib.darwinSystem rec {
