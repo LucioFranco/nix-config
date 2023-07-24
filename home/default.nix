@@ -75,6 +75,7 @@
   };
 
   home.packages = with pkgs; [
+    clang
     rustup
     python38
     python38Packages.pip
