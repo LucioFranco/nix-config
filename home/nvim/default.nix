@@ -57,6 +57,9 @@
       fidget-nvim
       nvim-web-devicons
 
+      # statusbar
+      feline-nvim
+
       # tmux
       # There seems to be some sort of bug with this plugin
       # so pin it to the last working version.
@@ -90,12 +93,23 @@
         src = pkgs.fetchFromGitHub {
           owner = "mrjones2014";
           repo = "smart-splits.nvim";
-          rev = "04a075670bbe3bee6616472e2ae5cf3aa61c3eeb";
+          rev = "ecea65d8f029978d92e29f5fa83f6774f31249aa";
           hash = "sha256-l8oKTnL8LCuQ9SY0XuFsaPgpme3a/OpxaPSjO7yYdrU=";
         };
 
         dependencies = [ pkgs.luajitPackages.luacheck ];
       })
+
+      # (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+      #   pname = "zellij.nvim";
+      #   version = "2023-07-25";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "Lilja";
+      #     repo = "zellij.nvim";
+      #     rev = "ab2a2d7adf4779f99bbdd514f19a64c3abb910eb";
+      #     hash = "sha256-gR6INhtPErNGkd5wnomvHXnGhRI/AkmMFfhM6jmrVrM=";
+      #   };
+      # })
     ];
   };
 }

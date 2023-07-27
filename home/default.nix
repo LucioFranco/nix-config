@@ -85,6 +85,7 @@
     pkg-config
     git
     cmake
+    gnumake
     ninja
     gh
     nodePackages.conventional-changelog-cli
@@ -129,5 +130,7 @@
     nodePackages.pyright
 
     nerdfonts
+
+    sqlite
   ];
 }

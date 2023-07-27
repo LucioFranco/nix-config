@@ -191,6 +191,12 @@ vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
 vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
 vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
 vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
+
+-- require('zellij').setup({
+--           vimTmuxNavigatorKeybinds = true,
+--         })
+
+require('feline').setup()
 EOF
 
 " Set format on save
@@ -200,7 +206,7 @@ autocmd BufWritePre * lua vim.lsp.buf.format(nil, 200)
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> <c-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
@@ -231,4 +237,6 @@ nnoremap <leader>xd <cmd>Trouble document_diagnostics<cr>
 nnoremap <leader>xq <cmd>Trouble quickfix<cr>
 nnoremap <leader>xl <cmd>Trouble loclist<cr>
 nnoremap xR <cmd>Trouble lsp_references<cr>
+
+
 

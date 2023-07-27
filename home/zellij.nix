@@ -4,9 +4,14 @@
     enableZshIntegration = false;
     settings = {
       theme = "colorblind";
-      copy_command = "wl-copy";
-      # TODO(lucio): Remove this when you've learned the bindings
-      layout = "compact";
+      # copy_command = "wl-copy";
+      default_layout = "compact";
+      pane_frames = false;
+      hide_session_name = true;
+
+      keybinds = {
+        unbind = [ "Ctrl h" "Ctrl p" ];
+      };
 
       themes = {
         colorblind = {

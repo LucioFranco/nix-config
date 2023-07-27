@@ -31,6 +31,10 @@
       set-option -g automatic-rename on
       set-option -g automatic-rename-format '#{b:pane_current_path}'
 
+      # Start windows and panes at 1, not 0
+      set -g base-index 1
+      setw -g pane-base-index 1
+
       setw -g monitor-activity on
       set -g visual-activity off
 
