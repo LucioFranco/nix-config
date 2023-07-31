@@ -10,6 +10,8 @@
     };
   };
 
+  home.packages = with pkgs; [ lazygit ];
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -56,6 +58,9 @@
       trouble-nvim
       fidget-nvim
       nvim-web-devicons
+
+      # git
+      lazygit-nvim
 
       # statusbar
       feline-nvim

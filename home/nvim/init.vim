@@ -196,7 +196,8 @@ vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 --           vimTmuxNavigatorKeybinds = true,
 --         })
 
-require('feline').setup()
+require('feline').setup({})
+
 EOF
 
 " Set format on save
@@ -237,6 +238,9 @@ nnoremap <leader>xd <cmd>Trouble document_diagnostics<cr>
 nnoremap <leader>xq <cmd>Trouble quickfix<cr>
 nnoremap <leader>xl <cmd>Trouble loclist<cr>
 nnoremap xR <cmd>Trouble lsp_references<cr>
+
+" setup mapping to call :LazyGit
+nnoremap <silent> <leader>gg :LazyGit<CR>
 
 
 

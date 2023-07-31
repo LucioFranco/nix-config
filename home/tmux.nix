@@ -34,6 +34,7 @@
       # Start windows and panes at 1, not 0
       set -g base-index 1
       setw -g pane-base-index 1
+      set-option -g renumber-windows on
 
       setw -g monitor-activity on
       set -g visual-activity off

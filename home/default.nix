@@ -15,7 +15,7 @@
 
   fonts.fontconfig.enable = true;
 
-  home.sessionVariables = {
+  home.sessionVariables = with pkgs; {
     # openssl config
     OPENSSL_DIR = "${pkgs.openssl.dev}";
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
@@ -23,6 +23,20 @@
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
 
     NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.npm_global";
+    LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";
+
+    # From: https://github.com/NixOS/nixpkgs/blob/1fab95f5190d087e66a3502481e34e15d62090aa/pkgs/applications/networking/browsers/firefox/common.nix#L247-L253
+    # Set C flags for Rust's bindgen program. Unlike ordinary C
+    # compilation, bindgen does not invoke $CC directly. Instead it
+    # uses LLVM's libclang. To make sure all necessary flags are
+    # included we need to look in a few places.
+    BINDGEN_EXTRA_CLANG_ARGS = "$(< ${stdenv.cc}/nix-support/libc-crt1-cflags) \
+      $(< ${stdenv.cc}/nix-support/libc-cflags) \
+      $(< ${stdenv.cc}/nix-support/cc-cflags) \
+      $(< ${stdenv.cc}/nix-support/libcxx-cxxflags) \
+      ${lib.optionalString stdenv.cc.isClang "-idirafter ${stdenv.cc.cc}/lib/clang/${lib.getVersion stdenv.cc.cc}/include"} \
+      ${lib.optionalString stdenv.cc.isGNU "-isystem ${stdenv.cc.cc}/include/c++/${lib.getVersion stdenv.cc.cc} -isystem ${stdenv.cc.cc}/include/c++/${lib.getVersion stdenv.cc.cc}/${stdenv.hostPlatform.config} -idirafter ${stdenv.cc.cc}/lib/gcc/${stdenv.hostPlatform.config}/${lib.getVersion stdenv.cc.cc}/include"} \
+    ";
   };
 
   home.sessionPath = [
@@ -76,6 +90,7 @@
 
   home.packages = with pkgs; [
     clang
+    libclang
     rustup
     python38
     python38Packages.pip
@@ -132,5 +147,6 @@
     nerdfonts
 
     sqlite
+    tcl
   ];
 }
