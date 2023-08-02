@@ -6,6 +6,7 @@
       b = "brazil";
       bb = "brazil-build";
       bbb = "brazil-build-recursive";
+      http = "xh";
     };
 
     initExtra = ''
