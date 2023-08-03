@@ -44,6 +44,7 @@
   home.sessionPath = [
     "${config.home.homeDirectory}/.toolbox/bin"
     "${config.home.homeDirectory}/.npm_global/bin"
+    "${config.home.homeDirectory}/go/bin"
   ];
 
   # Disable hm's darwin linking logic that conflicts with the custom
@@ -51,6 +52,8 @@
   #
   # Ref: https://github.com/nix-community/home-manager/issues/1341#issuecomment-1306148374
   disabledModules = [ "targets/darwin/linkapps.nix" ];
+
+  programs.go.enable = true;
 
   # Home manager will symlink apps to ~/Applications/Home Manager Apps/ but
   # MacOS spotlight doesn't understand symlinks so instead we will just copy.
@@ -153,5 +156,9 @@
 
     # http
     xh
+
+    flyctl
+    vault
+    podman
   ];
 }
