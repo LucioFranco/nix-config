@@ -23,6 +23,7 @@
       "transmission"
       "the-unarchiver"
       "spotify"
+      "rectangle"
     ];
   };
 
