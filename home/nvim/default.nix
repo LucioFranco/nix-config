@@ -99,7 +99,7 @@
           owner = "mrjones2014";
           repo = "smart-splits.nvim";
           rev = "ecea65d8f029978d92e29f5fa83f6774f31249aa";
-          hash = "sha256-l8oKTnL8LCuQ9SY0XuFsaPgpme3a/OpxaPSjO7yYdrU=";
+          hash = "sha256-mLLh8rcq5D6dA9Iwn3ULiHRG/jI4Sjct4J498C+QPO8=";
         };
 
         dependencies = [ pkgs.luajitPackages.luacheck ];
