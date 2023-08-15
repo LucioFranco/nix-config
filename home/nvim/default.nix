@@ -56,14 +56,14 @@
       # Diagnostics
       dressing-nvim
       trouble-nvim
-      fidget-nvim
       nvim-web-devicons
 
       # git
       lazygit-nvim
 
       # statusbar
-      feline-nvim
+      lualine-nvim
+      lualine-lsp-progress
 
       # tmux
       # There seems to be some sort of bug with this plugin

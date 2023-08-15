@@ -145,12 +145,6 @@ require('rust-tools').setup(opts)
 
 require('trouble').setup({})
 
-require('fidget').setup({
-  text = {
-    spinner = "moon",
-  }
-})
-
 require('dressing').setup({
   input = {
     enabled = true,
@@ -201,8 +195,14 @@ vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 --           vimTmuxNavigatorKeybinds = true,
 --         })
 
-require('feline').setup({})
 
+require('lualine').setup({
+    sections = {
+      lualine_c = {
+        'lsp_progress',
+      } 
+    }
+})
 EOF
 
 " Set format on save
