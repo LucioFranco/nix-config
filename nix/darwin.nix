@@ -27,6 +27,10 @@
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    darwin.apple_sdk.frameworks.Security
+  ];
+
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs;

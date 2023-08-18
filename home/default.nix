@@ -94,7 +94,6 @@
   };
 
   home.packages = with pkgs; [
-    clang
     libclang
     rustup
     python38
@@ -162,5 +161,7 @@
     podman
 
     iconv
+  ] ++ lib.optionals (stdenv.isLinux) [
+    clang
   ];
 }
