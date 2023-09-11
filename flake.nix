@@ -40,6 +40,10 @@
     nur = {
       url = "github:nix-community/nur";
     };
+
+    xdg-open-wsl = {
+      url = "github:LucioFranco/xdg-open-wsl";
+    };
   };
 
   outputs =
@@ -101,6 +105,7 @@
 
       homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration rec {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs.inputs = inputs;
         modules = [ ./nix/wsl.nix ];
       };
 

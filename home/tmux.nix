@@ -3,7 +3,7 @@
     enable = true;
 
     clock24 = false;
-    #terminal = "tmux-256color";
+    terminal = "tmux-256color";
     newSession = true;
     sensibleOnTop = false;
     historyLimit = 30000;
