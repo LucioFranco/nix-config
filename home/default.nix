@@ -138,6 +138,7 @@
     zellij
 
     nodejs
+    bun
 
     pulumi
     pulumiPackages.pulumi-language-python
