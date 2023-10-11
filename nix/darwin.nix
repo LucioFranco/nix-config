@@ -57,10 +57,10 @@
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
   system.defaults.NSGlobalDomain._HIHideMenuBar = false;
 
-  # system.defaults.dock.autohide = true;
-  # system.defaults.dock.mru-spaces = false;
-  # system.defaults.dock.orientation = "left";
-  # system.defaults.dock.showhidden = true;
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.orientation = "bottom";
+  system.defaults.dock.showhidden = true;
 
   system.defaults.finder.AppleShowAllExtensions = true;
   system.defaults.finder.QuitMenuItem = true;

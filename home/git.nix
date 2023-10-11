@@ -26,7 +26,7 @@
       }
     ];
 
-    ignores = [ ".DS_Store" ];
+    ignores = [ ".DS_Store" "*.dSYM" ];
   };
 
   home.shellAliases = rec {
