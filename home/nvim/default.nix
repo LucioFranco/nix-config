@@ -91,7 +91,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "shaunsingh";
           repo = "solarized.nvim";
-          rev = "34c2245a6ddfd85766f6127768f6b04b0ae2f84a";
+          rev = "fe02ed49cc017cc93657bd6306a2624394611c69";
           hash = "sha256-f6/OLa0RvDWByktwTyeLpe3p9BNlgzNHjcFHUNVQJq4=";
         };
       })
