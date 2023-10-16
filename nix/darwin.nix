@@ -24,11 +24,13 @@
       "the-unarchiver"
       "spotify"
       "rectangle"
+      "slack"
     ];
   };
 
   environment.systemPackages = with pkgs; [
     darwin.apple_sdk.frameworks.Security
+    qemu
   ];
 
   fonts = {
@@ -39,7 +41,7 @@
 
   programs.zsh.enable = true;
 
-  nix = { settings.experimental-features = [ "nix-command" "flakes" ]; };
+  # nix = { settings.experimental-features = [ "nix-command" "flakes" ]; };
 
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
