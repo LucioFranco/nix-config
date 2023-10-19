@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }: {
+{ inputs, pkgs, config, lib, ... }: {
   # home.username = "lucio";
   # home.homeDirectory = "/home/lucio";
 
@@ -12,6 +12,19 @@
     ./tmux.nix
     ./zellij.nix
   ];
+
+  nix = {
+    registry = {
+      # Register this flake itself on the registry
+      me.flake = inputs.self;
+
+      nixpkgs.flake = inputs.nixpkgs;
+      nixpkgs-stable.flake = inputs.nixpkgs-stable;
+      nixpkgs-master.flake = inputs.nixpkgs-master;
+      home-manager.flake = inputs.home-manager;
+      flake-utils.flake = inputs.flake-utils;
+    };
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -163,6 +176,8 @@
     podman
 
     iconv
+
+    wireguard-tools
   ] ++ lib.optionals (stdenv.isLinux) [
     clang
   ];

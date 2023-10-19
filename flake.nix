@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
 
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
     };
@@ -88,9 +91,13 @@
         #   inherit system;
         #   config.allowUnfree = true;
         # };
+        specialArgs = { inherit inputs; };
         modules = [
           ./nix/darwin.nix
           home-manager.darwinModules.home-manager
+          {
+            home-manager.extraSpecialArgs = specialArgs;
+          }
         ];
       };
 

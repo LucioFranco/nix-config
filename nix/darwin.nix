@@ -1,7 +1,8 @@
-{ pkgs, config, lib, ... }: {
+{ inputs, pkgs, config, lib, ... }: {
   home-manager.users.lucio = { config, ... }: {
     home.username = "lucio";
     home.stateVersion = "23.11";
+
 
     imports = [ ../home ];
   };
@@ -11,6 +12,7 @@
   users.users.lucio = {
     name = "lucio";
     home = "/Users/lucio";
+    shell = pkgs.zsh;
   };
 
   homebrew = {
@@ -31,6 +33,9 @@
   environment.systemPackages = with pkgs; [
     darwin.apple_sdk.frameworks.Security
     qemu
+    llvmPackages.libclang
+
+    darwin.iproute2mac
   ];
 
   fonts = {
@@ -73,6 +78,15 @@
 
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
+
+  launchd.daemons.limits = {
+    script = ''
+      /bin/launchctl limit maxfiles 524288 524288
+      /bin/launchctl limit maxproc 8192 8192
+    '';
+    serviceConfig.RunAtLoad = true;
+    serviceConfig.KeepAlive = false;
+  };
 
   system.activationScripts.applications.text = pkgs.lib.mkForce (
     ''
