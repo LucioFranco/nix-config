@@ -110,9 +110,9 @@
   home.packages = with pkgs; [
     libclang
     rustup
-    python38
-    python38Packages.pip
-    poetry
+    # python312
+    # python312Packages.pip
+    # poetry
     protobuf
     openssl
     pkg-config
@@ -154,8 +154,8 @@
     nodejs
     bun
 
-    pulumi
-    pulumiPackages.pulumi-language-python
+    # pulumi
+    # pulumiPackages.pulumi-language-python
     aws-iam-authenticator
     awscli2
     kubectl
