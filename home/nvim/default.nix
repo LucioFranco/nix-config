@@ -69,6 +69,10 @@
       copilot-lua
       copilot-cmp
 
+      # Buffer navigation
+      plenary-nvim
+      harpoon
+
       # tmux
       # There seems to be some sort of bug with this plugin
       # so pin it to the last working version.

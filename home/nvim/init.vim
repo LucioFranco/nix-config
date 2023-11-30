@@ -209,6 +209,20 @@ require('lualine').setup({
 --   panel = { enabled = false },
 -- })
 -- require("copilot_cmp").setup()
+
+-- require("harpoon").setup({})
+
+vim.keymap.set('n', '<leader>ht', require('harpoon.ui').toggle_quick_menu)
+vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file)
+for i = 1, 9 do
+  vim.keymap.set( 
+    'n',
+    string.format("<leader>h%s", i),
+    function()
+      require("harpoon.ui").nav_file(i)
+    end
+  ) 
+end
 EOF
 
 " Set format on save
