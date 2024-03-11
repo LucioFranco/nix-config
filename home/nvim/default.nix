@@ -96,7 +96,7 @@
           owner = "shaunsingh";
           repo = "solarized.nvim";
           rev = "fe02ed49cc017cc93657bd6306a2624394611c69";
-          hash = "sha256-f6/OLa0RvDWByktwTyeLpe3p9BNlgzNHjcFHUNVQJq4=";
+          hash = "sha256-ChsaxWhv3OBWBYQqzC9phXBgzLevOKG3XJxh4xrOraA= ";
         };
       })
 

@@ -87,34 +87,46 @@
 
       darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
-        # pkgs = import nixpkgs:! {
+        # pkgs = import nixpkgs {
         #   inherit system;
         #   config.allowUnfree = true;
         # };
         specialArgs = { inherit inputs; };
         modules = [
+
           ./nix/darwin.nix
           home-manager.darwinModules.home-manager
           {
             home-manager.extraSpecialArgs = specialArgs;
+            home-manager.useGlobalPkgs = true;
+          }
+          {
+            nixpkgs = {
+              config.allowUnfree = true;
+            };
+            nix = {
+              registry.nixpkgs.flake = nixpkgs;
+            };
           }
         ];
       };
 
-      darwinConfigurations.gha-mac = darwin.lib.darwinSystem rec {
-        system = "x86_64-darwin";
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
+      darwinConfigurations.gha-mac = darwin.lib.darwinSystem
+        rec {
+          system = "x86_64-darwin";
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
         };
-        modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
-      };
 
-      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration rec {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs.inputs = inputs;
-        modules = [ ./nix/wsl.nix ];
-      };
+      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration
+        rec {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs.inputs = inputs;
+          modules = [ ./nix/wsl.nix ];
+        };
 
       nixosConfigurations = {
         vbox = nixpkgs.lib.nixosSystem {
@@ -136,16 +148,20 @@
         };
       };
 
-      pkgs = forAllSystems (localSystem:
-        import nixpkgs {
-          inherit localSystem;
-          overlays = [ nur.overlay ];
-          config.allowUnfree = true;
-          config.allowAliases = true;
-        });
+      pkgs = forAllSystems
+        (localSystem:
+          import nixpkgs {
+            inherit localSystem;
+            overlays = [ nur.overlay ];
+            config.allowUnfree = true;
+            config.allowAliases = true;
+          });
 
-      checks = forAllSystems (import ./nix/checks.nix inputs);
-      devShells = forAllSystems (import ./nix/dev-shell.nix inputs);
-      packages = forAllSystems (import ./nix/packages.nix inputs);
+      checks = forAllSystems
+        (import ./nix/checks.nix inputs);
+      devShells = forAllSystems
+        (import ./nix/dev-shell.nix inputs);
+      packages = forAllSystems
+        (import ./nix/packages.nix inputs);
     };
 }

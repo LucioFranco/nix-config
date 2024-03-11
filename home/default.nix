@@ -67,7 +67,7 @@
   disabledModules = [ "targets/darwin/linkapps.nix" ];
 
   programs.go.enable = true;
-  programs.go.package = pkgs.go_1_21;
+  programs.go.package = pkgs.go_1_22;
 
   # Home manager will symlink apps to ~/Applications/Home Manager Apps/ but
   # MacOS spotlight doesn't understand symlinks so instead we will just copy.
@@ -172,7 +172,6 @@
     xh
 
     flyctl
-    vault
     podman
 
     iconv
