@@ -58,6 +58,7 @@
     "${config.home.homeDirectory}/.toolbox/bin"
     "${config.home.homeDirectory}/.npm_global/bin"
     "${config.home.homeDirectory}/go/bin"
+    "${config.home.homeDirectory}/.local/bin"
   ];
 
   # Disable hm's darwin linking logic that conflicts with the custom
