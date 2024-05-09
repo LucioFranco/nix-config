@@ -98,7 +98,9 @@ nvim_lsp.pyright.setup({
     }     
   }
 })
+
 nvim_lsp.gopls.setup{}
+nvim_lsp.zls.setup{}
 
 local navic = require("nvim-navic")
 

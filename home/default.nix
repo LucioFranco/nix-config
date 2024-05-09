@@ -141,6 +141,9 @@
 
     #rust-analyzer
 
+    zig
+    zls
+
     ripgrep
     fd
 

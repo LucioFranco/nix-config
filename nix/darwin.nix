@@ -27,7 +27,7 @@
       "spotify"
       "rectangle"
       "slack"
-      "chrome"
+      # "chrome"
     ];
   };
 
