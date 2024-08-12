@@ -144,7 +144,6 @@
     ripgrep
     fd
 
-    rnix-lsp
     nixpkgs-fmt
 
     neovide
