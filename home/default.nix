@@ -161,7 +161,7 @@
     kubectl
     kubernetes-helm
 
-    nodePackages.pyright
+    # nodePackages.pyright
 
     nerdfonts
 
