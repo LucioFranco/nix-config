@@ -213,6 +213,11 @@ require('lualine').setup({
 
 -- require("harpoon").setup({})
 
+require('avante_lib').load()
+require('avante').setup ({
+  -- Your config here!
+})
+
 vim.keymap.set('n', '<leader>ht', require('harpoon.ui').toggle_quick_menu)
 vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file)
 for i = 1, 9 do

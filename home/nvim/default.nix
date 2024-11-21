@@ -73,6 +73,10 @@
       plenary-nvim
       harpoon
 
+      avante-nvim
+      mini-icons
+      nui-nvim
+
       # tmux
       # There seems to be some sort of bug with this plugin
       # so pin it to the last working version.
