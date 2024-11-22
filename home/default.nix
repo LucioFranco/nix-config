@@ -19,8 +19,8 @@
       me.flake = inputs.self;
 
       nixpkgs.flake = inputs.nixpkgs;
-      nixpkgs-stable.flake = inputs.nixpkgs-stable;
-      nixpkgs-master.flake = inputs.nixpkgs-master;
+      # nixpkgs-stable.flake = inputs.nixpkgs-stable;
+      # nixpkgs-master.flake = inputs.nixpkgs-master;
       home-manager.flake = inputs.home-manager;
       flake-utils.flake = inputs.flake-utils;
     };

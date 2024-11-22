@@ -2,10 +2,7 @@
   description = "Lucio's nix config";
 
   inputs = {
-    nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
-
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs = { url = "github:nixos/nixpkgs/master"; };
 
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
