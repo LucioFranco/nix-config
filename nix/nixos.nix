@@ -14,7 +14,7 @@
     noto-fonts-emoji
     fira-code
     fira-code-symbols
-    nerdfonts
+    nerd-fonts
   ];
 
   home-manager.users.lucio = { ... }: {

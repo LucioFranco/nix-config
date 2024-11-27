@@ -166,7 +166,7 @@
 
     # nodePackages.pyright
 
-    nerdfonts
+    # nerd-fonts
 
     sqlite
     tcl
