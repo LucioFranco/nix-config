@@ -131,6 +131,8 @@
     unzip
     m4
 
+    openssh
+
     coreutils
     findutils
     gawk
