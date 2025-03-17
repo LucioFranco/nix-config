@@ -45,6 +45,8 @@ nnoremap <C-f> :NERDTreeFind<CR>
 tnoremap <Esc> <C-\><C-n>
 
 set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Configure LSP through rust-tools.nvim plugin.
 " rust-tools will configure and enable certain LSP features for us.

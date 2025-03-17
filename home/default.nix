@@ -52,6 +52,7 @@
     ";
 
     LIBRARY_PATH = "${pkgs.sqlite.out}/lib:${pkgs.iconv.out}/lib";
+    TERM="xterm-256color";
   };
 
   home.sessionPath = [

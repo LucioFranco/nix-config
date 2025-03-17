@@ -31,6 +31,9 @@
       set-option -g automatic-rename on
       set-option -g automatic-rename-format '#{b:pane_current_path}'
 
+      set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
+
       # Start windows and panes at 1, not 0
       set -g base-index 1
       setw -g pane-base-index 1
