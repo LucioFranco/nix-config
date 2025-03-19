@@ -33,7 +33,8 @@
       nvim-navic
 
       # Rust
-      rust-tools-nvim
+      #rust-tools-nvim
+      rustaceanvim
 
       vim-vsnip
       popup-nvim
@@ -43,6 +44,7 @@
       editorconfig-vim
       vim-nix
       vim-polyglot
+      nvim-treesitter
 
       fzf-vim
 
@@ -57,6 +59,12 @@
       dressing-nvim
       trouble-nvim
       nvim-web-devicons
+
+      # test
+      neotest
+      neotest-plenary
+      FixCursorHold-nvim
+      nvim-nio
 
       # git
       lazygit-nvim

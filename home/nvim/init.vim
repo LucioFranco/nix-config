@@ -150,7 +150,102 @@ local opts = {
 }
 
 
-require('rust-tools').setup(opts)
+--require('rust-tools').setup(opts)
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+  },
+  -- LSP configuration
+  server = {
+    cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
+    on_attach = function(client, bufnr)
+      -- you can also put keymaps in here
+    end,
+    default_settings = {
+      -- rust-analyzer language server configuration
+      ['rust-analyzer'] = {
+        diagnostics = {
+          enable = true,
+        },
+        completion = {
+          privateEditable = {
+            enable = true;
+          },
+        },
+        cargo = {
+            --features = "all"
+        }
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {
+  },
+}
+
+local neotest = require("neotest")
+neotest.setup({
+  adapters = {
+    require("neotest-plenary"),
+    require('rustaceanvim.neotest')  
+  },
+})
+
+local bufnr = vim.api.nvim_get_current_buf()
+vim.keymap.set(
+  "n", 
+  "<leader>a", 
+  function()
+    vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
+    -- or vim.lsp.buf.codeAction() if you don't want grouping.
+  end,
+  { silent = true, buffer = bufnr }
+)
+vim.keymap.set(
+  "n", 
+  "K",  -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+  function()
+    vim.cmd.RustLsp({'hover', 'actions'})
+  end,
+  { silent = true, buffer = bufnr }
+)
+
+vim.keymap.set(
+  "n", 
+  "<leader>rr",
+  function()
+    vim.cmd.RustLsp('runnables')
+  end,
+  { silent = true, noremap = true }
+)
+
+vim.keymap.set(
+  "n", 
+  "<leader>rt",
+  function()
+    vim.cmd.RustLsp('testables')
+  end,
+  { silent = true, noremap = true }
+)
+
+vim.keymap.set(
+  "n", 
+  "<leader>to",
+  function()
+    neotest.output.open({ enter = true }) 
+  end,
+  { silent = true, noremap = true }
+)
+vim.keymap.set(
+  "n", 
+  "<leader>tp",
+  function()
+    neotest.output_panel.toggle() 
+  end,
+  { silent = true, noremap = true }
+)
+
+
 
 
 require('trouble').setup({})
@@ -249,13 +344,13 @@ nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 " nnoremap <silent> <c-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+"nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> grr   <cmd>RustRunnables<CR>
+"nnoremap <silent> grr   <cmd>RustRunnables<CR>
 
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
