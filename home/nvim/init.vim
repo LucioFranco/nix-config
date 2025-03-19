@@ -127,17 +127,22 @@ local opts = {
           navic.attach(client, bufnr)
         end,
         capabilities=capabilities,
+        cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
             ["rust-analyzer"] = {
+                
                 diagnostics = {
                   enable = true,
-                  disabled = {"unresolved-proc-macro"},
-                  enableExperimental = false 
+                },
+                completion = {
+                  privateEditable = {
+                    enable = true;
+                  },
                 },
                 cargo = {
-                    features = "all"
+                    --features = "all"
                 }
             }
         }

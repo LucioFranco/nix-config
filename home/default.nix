@@ -110,27 +110,27 @@
   };
 
   home.packages = with pkgs; [
-    libclang
-    rustup
+    # libclang
+    #rustup
     # python312
     # python312Packages.pip
     # poetry
-    protobuf
-    openssl
-    pkg-config
+    # protobuf
+    # openssl
+    # pkg-config
     git
-    cmake
-    gnumake
-    ninja
+    # cmake
+    # gnumake
+    # ninja
     gh
     nodePackages.conventional-changelog-cli
     wget
-    autoconf
-    automake
-    autoconf-archive
-    libtool
-    unzip
-    m4
+    # autoconf
+    # automake
+    # autoconf-archive
+    # libtool
+    # unzip
+    # m4
 
     openssh
 
@@ -144,21 +144,21 @@
 
     #rust-analyzer
 
-    zig
-    zls
+    # zig
+    # zls
 
     ripgrep
     fd
 
     nixpkgs-fmt
 
-    neovide
+    # neovide
 
-    helix
-    zellij
+    # helix
+    # zellij
 
-    nodejs
-    bun
+    # nodejs
+    # bun
 
     # pulumi
     # pulumiPackages.pulumi-language-python
@@ -171,19 +171,19 @@
 
     # nerd-fonts
 
-    sqlite
-    tcl
+    # sqlite
+    # tcl
 
     # http
     xh
 
-    flyctl
+    # flyctl
     podman
 
     iconv
 
-    wireguard-tools
+    # wireguard-tools
   ] ++ lib.optionals (stdenv.isLinux) [
-    clang
+    # clang
   ];
 }
