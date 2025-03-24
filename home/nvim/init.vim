@@ -134,7 +134,7 @@ local opts = {
             ["rust-analyzer"] = {
                 
                 diagnostics = {
-                  enable = true,
+                  enable = false,
                 },
                 completion = {
                   privateEditable = {
@@ -154,6 +154,7 @@ local opts = {
 vim.g.rustaceanvim = {
   -- Plugin configuration
   tools = {
+    enable_clippy = false,
   },
   -- LSP configuration
   server = {
@@ -165,7 +166,7 @@ vim.g.rustaceanvim = {
       -- rust-analyzer language server configuration
       ['rust-analyzer'] = {
         diagnostics = {
-          enable = true,
+          enable = false,
         },
         completion = {
           privateEditable = {
@@ -304,7 +305,7 @@ vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 require('lualine').setup({
     sections = {
       lualine_c = {
-        'lsp_progress',
+        'lsp_progress', { "filename", path = 1 }
       } 
     }
 })

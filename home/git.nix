@@ -26,7 +26,7 @@
       }
     ];
 
-    ignores = [ ".DS_Store" "*.dSYM"  ".envrc" ".direnv"];
+    ignores = [ ".DS_Store" "*.dSYM"  ".envrc" ".direnv" "CLAUDE.md"];
   };
 
   home.shellAliases = rec {

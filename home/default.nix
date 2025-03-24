@@ -29,6 +29,9 @@
   fonts.fontconfig.enable = true;
 
   home.sessionVariables = with pkgs; {
+    # RA debug setting
+    RA_PROFILE="*@3>10";
+
     # openssl config
     OPENSSL_DIR = "${pkgs.openssl.dev}";
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
@@ -131,6 +134,9 @@
     # libtool
     # unzip
     # m4
+
+    # flakehub
+    fh
 
     openssh
 
