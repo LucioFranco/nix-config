@@ -142,7 +142,7 @@ local opts = {
                   },
                 },
                 cargo = {
-                    --features = "all"
+                    features = "all"
                 }
             }
         }

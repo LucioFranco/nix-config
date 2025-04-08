@@ -114,6 +114,8 @@
   };
 
   home.packages = with pkgs; [
+    inputs.tools.packages.${pkgs.system}.default
+
     # libclang
     #rustup
     # python312

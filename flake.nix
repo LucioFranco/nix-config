@@ -44,6 +44,10 @@
     xdg-open-wsl = {
       url = "github:LucioFranco/xdg-open-wsl";
     };
+
+    tools = {
+      url = "path:tools";
+    };
   };
 
   outputs =
