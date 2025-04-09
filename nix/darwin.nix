@@ -3,7 +3,6 @@
     home.username = "lucio";
     home.stateVersion = "24.11";
 
-
     imports = [ ../home ];
   };
 
@@ -87,4 +86,8 @@
     serviceConfig.KeepAlive = false;
   };
 
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+  };
 }

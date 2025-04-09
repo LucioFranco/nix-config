@@ -3,6 +3,7 @@
   # home.homeDirectory = "/home/lucio";
 
   imports = [
+    ./cargo.nix
     ./zsh.nix
     ./starship.nix
     ./git.nix
@@ -30,7 +31,7 @@
 
   home.sessionVariables = with pkgs; {
     # RA debug setting
-    RA_PROFILE="*@3>10";
+    RA_PROFILE = "*@3>10";
 
     # openssl config
     OPENSSL_DIR = "${pkgs.openssl.dev}";
@@ -46,16 +47,25 @@
     # compilation, bindgen does not invoke $CC directly. Instead it
     # uses LLVM's libclang. To make sure all necessary flags are
     # included we need to look in a few places.
-    BINDGEN_EXTRA_CLANG_ARGS = "$(< ${stdenv.cc}/nix-support/libc-crt1-cflags) \
-      $(< ${stdenv.cc}/nix-support/libc-cflags) \
-      $(< ${stdenv.cc}/nix-support/cc-cflags) \
-      $(< ${stdenv.cc}/nix-support/libcxx-cxxflags) \
-      ${lib.optionalString stdenv.cc.isClang "-idirafter ${stdenv.cc.cc}/lib/clang/${lib.getVersion stdenv.cc.cc}/include"} \
-      ${lib.optionalString stdenv.cc.isGNU "-isystem ${stdenv.cc.cc}/include/c++/${lib.getVersion stdenv.cc.cc} -isystem ${stdenv.cc.cc}/include/c++/${lib.getVersion stdenv.cc.cc}/${stdenv.hostPlatform.config} -idirafter ${stdenv.cc.cc}/lib/gcc/${stdenv.hostPlatform.config}/${lib.getVersion stdenv.cc.cc}/include"} \
-    ";
+    BINDGEN_EXTRA_CLANG_ARGS =
+      "$(< ${stdenv.cc}/nix-support/libc-crt1-cflags) \n      $(< ${stdenv.cc}/nix-support/libc-cflags) \n      $(< ${stdenv.cc}/nix-support/cc-cflags) \n      $(< ${stdenv.cc}/nix-support/libcxx-cxxflags) \n      ${
+              lib.optionalString stdenv.cc.isClang
+              "-idirafter ${stdenv.cc.cc}/lib/clang/${
+                lib.getVersion stdenv.cc.cc
+              }/include"
+            } \n      ${
+              lib.optionalString stdenv.cc.isGNU
+              "-isystem ${stdenv.cc.cc}/include/c++/${
+                lib.getVersion stdenv.cc.cc
+              } -isystem ${stdenv.cc.cc}/include/c++/${
+                lib.getVersion stdenv.cc.cc
+              }/${stdenv.hostPlatform.config} -idirafter ${stdenv.cc.cc}/lib/gcc/${stdenv.hostPlatform.config}/${
+                lib.getVersion stdenv.cc.cc
+              }/include"
+            } \n    ";
 
     LIBRARY_PATH = "${pkgs.sqlite.out}/lib:${pkgs.iconv.out}/lib";
-    TERM="xterm-256color";
+    TERM = "xterm-256color";
   };
 
   home.sessionPath = [
@@ -113,86 +123,87 @@
     settings.git_protocol = "ssh";
   };
 
-  home.packages = with pkgs; [
-    inputs.tools.packages.${pkgs.system}.default
+  home.packages = with pkgs;
+    [
+      inputs.tools.packages.${pkgs.system}.default
 
-    # libclang
-    #rustup
-    # python312
-    # python312Packages.pip
-    # poetry
-    # protobuf
-    # openssl
-    # pkg-config
-    git
-    # cmake
-    # gnumake
-    # ninja
-    gh
-    nodePackages.conventional-changelog-cli
-    wget
-    # autoconf
-    # automake
-    # autoconf-archive
-    # libtool
-    # unzip
-    # m4
+      # libclang
+      #rustup
+      # python312
+      # python312Packages.pip
+      # poetry
+      # protobuf
+      # openssl
+      # pkg-config
+      git
+      # cmake
+      # gnumake
+      # ninja
+      gh
+      nodePackages.conventional-changelog-cli
+      wget
+      # autoconf
+      # automake
+      # autoconf-archive
+      # libtool
+      # unzip
+      # m4
 
-    # flakehub
-    fh
+      # flakehub
+      fh
 
-    openssh
+      openssh
 
-    coreutils
-    findutils
-    gawk
-    gnugrep
-    gnused
-    gnutar
-    gnutls
+      coreutils
+      findutils
+      gawk
+      gnugrep
+      gnused
+      gnutar
+      gnutls
 
-    #rust-analyzer
+      #rust-analyzer
 
-    # zig
-    # zls
+      # zig
+      # zls
 
-    ripgrep
-    fd
+      ripgrep
+      fd
 
-    nixpkgs-fmt
+      nixpkgs-fmt
 
-    # neovide
+      # neovide
 
-    # helix
-    # zellij
+      # helix
+      # zellij
 
-    # nodejs
-    # bun
+      # nodejs
+      # bun
 
-    # pulumi
-    # pulumiPackages.pulumi-language-python
-    aws-iam-authenticator
-    awscli2
-    kubectl
-    kubernetes-helm
+      # pulumi
+      # pulumiPackages.pulumi-language-python
+      aws-iam-authenticator
+      awscli2
+      kubectl
+      kubernetes-helm
 
-    # nodePackages.pyright
+      # nodePackages.pyright
 
-    # nerd-fonts
+      # nerd-fonts
 
-    # sqlite
-    # tcl
+      # sqlite
+      # tcl
 
-    # http
-    xh
+      # http
+      xh
 
-    # flyctl
-    podman
+      # flyctl
+      podman
 
-    iconv
+      iconv
 
-    # wireguard-tools
-  ] ++ lib.optionals (stdenv.isLinux) [
-    # clang
-  ];
+      # wireguard-tools
+    ] ++ lib.optionals (stdenv.isLinux) [
+      # clang
+    ];
 }
