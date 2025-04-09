@@ -27,6 +27,7 @@
       "spotify"
       "rectangle"
       "slack"
+      "private-internet-access"
       # "chrome"
     ];
   };
@@ -43,8 +44,9 @@
 
   # nix = { settings.experimental-features = [ "nix-command" "flakes" ]; };
 
-  services.nix-daemon.enable = true;
+  #services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
+  nix.enable = false;
 
   system.stateVersion = 5;
 
