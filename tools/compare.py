@@ -16,17 +16,7 @@ async def read_lines(stream, logfile):
         logfile.flush()
         yield decoded
 
-async def run_and_compare(release, seed, log1_path="run1.log", log2_path="run2.log"):
-    if not seed:
-        seed = random.randint(0, 2**64 - 1)
-
-    print("running seed=" + str(seed))
-
-    cmd = "./target/debug/pc-sim" + " "  + str(seed)
-
-    if release:
-        cmd = "./target/release/pc-sim" + " " + str(seed)
-
+async def run_and_compare(cmd, log1_path="run1.log", log2_path="run2.log"):
     # Start both processes
     proc1 = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL
@@ -69,26 +59,13 @@ async def async_zip(gen1, gen2):
         except StopAsyncIteration:
             break
 
-async def run_cargo_build(release: bool):
-    cmd = "cargo build -p pc-sim --release" if release else "cargo build -p pc-sim"
-    print(f"Running: {cmd}")
-    proc = await asyncio.create_subprocess_shell(cmd)
-    await proc.wait()
-
 def main():
     parser = argparse.ArgumentParser(description="Compare output or build with cargo.")
-    subparsers = parser.add_subparsers(dest="command", required=True)
-
-    # Subcommand: compare
-    compare_parser = subparsers.add_parser("compare", help="Compare two commands")
-    compare_parser.add_argument("--release", action="store_true", help="Use --release flag")
-    compare_parser.add_argument("--seed", type=int, help="--seed <seed>")
+    parser.add_argument("cmd", type=str, help="command to compare")
 
     args = parser.parse_args()
 
-    if args.command == "compare":
-        asyncio.run(run_cargo_build(args.release))
-        asyncio.run(run_and_compare(args.release, args.seed))
+    asyncio.run(run_and_compare(args.cmd))
 
 if __name__ == "__main__":
     main()
