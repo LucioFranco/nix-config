@@ -63,6 +63,7 @@
     "${config.home.homeDirectory}/.npm_global/bin"
     "${config.home.homeDirectory}/go/bin"
     "${config.home.homeDirectory}/.local/bin"
+    "${config.home.homeDirectory}/.cargo/bin"
   ];
 
   # Disable hm's darwin linking logic that conflicts with the custom
@@ -113,6 +114,8 @@
   };
 
   home.packages = with pkgs; [
+    inputs.tools.packages.${pkgs.system}.default
+
     # libclang
     #rustup
     # python312

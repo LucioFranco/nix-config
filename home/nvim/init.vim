@@ -90,7 +90,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
 local nvim_lsp = require'lspconfig'
-nvim_lsp.rnix.setup({})
+nvim_lsp.nixd.setup({})
 nvim_lsp.pyright.setup({
   settings = {
     python = {
@@ -142,7 +142,7 @@ local opts = {
                   },
                 },
                 cargo = {
-                    --features = "all"
+                    features = "all"
                 }
             }
         }
