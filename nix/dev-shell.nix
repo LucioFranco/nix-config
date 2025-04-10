@@ -9,7 +9,7 @@ with self.pkgs.${localSystem}; {
     nativeBuildInputs = [
       # Nix
       nixd
-      nixfmt
+      nixfmt-classic
     ];
 
     shellHook = ''

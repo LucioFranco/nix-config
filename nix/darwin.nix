@@ -6,7 +6,7 @@
     imports = [ ../home ];
   };
 
-  home-manager.verbose = true;
+  home-manager.verbose = false;
 
   users.users.lucio = {
     name = "lucio";
@@ -35,13 +35,9 @@
     darwin.apple_sdk.frameworks.Security
     qemu
     llvmPackages.libclang
-
-    darwin.iproute2mac
   ];
 
   programs.zsh.enable = true;
-
-  # nix = { settings.experimental-features = [ "nix-command" "flakes" ]; };
 
   #services.nix-daemon.enable = true;
   nix.package = pkgs.nix;

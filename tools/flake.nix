@@ -1,43 +1,51 @@
 {
-  description = "A very basic flake";
+  description = "My custom tools that I include in my home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # crane.url = "github:ipetkov/crane";
+    # flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.follows = "nixpkgs";
+    flake-utils.follows = "flake-utils";
+    crane.follows = "crane";
   };
 
-  outputs = { self, flake-utils, nixpkgs }: 
+  outputs = { crane, flake-utils, nixpkgs, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+        craneLib = crane.mkLib pkgs;
 
-        compare = pkgs.python3Packages.buildPythonApplication {
-          pname = "compare";
-          version = "0.1.0";
+        merge = attrs: lib.foldl' lib.recursiveUpdate { } attrs;
 
-          src = ./.;
-          format = "other";
+        buildPython = name: {
+          name = pkgs.python3Packages.buildPythonApplication {
+            pname = name;
+            version = "0.1.0";
 
-          installPhase = ''
-            mkdir -p $out/bin
-            cp compare.py $out/bin/compare
-            chmod +x $out/bin/compare
-          '';
+            src = ./.;
+            format = "other";
+
+            installPhase = ''
+              mkdir -p $out/bin
+              cp ${name}.py $out/bin/${name}
+              chmod +x $out/bin/${name}
+            '';
+          };
         };
-      in
-      {
-        packages = {
-          default = compare;
+
+        buildRust = name: {
+          name = craneLib.buildPackage {
+            src = craneLib.cleanCargoSource ./${name};
+          };
         };
 
-        # apps.default = flake-utils.lib.mkApp {
-        #   drv = compare;
-        # };
+        tools = merge [ (buildRust "n") (buildPython "compare") ];
+      in {
+        packages = tools;
+        checks = tools;
 
-        # apps.compare = flake-utils.lib.mkApp {
-        #   drv = compare;
-        #   exe = "compare";
-        # };
-      }
-    );
+        devShells.default = pkgs.mkShell { packages = with pkgs; [ rustup ]; };
+      });
 }

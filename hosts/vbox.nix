@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # boot.growPartition = true;
   # boot.loader.grub.device = "/dev/sda";
 

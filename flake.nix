@@ -4,9 +4,7 @@
   inputs = {
     nixpkgs = { url = "github:nixos/nixpkgs/master"; };
 
-    nixos-hardware = {
-      url = "github:nixos/nixos-hardware";
-    };
+    nixos-hardware = { url = "github:nixos/nixos-hardware"; };
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -26,7 +24,6 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
 
@@ -37,37 +34,29 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    nur = {
-      url = "github:nix-community/nur";
-    };
+    nur = { url = "github:nix-community/nur"; };
 
-    xdg-open-wsl = {
-      url = "github:LucioFranco/xdg-open-wsl";
-    };
+    xdg-open-wsl = { url = "github:LucioFranco/xdg-open-wsl"; };
+
+    crane.url = "github:ipetkov/crane";
 
     tools = {
       url = "path:tools";
+      inputs.crane.follows = "crane";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    { self
-    , darwin
-    , nixpkgs
-    , home-manager
-    , nixos-generators
-    , nixos-hardware
-    , nur
-    , ...
-    }@inputs:
+  outputs = { self, darwin, nixpkgs, home-manager, nixos-generators
+    , nixos-hardware, nur, ... }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-darwin"
         "x86_64-darwin"
         "x86_64-linux"
       ];
-    in
-    {
+    in {
       hosts = {
         workbook = {
           type = "darwin";
@@ -80,10 +69,10 @@
         };
 
         # CI test hosts 
-        gha-mac = {
-          type = "darwin";
-          hostPlatform = "x86_64-darwin";
-        };
+        # gha-mac = {
+        #   type = "darwin";
+        #   hostPlatform = "x86_64-darwin";
+        # };
       };
 
       darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
@@ -102,67 +91,55 @@
             home-manager.useGlobalPkgs = true;
           }
           {
-            nixpkgs = {
-              config.allowUnfree = true;
-            };
-            nix = {
-              registry.nixpkgs.flake = nixpkgs;
-            };
+            nixpkgs = { config.allowUnfree = true; };
+            nix = { registry.nixpkgs.flake = nixpkgs; };
           }
         ];
       };
 
-      darwinConfigurations.gha-mac = darwin.lib.darwinSystem
-        rec {
-          system = "x86_64-darwin";
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
-        };
+      # darwinConfigurations.gha-mac = darwin.lib.darwinSystem rec {
+      #   system = "x86_64-darwin";
+      #   pkgs = import nixpkgs {
+      #     inherit system;
+      #     config.allowUnfree = true;
+      #   };
+      #   modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
+      # };
 
-      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration
-        rec {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs.inputs = inputs;
-          modules = [ ./nix/wsl.nix ];
-        };
-
-      nixosConfigurations = {
-        vbox = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./nix/nixos.nix
-            home-manager.nixosModules.home-manager
-          ];
-        };
-
-        thinkpad = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            nur.nixosModules.nur
-            ./nix/nixos.nix
-            home-manager.nixosModules.home-manager
-            nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
-          ];
-        };
+      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration rec {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs.inputs = inputs;
+        modules = [ ./nix/wsl.nix ];
       };
 
-      pkgs = forAllSystems
-        (localSystem:
-          import nixpkgs {
-            inherit localSystem;
-            overlays = [ nur.overlay ];
-            config.allowUnfree = true;
-            config.allowAliases = true;
-          });
+      nixosConfigurations = {
+        # nixosConfigurations = {
+        #   vbox = nixpkgs.lib.nixosSystem {
+        #     system = "x86_64-linux";
+        #     modules = [ ./nix/nixos.nix home-manager.nixosModules.home-manager ];
+        #   };
 
-      checks = forAllSystems
-        (import ./nix/checks.nix inputs);
-      devShells = forAllSystems
-        (import ./nix/dev-shell.nix inputs);
-      packages = forAllSystems
-        (import ./nix/packages.nix inputs);
+        #   thinkpad = nixpkgs.lib.nixosSystem {
+        #     system = "x86_64-linux";
+        #     modules = [
+        #       nur.nixosModules.nur
+        #       ./nix/nixos.nix
+        #       home-manager.nixosModules.home-manager
+        #       nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
+        #     ];
+        #   };
+      };
+
+      pkgs = forAllSystems (localSystem:
+        import nixpkgs {
+          inherit localSystem;
+          # overlays = [ nur.overlay.default ];
+          config.allowUnfree = true;
+          config.allowAliases = true;
+        });
+
+      checks = forAllSystems (import ./nix/checks.nix inputs);
+      devShells = forAllSystems (import ./nix/dev-shell.nix inputs);
+      packages = forAllSystems (import ./nix/packages.nix inputs);
     };
 }

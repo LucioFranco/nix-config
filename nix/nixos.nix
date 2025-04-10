@@ -1,7 +1,5 @@
 { pkgs, config, ... }: {
-  imports = [
-    ../hardware/thinkpad-hardware.nix
-  ];
+  imports = [ ../hardware/thinkpad-hardware.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -28,9 +26,7 @@
       enable = true;
 
       config = {
-        bars = [{
-          command = "${pkgs.waybar}/bin/waybar";
-        }];
+        bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
 
         # keybindings =
         #   let
@@ -40,11 +36,7 @@
         #     "${modifier}+
         #   };
 
-        input = {
-          "*" = {
-            xkb_options = "ctrl:nocaps";
-          };
-        };
+        input = { "*" = { xkb_options = "ctrl:nocaps"; }; };
 
         terminal = "${pkgs.alacritty}/bin/alacritty";
       };
@@ -57,9 +49,8 @@
 
       profiles.default = {
         isDefault = true;
-        extensions = with config.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-        ];
+        extensions = with config.nur.repos.rycee.firefox-addons;
+          [ ublock-origin ];
       };
     };
   };
@@ -69,14 +60,10 @@
   networking.networkmanager = {
     enable = true;
 
-    wifi = {
-      scanRandMacAddress = false;
-    };
+    wifi = { scanRandMacAddress = false; };
   };
 
-  hardware.opengl = {
-    enable = true;
-  };
+  hardware.opengl = { enable = true; };
 
   services.dbus.enable = true;
   xdg.portal = {

@@ -82,35 +82,30 @@
   # Ref: https://github.com/nix-community/home-manager/issues/1341#issuecomment-1306148374
   disabledModules = [ "targets/darwin/linkapps.nix" ];
 
-  programs.go.enable = true;
-  programs.go.package = pkgs.go_1_22;
-
   # Home manager will symlink apps to ~/Applications/Home Manager Apps/ but
   # MacOS spotlight doesn't understand symlinks so instead we will just copy.
   #
   # Ref: https://github.com/nix-community/home-manager/issues/1341#issuecomment-1190875080
   home.activation = lib.mkIf pkgs.stdenv.isDarwin {
-    copyApplications =
-      let
-        apps = pkgs.buildEnv {
-          name = "home-manager-applications";
-          paths = config.home.packages;
-          pathsToLink = "/Applications";
-        };
-      in
-      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        baseDir="$HOME/Applications/Home Manager Apps"
-        if [ -e "$baseDir" ]; then
-          echo "Removing $baseDir"
-          rm -rf "$baseDir" || rm -rf "$baseDir"
-        fi
-        mkdir -p "$baseDir"
-        for appFile in ${apps}/Applications/*; do
-          target="$baseDir/$(basename "$appFile")"
-          $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-          $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-        done
-      '';
+    copyApplications = let
+      apps = pkgs.buildEnv {
+        name = "home-manager-applications";
+        paths = config.home.packages;
+        pathsToLink = "/Applications";
+      };
+    in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      baseDir="$HOME/Applications/Home Manager Apps"
+      if [ -e "$baseDir" ]; then
+        echo "Removing $baseDir"
+        rm -rf "$baseDir" || rm -rf "$baseDir"
+      fi
+      mkdir -p "$baseDir"
+      for appFile in ${apps}/Applications/*; do
+        target="$baseDir/$(basename "$appFile")"
+        $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
+        $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
+      done
+    '';
   };
 
   programs.direnv = {
@@ -124,8 +119,8 @@
   };
 
   home.packages = with pkgs;
-    [
-      inputs.tools.packages.${pkgs.system}.default
+  # Add our custom tools from our tools flake
+    lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
 
       # libclang
       #rustup
