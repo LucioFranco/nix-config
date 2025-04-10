@@ -61,6 +61,7 @@
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
   system.defaults.NSGlobalDomain._HIHideMenuBar = false;
+  system.defaults.controlcenter.BatteryShowPercentage = true;
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
