@@ -127,7 +127,8 @@ local opts = {
           navic.attach(client, bufnr)
         end,
         capabilities=capabilities,
-        cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
+        -- cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
+        cmd = "rust-analyzer",
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -158,7 +159,7 @@ vim.g.rustaceanvim = {
   },
   -- LSP configuration
   server = {
-    cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
+    --cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
     on_attach = function(client, bufnr)
       -- you can also put keymaps in here
     end,
