@@ -3,10 +3,14 @@
     enable = true;
 
     settings = {
-      window.decorations = "none";
-      window.option_as_alt = "Both";
+      window = {
+        dynamic_padding = false;
+        decorations = "none";
+        option_as_alt = "Both";
+      };
+
       font = {
-        size = 13.5;
+        size = 14;
         normal = { family = "Hack Nerd Font Mono"; };
       };
 

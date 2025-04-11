@@ -26,10 +26,19 @@
       }
     ];
 
-    ignores = [ ".DS_Store" "*.dSYM" ".envrc" ".direnv" "CLAUDE.md" ];
+    ignores = [
+      ".DS_Store"
+      "*.dSYM"
+      ".envrc"
+      ".direnv"
+      "CLAUDE.md"
+      "*.log"
+      "*.log.*"
+      "window.toml"
+    ];
   };
 
-  home.shellAliases = rec {
+  home.shellAliases = {
     ga = "git add";
     gca = "git commit -a";
     gc = "git commit";
