@@ -41,7 +41,18 @@
           };
         };
 
-        tools = merge [ (buildRust "n") (buildPython "compare") ];
+        window = {
+          window = craneLib.buildPackage {
+            src = pkgs.fetchFromGitHub {
+              owner = "LucioFranco";
+              repo = "window";
+              rev = "579952b72cc04a4fe0f286f73c0785112c976083";
+              sha256 = "sha256-gHMWrzXAnreDNtvx9H0EMbmHx7Eik47LIGCy2oNGS6g=";
+            };
+          };
+        };
+
+        tools = merge [ (buildRust "n") (buildPython "compare") window ];
       in {
         packages = tools;
         checks = tools;
