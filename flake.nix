@@ -42,12 +42,12 @@
 
     crane.url = "github:ipetkov/crane";
 
-    tools = {
-      url = "path:tools";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # tools = {
+    #   url = "path:tools";
+    #   inputs.crane.follows = "crane";
+    #   inputs.flake-utils.follows = "flake-utils";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = { self, nixos-wsl, darwin, nixpkgs, home-manager, nixos-generators

@@ -393,7 +393,6 @@
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "pre-commit-hooks": "pre-commit-hooks",
-        "tools": "tools",
         "xdg-open-wsl": "xdg-open-wsl"
       }
     },
@@ -438,28 +437,6 @@
         "repo": "default",
         "type": "github"
       }
-    },
-    "tools": {
-      "inputs": {
-        "crane": [
-          "crane"
-        ],
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "tools",
-        "type": "path"
-      },
-      "original": {
-        "path": "tools",
-        "type": "path"
-      },
-      "parent": []
     },
     "treefmt-nix": {
       "inputs": {

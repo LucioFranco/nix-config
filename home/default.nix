@@ -120,7 +120,8 @@
 
   home.packages = with pkgs;
   # Add our custom tools from our tools flake
-    lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
+  # lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
+    [
 
       # libclang
       #rustup
