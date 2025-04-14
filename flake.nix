@@ -6,6 +6,8 @@
 
     nixos-hardware = { url = "github:nixos/nixos-hardware"; };
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,7 +50,7 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, nixos-generators
+  outputs = { self, nixos-wsl, darwin, nixpkgs, home-manager, nixos-generators
     , nixos-hardware, nur, ... }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -113,6 +115,15 @@
       };
 
       nixosConfigurations = {
+        wsl = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/nixos.nix
+            home-manager.nixosModules.home-manager
+            nixos-wsl.nixosModules.default
+            { home-manager.extraSpecialArgs.inputs = inputs; }
+          ];
+        };
         # nixosConfigurations = {
         #   vbox = nixpkgs.lib.nixosSystem {
         #     system = "x86_64-linux";
