@@ -12,6 +12,9 @@ case "$1" in
     nix build .#darwinConfigurations.workbook.system
     ./result/sw/bin/darwin-rebuild switch --flake .#workbook
     ;;
+  nixos)
+    sudo nixos-rebuild switch --flake .#wsl
+    ;;
   *)
     echo "argument $1"
     ;;
