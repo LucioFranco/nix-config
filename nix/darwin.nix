@@ -35,6 +35,9 @@
     darwin.apple_sdk.frameworks.Security
     qemu
     llvmPackages.libclang
+
+    docker
+    colima
   ];
 
   programs.zsh.enable = true;
