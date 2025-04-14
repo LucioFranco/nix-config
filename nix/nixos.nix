@@ -1,5 +1,8 @@
 { pkgs, config, ... }: {
-  wsl.enable = true;
+  wsl = {
+    enable = true;
+    defaultUser = "lucio";
+  };
 
   home-manager.users.lucio = { ... }: {
     home.username = "lucio";
