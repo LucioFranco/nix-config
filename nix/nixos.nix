@@ -17,6 +17,8 @@
     # setSocketVariable = true;
   };
 
+  programs.nix-ld = { enable = true; };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "lucio" ];
 
