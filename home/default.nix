@@ -129,7 +129,7 @@
       # python312Packages.pip
       # poetry
       # protobuf
-      # openssl
+      openssl
       # pkg-config
       git
       # cmake

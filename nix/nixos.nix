@@ -12,11 +12,17 @@
     imports = [ ../home ];
   };
 
+  virtualisation.docker = {
+    enable = true;
+    # setSocketVariable = true;
+  };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "lucio" ];
 
   users.users.lucio = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     # uid = 1000;
     password = "demo";
     shell = pkgs.zsh;
