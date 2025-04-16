@@ -1,8 +1,21 @@
-{ pkgs, config, ... }: {
+{ pkgs, inputs, outputs, config, ... }: {
+
   wsl = {
     enable = true;
     defaultUser = "lucio";
   };
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      inputs.dashlane-cli.overlays.default
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [ dashlane-cli ];
 
   home-manager.users.lucio = { ... }: {
     home.username = "lucio";
@@ -16,6 +29,8 @@
     enable = true;
     # setSocketVariable = true;
   };
+
+  time = { timeZone = "America/New_York"; };
 
   programs.nix-ld = { enable = true; };
 

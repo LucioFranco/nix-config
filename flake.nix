@@ -42,6 +42,8 @@
 
     crane.url = "github:ipetkov/crane";
 
+    dashlane-cli.url = "https://flakehub.com/f/LucioFranco/dashlane-cli/0.1.24";
+
     # tools = {
     #   url = "path:tools";
     #   inputs.crane.follows = "crane";
@@ -53,11 +55,14 @@
   outputs = { self, nixos-wsl, darwin, nixpkgs, home-manager, nixos-generators
     , nixos-hardware, nur, ... }@inputs:
     let
+      inherit (self) outputs;
+
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-darwin"
         "x86_64-darwin"
         "x86_64-linux"
       ];
+
     in {
       hosts = {
         workbook = {
@@ -77,13 +82,15 @@
         # };
       };
 
+      overlays = import ./overlays { inherit inputs; };
+
       darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         # pkgs = import nixpkgs {
         #   inherit system;
         #   config.allowUnfree = true;
         # };
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs outputs; };
         modules = [
 
           ./nix/darwin.nix
@@ -117,6 +124,7 @@
       nixosConfigurations = {
         wsl = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
           modules = [
             ./nix/nixos.nix
             home-manager.nixosModules.home-manager
