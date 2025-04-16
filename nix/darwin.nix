@@ -1,9 +1,19 @@
-{ inputs, pkgs, config, lib, ... }: {
+{ inputs, outputs, pkgs, config, lib, ... }: {
   home-manager.users.lucio = { config, ... }: {
     home.username = "lucio";
     home.stateVersion = "24.11";
 
     imports = [ ../home ];
+  };
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      inputs.dashlane-cli.overlays.default
+    ];
   };
 
   home-manager.verbose = false;
