@@ -185,7 +185,7 @@
 
       # nodePackages.pyright
 
-      # nerd-fonts
+      nerd-fonts.hack
 
       # sqlite
       # tcl
