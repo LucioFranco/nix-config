@@ -2,5 +2,5 @@
 # You can build them using 'nix build .#example'
 pkgs:
 {
-  # dashlane-cli = pkgs.callPackage ./dashlane.nix { pkgs = pkgs; };
+  # dashlane-cli = pkgs.callPackage ./dashlane { pkgs = pkgs; };
 }

@@ -10,8 +10,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      inputs.dashlane-cli.overlays.default
     ];
   };
 

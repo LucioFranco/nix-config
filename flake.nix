@@ -42,7 +42,8 @@
 
     crane.url = "github:ipetkov/crane";
 
-    dashlane-cli.url = "https://flakehub.com/f/LucioFranco/dashlane-cli/0.1.24";
+    # dashlane-cli.url = "https://flakehub.com/f/LucioFranco/dashlane-cli/0.1.25";
+    # dashlane-cli.url = "path:..flakes/dashlane-cli";
 
     # tools = {
     #   url = "path:tools";

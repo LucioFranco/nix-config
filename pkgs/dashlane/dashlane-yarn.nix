@@ -7,10 +7,13 @@
 
 let
 
-  yarnBin = ./.yarn/releases/yarn-4.5.1.cjs;
+  yarnNixify = ./yarn-plugin-nixify.js;
+
+  # yarnBin = ./.yarn/releases/yarn-4.5.1.cjs;
+  yarnBin = "${src}/.yarn/releases/yarn-4.5.1.cjs";
 
   cacheFolder = ".yarn/cache";
-  lockfile = ./yarn.lock;
+  lockfile = "${src}/yarn.lock";
 
   # Call overrideAttrs on a derivation if a function is provided.
   optionalOverride = fn: drv: if fn == null then drv else drv.overrideAttrs fn;
@@ -43,10 +46,14 @@ let
   cacheDrv = stdenv.mkDerivation {
     name = "yarn-cache";
     buildInputs = [ yarn git cacert ];
+
     buildCommand = ''
       cp --reflink=auto --recursive '${src}' ./src
       cd ./src/
       ${buildVars}
+
+      yarn plugin import ${yarnNixify}
+
       HOME="$TMP" yarn_enable_global_cache=false yarn_cache_folder="$out" \
         yarn nixify fetch
       rm $out/.gitignore
@@ -67,7 +74,6 @@ let
       # Copy over the Yarn cache.
       rm -fr '${cacheFolder}'
       mkdir -p '${cacheFolder}'
-      cp --reflink=auto --recursive ${cacheDrv}/* '${cacheFolder}/'
 
       # Yarn may need a writable home directory.
       export yarn_global_folder="$TMP"
@@ -80,6 +86,11 @@ let
       # Some node-gyp calls may call out to npm, which could fail due to an
       # read-only home dir.
       export HOME="$TMP"
+
+      yarn plugin import ${yarnNixify}
+
+      # HOME="$TMP" yarn_enable_global_cache=false yarn_cache_folder="$out" \
+      yarn nixify fetch
 
       # running preConfigure after the cache is populated allows for
       # preConfigure to contain substituteInPlace for dependencies as well as the
@@ -102,8 +113,8 @@ let
       runHook preInstall
 
       mkdir -p .git/refs/heads
-      echo "ref: refs/heads/master" > .git/HEAD
-      echo "423517344b4f328a297d7a87147f3be1c49e77a3" > .git/refs/heads/master
+      echo "fetchgit" > .git/refs/heads/fetchgit
+
       yarn run build
 
       # Move the package contents to the output directory.
