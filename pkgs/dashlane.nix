@@ -3,17 +3,16 @@
 let
   version = "6.2447.2";
 
-  # Map of binaries and their hashes per system
   binaries = {
     "x86_64-linux" = {
       url =
         "https://github.com/Dashlane/dashlane-cli/releases/download/v${version}/dcli-linux-x64";
-      sha256 = "sha256-1waxs4wrgw50fmjadgqvb1z1yiv70c6v3m0c9vzpd53jzs6hqlch";
+      sha256 = "sha256-kFEMjf5ylHb/TgzUsQ0DZ0cfflgbv6ZkdaDwlznRXfE=";
     };
     "x86_64-darwin" = {
       url =
         "https://github.com/Dashlane/dashlane-cli/releases/download/v${version}/dcli-macos-x64";
-      sha256 = "sha256-1a0idk31ckfqi1rj3irgz3bwqj9pd2pcj17y2lcdk06ax1jlrxwg";
+      sha256 = "";
     };
     "aarch64-darwin" = {
       url =
