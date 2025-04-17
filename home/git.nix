@@ -35,6 +35,7 @@
       "*.log"
       "*.log.*"
       "window.toml"
+      ".pre-commit-config.yaml"
     ];
   };
 
