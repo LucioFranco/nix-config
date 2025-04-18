@@ -18,6 +18,7 @@
     };
   };
   services.displayManager.defaultSession = "xfce";
+  environment.systemPackages = with pkgs; [ vmwareTools ];
 
   home-manager.users.lucio = { ... }: {
     home.username = "lucio";
