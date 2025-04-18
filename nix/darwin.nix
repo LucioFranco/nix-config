@@ -56,6 +56,8 @@
   nix.package = pkgs.nix;
   nix.enable = false;
 
+  # nix.linux-builder.enable = true;
+
   system.stateVersion = 5;
 
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;

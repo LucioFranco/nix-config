@@ -1,10 +1,5 @@
 { pkgs, inputs, outputs, config, ... }: {
 
-  wsl = {
-    enable = true;
-    defaultUser = "lucio";
-  };
-
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
@@ -13,7 +8,16 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [ dashlane-cli ];
+  # environment.systemPackages = with pkgs; [ dashlane-cli ];
+
+  services.xserver = {
+    enable = true;
+    desktopManager = {
+      xterm.enable = false;
+      xfce.enable = true;
+    };
+  };
+  services.displayManager.defaultSession = "xfce";
 
   home-manager.users.lucio = { ... }: {
     home.username = "lucio";
@@ -21,6 +25,34 @@
 
     home.stateVersion = "24.11";
     imports = [ ../home ];
+
+    # wayland.windowManager.sway = {
+    #   enable = true;
+
+    #   config = {
+    #     bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
+
+    #     # keybindings =
+    #     #   let
+    #     #     modifier = config.wayland.windowManager.sway.config.modifier;
+    #     #   in
+    #     #   lib.mkOptionDefault { 
+    #     #     "${modifier}+
+    #     #   };
+
+    #     input = { "*" = { xkb_options = "ctrl:nocaps"; }; };
+
+    #     terminal = "${pkgs.alacritty}/bin/alacritty";
+    #   };
+
+    #   systemd.enable = true;
+    # };
+
+    programs.firefox = {
+      enable = true;
+
+      profiles.default = { isDefault = true; };
+    };
   };
 
   virtualisation.docker = {

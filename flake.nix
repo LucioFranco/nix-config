@@ -60,6 +60,7 @@
 
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-darwin"
+        "aarch64-linux"
         "x86_64-darwin"
         "x86_64-linux"
       ];
@@ -127,12 +128,24 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./nix/nixos.nix
+            ./nix/nixos-wsl.nix
             home-manager.nixosModules.home-manager
             nixos-wsl.nixosModules.default
             { home-manager.extraSpecialArgs.inputs = inputs; }
           ];
         };
+
+        # vm = nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
+        #   specialArgs = { inherit inputs outputs; };
+        #   modules = [
+        #     ./nix/nixos.nix
+        #     ./hosts/vmware.nix
+        #     home-manager.nixosModules.home-manager
+        #     { home-manager.extraSpecialArgs.inputs = inputs; }
+        #   ];
+        # };
+
         # nixosConfigurations = {
         #   vbox = nixpkgs.lib.nixosSystem {
         #     system = "x86_64-linux";
@@ -164,6 +177,19 @@
 
       checks = forAllSystems (import ./nix/checks.nix inputs);
       devShells = forAllSystems (import ./nix/dev-shell.nix inputs);
-      packages = forAllSystems (import ./nix/packages.nix inputs);
+      # packages = forAllSystems (import ./nix/packages.nix inputs);
+
+      packages."aarch64-linux".vmware = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./hardware/vmware.nix
+          ./nix/nixos.nix
+          home-manager.nixosModules.default
+          { home-manager.extraSpecialArgs.inputs = inputs; }
+        ];
+
+        format = "vmware";
+      };
     };
 }
