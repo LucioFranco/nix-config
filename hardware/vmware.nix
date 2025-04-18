@@ -12,4 +12,9 @@
   # VMware, Parallels both only support this being 0 otherwise you see
   # "error switching console mode" on boot.
   boot.loader.systemd-boot.consoleMode = "0";
+
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16 * 1024;
+  }];
 }

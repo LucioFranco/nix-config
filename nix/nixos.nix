@@ -15,7 +15,7 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      xterm.enable = false;
+      xterm.enable = true;
       xfce.enable = true;
     };
 
