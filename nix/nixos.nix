@@ -8,7 +8,7 @@
     ];
   };
 
-  # environment.systemPackages = with pkgs; [ dashlane-cli ];
+  environment.systemPackages = with pkgs; [ dashlane-cli ];
 
   disabledModules = [ "virtualisation/vmware-guest.nix" ];
 
@@ -19,10 +19,24 @@
       xfce.enable = true;
     };
 
-    autoRepeatDelay = 10;
-    autoRepeatInterval = 1;
+    # autoRepeatDelay = 10;
+    # autoRepeatInterval = 1;
   };
   services.displayManager.defaultSession = "xfce";
+
+  # Share our host filesystem
+  fileSystems."/host" = {
+    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+    device = ".host:/";
+    options = [
+      "umask=22"
+      "uid=1000"
+      "gid=1000"
+      "allow_other"
+      "auto_unmount"
+      "defaults"
+    ];
+  };
 
   home-manager.users.lucio = { ... }: {
     home.username = "lucio";

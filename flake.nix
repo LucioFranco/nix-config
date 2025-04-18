@@ -135,6 +135,19 @@
           ];
         };
 
+        vmware = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hardware/vmware.nix
+            ./hardware/hardware-configuration.nix
+            ./nix/vmware-guest.nix
+            ./nix/nixos.nix
+            home-manager.nixosModules.default
+            { home-manager.extraSpecialArgs.inputs = inputs; }
+          ];
+        };
+
         # vm = nixpkgs.lib.nixosSystem {
         #   system = "x86_64-linux";
         #   specialArgs = { inherit inputs outputs; };
