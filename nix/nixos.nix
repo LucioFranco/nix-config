@@ -10,15 +10,19 @@
 
   # environment.systemPackages = with pkgs; [ dashlane-cli ];
 
+  disabledModules = [ "virtualisation/vmware-guest.nix" ];
+
   services.xserver = {
     enable = true;
     desktopManager = {
       xterm.enable = false;
       xfce.enable = true;
     };
+
+    autoRepeatDelay = 10;
+    autoRepeatInterval = 1;
   };
   services.displayManager.defaultSession = "xfce";
-  environment.systemPackages = with pkgs; [ vmwareTools ];
 
   home-manager.users.lucio = { ... }: {
     home.username = "lucio";
