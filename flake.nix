@@ -70,6 +70,7 @@
         }:
         {
           packages.default = pkgs.hello;
+          formatter = config.treefmt.build.wrapper;
 
           devShells = import ./nix/dev-shell.nix ctx;
 

@@ -10,8 +10,15 @@
     crane.follows = "crane";
   };
 
-  outputs = { crane, flake-utils, nixpkgs, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      crane,
+      flake-utils,
+      nixpkgs,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
@@ -52,11 +59,17 @@
           };
         };
 
-        tools = merge [ (buildRust "n") (buildPython "compare") window ];
-      in {
+        tools = merge [
+          (buildRust "n")
+          (buildPython "compare")
+          window
+        ];
+      in
+      {
         packages = tools;
         checks = tools;
 
         devShells.default = pkgs.mkShell { packages = with pkgs; [ rustup ]; };
-      });
+      }
+    );
 }

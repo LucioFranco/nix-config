@@ -1,4 +1,11 @@
-{ inputs, pkgs, config, lib, ... }: {
+{
+  inputs,
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
   # home.username = "lucio";
   # home.homeDirectory = "/home/lucio";
 
@@ -47,22 +54,7 @@
     # compilation, bindgen does not invoke $CC directly. Instead it
     # uses LLVM's libclang. To make sure all necessary flags are
     # included we need to look in a few places.
-    BINDGEN_EXTRA_CLANG_ARGS =
-      "$(< ${stdenv.cc}/nix-support/libc-crt1-cflags) \n      $(< ${stdenv.cc}/nix-support/libc-cflags) \n      $(< ${stdenv.cc}/nix-support/cc-cflags) \n      $(< ${stdenv.cc}/nix-support/libcxx-cxxflags) \n      ${
-              lib.optionalString stdenv.cc.isClang
-              "-idirafter ${stdenv.cc.cc}/lib/clang/${
-                lib.getVersion stdenv.cc.cc
-              }/include"
-            } \n      ${
-              lib.optionalString stdenv.cc.isGNU
-              "-isystem ${stdenv.cc.cc}/include/c++/${
-                lib.getVersion stdenv.cc.cc
-              } -isystem ${stdenv.cc.cc}/include/c++/${
-                lib.getVersion stdenv.cc.cc
-              }/${stdenv.hostPlatform.config} -idirafter ${stdenv.cc.cc}/lib/gcc/${stdenv.hostPlatform.config}/${
-                lib.getVersion stdenv.cc.cc
-              }/include"
-            } \n    ";
+    BINDGEN_EXTRA_CLANG_ARGS = "$(< ${stdenv.cc}/nix-support/libc-crt1-cflags) \n      $(< ${stdenv.cc}/nix-support/libc-cflags) \n      $(< ${stdenv.cc}/nix-support/cc-cflags) \n      $(< ${stdenv.cc}/nix-support/libcxx-cxxflags) \n      ${lib.optionalString stdenv.cc.isClang "-idirafter ${stdenv.cc.cc}/lib/clang/${lib.getVersion stdenv.cc.cc}/include"} \n      ${lib.optionalString stdenv.cc.isGNU "-isystem ${stdenv.cc.cc}/include/c++/${lib.getVersion stdenv.cc.cc} -isystem ${stdenv.cc.cc}/include/c++/${lib.getVersion stdenv.cc.cc}/${stdenv.hostPlatform.config} -idirafter ${stdenv.cc.cc}/lib/gcc/${stdenv.hostPlatform.config}/${lib.getVersion stdenv.cc.cc}/include"} \n    ";
 
     LIBRARY_PATH = "${pkgs.sqlite.out}/lib:${pkgs.iconv.out}/lib";
     TERM = "xterm-256color";
@@ -87,25 +79,27 @@
   #
   # Ref: https://github.com/nix-community/home-manager/issues/1341#issuecomment-1190875080
   home.activation = lib.mkIf pkgs.stdenv.isDarwin {
-    copyApplications = let
-      apps = pkgs.buildEnv {
-        name = "home-manager-applications";
-        paths = config.home.packages;
-        pathsToLink = "/Applications";
-      };
-    in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      baseDir="$HOME/Applications/Home Manager Apps"
-      if [ -e "$baseDir" ]; then
-        echo "Removing $baseDir"
-        rm -rf "$baseDir" || rm -rf "$baseDir"
-      fi
-      mkdir -p "$baseDir"
-      for appFile in ${apps}/Applications/*; do
-        target="$baseDir/$(basename "$appFile")"
-        $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-        $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-      done
-    '';
+    copyApplications =
+      let
+        apps = pkgs.buildEnv {
+          name = "home-manager-applications";
+          paths = config.home.packages;
+          pathsToLink = "/Applications";
+        };
+      in
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        baseDir="$HOME/Applications/Home Manager Apps"
+        if [ -e "$baseDir" ]; then
+          echo "Removing $baseDir"
+          rm -rf "$baseDir" || rm -rf "$baseDir"
+        fi
+        mkdir -p "$baseDir"
+        for appFile in ${apps}/Applications/*; do
+          target="$baseDir/$(basename "$appFile")"
+          $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
+          $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
+        done
+      '';
   };
 
   programs.direnv = {
@@ -118,9 +112,10 @@
     settings.git_protocol = "ssh";
   };
 
-  home.packages = with pkgs;
-  # Add our custom tools from our tools flake
-  # lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
+  home.packages =
+    with pkgs;
+    # Add our custom tools from our tools flake
+    # lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
     [
 
       # libclang
@@ -199,7 +194,8 @@
       iconv
 
       # wireguard-tools
-    ] ++ lib.optionals (stdenv.isLinux) [
+    ]
+    ++ lib.optionals (stdenv.isLinux) [
       # clang
     ];
 }

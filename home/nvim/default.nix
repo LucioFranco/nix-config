@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
     sessionVariables = rec {
       EDITOR = "nvim";

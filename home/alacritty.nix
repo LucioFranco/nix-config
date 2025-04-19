@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.alacritty = {
     enable = true;
 
@@ -11,7 +12,9 @@
 
       font = {
         size = 14;
-        normal = { family = "Hack Nerd Font Mono"; };
+        normal = {
+          family = "Hack Nerd Font Mono";
+        };
       };
 
       colors = {
