@@ -40,4 +40,3 @@ in pkgs.stdenv.mkDerivation {
     chmod +x $out/bin/dcli
   '';
 }
-
