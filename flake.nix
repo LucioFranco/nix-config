@@ -80,7 +80,7 @@
               actionlint.enable = true;
               shellcheck.enable = true;
               ruff.enable = true;
-              treefmt.enable = false;
+              treefmt.enable = true;
 
               # TODO: re-enable this
               statix.enable = false;
