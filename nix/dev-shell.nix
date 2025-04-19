@@ -5,7 +5,7 @@
 
     nativeBuildInputs = with pkgs; [
       nixd
-      nixfmt-rfc-style
+      nixfmt
       nix-output-monitor
 
       # Shell
