@@ -104,7 +104,7 @@
         };
       flake = {
         githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-          checks = { inherit (self) checks; };
+          checks = self.checks;
         };
 
       };
