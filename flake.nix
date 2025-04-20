@@ -89,7 +89,10 @@
               };
             };
 
-            packages.default = pkgs.hello;
+            # packages = pkgs.lib.mapAttrs (_: darwin: darwin.system)
+            #   top.config.flake.darwinConfigurations;
+            packages = import ./nix/packages.nix top ctx;
+
             formatter = config.treefmt.build.wrapper;
             checks.formatting = config.treefmt.build.check self;
 
@@ -128,12 +131,11 @@
           overlays = import ./overlays { inherit inputs; };
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-            checks =
-              self.checks
-              // inputs.nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (_: {
-                workbook = self.darwinConfigurations.workbook.system;
-
-              });
+            checks = inputs.nixpkgs.lib.mapAttrs (
+              _system: sys:
+              # deep‑merge checks and packages for each system
+              inputs.nixpkgs.lib.recursiveUpdate sys.checks sys.packages
+            ) top.config.allSystems;
           };
         };
 
