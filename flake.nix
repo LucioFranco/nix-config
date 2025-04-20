@@ -91,7 +91,6 @@
 
             # packages = pkgs.lib.mapAttrs (_: darwin: darwin.system)
             #   top.config.flake.darwinConfigurations;
-            packages = import ./nix/packages.nix top ctx;
 
             formatter = config.treefmt.build.wrapper;
             checks.formatting = config.treefmt.build.check self;
@@ -127,6 +126,8 @@
           };
         flake = {
           darwinConfigurations = import ./nix/darwin.nix top;
+
+          packages = import ./nix/packages.nix top;
 
           overlays = import ./overlays { inherit inputs; };
 
