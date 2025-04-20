@@ -89,9 +89,6 @@
               };
             };
 
-            # packages = pkgs.lib.mapAttrs (_: darwin: darwin.system)
-            #   top.config.flake.darwinConfigurations;
-
             formatter = config.treefmt.build.wrapper;
             checks.formatting = config.treefmt.build.check self;
 
