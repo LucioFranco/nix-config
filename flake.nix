@@ -115,7 +115,7 @@
               projectRootFile = "flake.nix";
               flakeCheck = false; # Covered by git-hooks check
               programs = {
-                nixfmt-rfc-style.enable = true;
+                nixfmt.enable = true;
                 ruff-format.enable = true;
                 shfmt = {
                   enable = true;
@@ -129,7 +129,7 @@
 
           packages = import ./nix/packages.nix top;
 
-          overlays = import ./overlays { inherit inputs; };
+          overlays = import ./nix/overlays.nix top;
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
             checks = inputs.nixpkgs.lib.recursiveUpdate self.checks self.packages;
