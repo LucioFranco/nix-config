@@ -129,7 +129,7 @@
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
             # checks = self.checks;
-            checks."aarch64-darwin" = self.darwinConfigurations;
+            checks."aarch64-darwin".workbook = self.darwinConfigurations.workbook.system;
           };
         };
 
