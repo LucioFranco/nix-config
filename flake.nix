@@ -60,7 +60,6 @@
         imports = [
           inputs.git-hooks.flakeModule
           inputs.treefmt-nix.flakeModule
-          # inputs.flake-parts.flakeModules.easyOverlay
         ];
         systems = [
           "x86_64-linux"
@@ -82,7 +81,8 @@
 
               overlays = [
                 self.overlays.additions
-
+                self.overlays.modifications
+                self.overlays.unstable-packages
               ];
               config = {
                 allowUnfree = true;
@@ -128,8 +128,12 @@
           overlays = import ./overlays { inherit inputs; };
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-            # checks = self.checks;
-            checks."aarch64-darwin".workbook = self.darwinConfigurations.workbook.system;
+            checks =
+              self.checks
+              // inputs.nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (_: {
+                workbook = self.darwinConfigurations.workbook.system;
+
+              });
           };
         };
 
