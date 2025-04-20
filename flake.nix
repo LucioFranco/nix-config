@@ -131,11 +131,8 @@
           overlays = import ./overlays { inherit inputs; };
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-            checks = inputs.nixpkgs.lib.mapAttrs (
-              _system: sys:
-              # deep‑merge checks and packages for each system
-              inputs.nixpkgs.lib.recursiveUpdate sys.checks sys.packages
-            ) top.config.allSystems;
+            checks = inputs.nixpkgs.lib.recursiveUpdate self.checks self.packages;
+
           };
         };
 
