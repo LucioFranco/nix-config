@@ -49,64 +49,89 @@
 
   outputs =
     inputs@{ self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        inputs.git-hooks.flakeModule
-        inputs.treefmt-nix.flakeModule
-      ];
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
-      perSystem =
-        ctx@{
-          config,
-          self',
-          inputs',
-          pkgs,
-          system,
-          ...
-        }:
-        {
-          packages.default = pkgs.hello;
-          formatter = config.treefmt.build.wrapper;
-          checks.formatting = config.treefmt.build.check self;
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{ withSystem, ... }:
+      let
+        # overlays = import ./overlays { inherit inputs; };
+      in
+      {
+        debug = true;
 
-          devShells = import ./nix/dev-shell.nix ctx;
+        imports = [
+          inputs.git-hooks.flakeModule
+          inputs.treefmt-nix.flakeModule
+          # inputs.flake-parts.flakeModules.easyOverlay
+        ];
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ];
+        perSystem =
+          ctx@{
+            config,
+            self',
+            inputs',
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
 
-          pre-commit = {
-            check.enable = true;
-            settings.hooks = {
-              actionlint.enable = true;
-              shellcheck.enable = true;
-              ruff.enable = true;
-              treefmt.enable = true;
+              overlays = [
+                self.overlays.additions
 
-              # TODO: re-enable this
-              statix.enable = false;
-              pyright.enable = false;
+              ];
+              config = {
+                allowUnfree = true;
+              };
             };
-          };
 
-          treefmt = {
-            projectRootFile = "flake.nix";
-            flakeCheck = false; # Covered by git-hooks check
-            programs = {
-              nixfmt-rfc-style.enable = true;
-              ruff-format.enable = true;
-              shfmt = {
-                enable = true;
-                indent_size = 0;
+            packages.default = pkgs.hello;
+            formatter = config.treefmt.build.wrapper;
+            checks.formatting = config.treefmt.build.check self;
+
+            devShells = import ./nix/dev-shell.nix ctx;
+
+            pre-commit = {
+              check.enable = true;
+              settings.hooks = {
+                actionlint.enable = true;
+                shellcheck.enable = true;
+                ruff.enable = true;
+                treefmt.enable = true;
+
+                # TODO: re-enable this
+                statix.enable = false;
+                pyright.enable = false;
+              };
+            };
+
+            treefmt = {
+              projectRootFile = "flake.nix";
+              flakeCheck = false; # Covered by git-hooks check
+              programs = {
+                nixfmt-rfc-style.enable = true;
+                ruff-format.enable = true;
+                shfmt = {
+                  enable = true;
+                  indent_size = 0;
+                };
               };
             };
           };
-        };
-      flake = {
-        githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-          checks = self.checks;
+        flake = {
+          darwinConfigurations = import ./nix/darwin.nix top;
+
+          overlays = import ./overlays { inherit inputs; };
+
+          githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
+            checks = self.checks;
+          };
         };
 
-      };
-    };
+      }
+    );
 }
