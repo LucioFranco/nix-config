@@ -128,7 +128,8 @@
           overlays = import ./overlays { inherit inputs; };
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-            checks = self.checks;
+            # checks = self.checks;
+            checks."aarch64-darwin" = self.darwinConfigurations;
           };
         };
 
