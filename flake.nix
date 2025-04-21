@@ -4,6 +4,7 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     tinted-schemes = {
       url = "github:tinted-theming/schemes";
@@ -123,6 +124,7 @@
           };
         flake = {
           darwinConfigurations = import ./nix/darwin.nix top;
+          nixosConfigurations = import ./nix/nixos.nix top;
 
           packages = import ./nix/packages.nix top;
 

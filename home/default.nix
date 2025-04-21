@@ -21,18 +21,18 @@
     ./zellij.nix
   ];
 
-  nix = {
-    registry = {
-      # Register this flake itself on the registry
-      me.flake = inputs.self;
+  # nix = {
+  #   registry = {
+  #     # Register this flake itself on the registry
+  #     me.flake = inputs.self;
 
-      nixpkgs.flake = inputs.nixpkgs;
-      # nixpkgs-stable.flake = inputs.nixpkgs-stable;
-      # nixpkgs-master.flake = inputs.nixpkgs-master;
-      home-manager.flake = inputs.home-manager;
-      flake-utils.flake = inputs.flake-utils;
-    };
-  };
+  #     nixpkgs.flake = inputs.nixpkgs;
+  #     # nixpkgs-stable.flake = inputs.nixpkgs-stable;
+  #     # nixpkgs-master.flake = inputs.nixpkgs-master;
+  #     home-manager.flake = inputs.home-manager;
+  #     flake-utils.flake = inputs.flake-utils;
+  #   };
+  # };
 
   fonts.fontconfig.enable = true;
 
