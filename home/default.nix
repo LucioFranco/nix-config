@@ -143,6 +143,8 @@
       # flakehub
       fh
 
+      nix-output-monitor
+
       openssh
 
       coreutils
