@@ -2,6 +2,8 @@
   description = "Description for the project";
 
   inputs = {
+    vim-config.url = "github:LucioFranco/vim-config";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
@@ -52,9 +54,6 @@
     inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
       top@{ withSystem, ... }:
-      let
-        # overlays = import ./overlays { inherit inputs; };
-      in
       {
         debug = true;
 
@@ -84,6 +83,7 @@
                 self.overlays.additions
                 self.overlays.modifications
                 self.overlays.unstable-packages
+                inputs.vim-config.overlays.default
               ];
               config = {
                 allowUnfree = true;

@@ -1,6 +1,6 @@
 { withSystem, inputs, ... }:
 let
-  inherit (inputs) self home-manager nixpkgs;
+  inherit (inputs) home-manager nixpkgs;
   inherit (nixpkgs) lib;
 in
 withSystem "x86_64-linux" (
@@ -15,7 +15,10 @@ withSystem "x86_64-linux" (
         ../hosts/wsl.nix
         home-manager.nixosModules.home-manager
         inputs.nixos-wsl.nixosModules.default
-        { home-manager.extraSpecialArgs.inputs = inputs; }
+        {
+          home-manager.extraSpecialArgs.inputs = inputs;
+          home-manager.useGlobalPkgs = true;
+        }
       ];
     };
   }
