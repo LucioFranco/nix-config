@@ -949,11 +949,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1745331204,
-        "narHash": "sha256-BcUVttA30B4R0COIdbZmRBkcWipdF+DKhA81BeKQzqU=",
+        "lastModified": 1745332405,
+        "narHash": "sha256-UPDy1naTfQDj7vTQf/xyXWkEE24cB3wgUHYfzpQ/0eI=",
         "owner": "LucioFranco",
         "repo": "vim-config",
-        "rev": "6ea218165f248155a715c7f9fbfb5b4af6a3a4c9",
+        "rev": "3e9966bc66d5ebfab6591c618f5f985667f66c50",
         "type": "github"
       },
       "original": {
