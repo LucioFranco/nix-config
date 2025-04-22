@@ -1,47 +1,25 @@
-{ pkgs, inputs, outputs, config, ... }: {
+{ withSystem, inputs, ... }:
+let
+  inherit (inputs) home-manager nixpkgs;
+  inherit (nixpkgs) lib;
+in
+withSystem "x86_64-linux" (
+  { system, pkgs, ... }:
+  {
+    wsl = lib.nixosSystem {
+      inherit pkgs system;
 
-  wsl = {
-    enable = true;
-    defaultUser = "lucio";
-  };
+      specialArgs = { inherit inputs; };
 
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
-  };
-
-  environment.systemPackages = with pkgs; [ dashlane-cli ];
-
-  home-manager.users.lucio = { ... }: {
-    home.username = "lucio";
-    home.homeDirectory = "/home/lucio";
-
-    home.stateVersion = "24.11";
-    imports = [ ../home ];
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    # setSocketVariable = true;
-  };
-
-  time = { timeZone = "America/New_York"; };
-
-  programs.nix-ld = { enable = true; };
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = [ "lucio" ];
-
-  users.users.lucio = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
-    # uid = 1000;
-    password = "demo";
-    shell = pkgs.zsh;
-  };
-
-  programs.zsh.enable = true;
-}
+      modules = [
+        ../hosts/wsl.nix
+        home-manager.nixosModules.home-manager
+        inputs.nixos-wsl.nixosModules.default
+        {
+          home-manager.extraSpecialArgs.inputs = inputs;
+          home-manager.useGlobalPkgs = true;
+        }
+      ];
+    };
+  }
+)

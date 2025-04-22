@@ -1,15 +1,20 @@
 {
-  description = "Lucio's nix config";
+  description = "Description for the project";
 
   inputs = {
-    nixpkgs = { url = "github:nixos/nixpkgs/master"; };
+    vim-config.url = "github:LucioFranco/vim-config";
 
-    nixos-hardware = { url = "github:nixos/nixos-hardware"; };
-
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
+    tinted-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
+
     darwin = {
-      url = "github:lnl7/nix-darwin/master";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,152 +23,119 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
+    nix-github-actions = {
+      url = "github:nix-community/nix-github-actions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs = {
+        # base16.follows = "base16";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
 
-    nur = { url = "github:nix-community/nur"; };
-
-    xdg-open-wsl = { url = "github:LucioFranco/xdg-open-wsl"; };
-
-    crane.url = "github:ipetkov/crane";
-
-    # dashlane-cli.url = "https://flakehub.com/f/LucioFranco/dashlane-cli/0.1.25";
-    # dashlane-cli.url = "path:..flakes/dashlane-cli";
-
-    # tools = {
-    #   url = "path:tools";
-    #   inputs.crane.follows = "crane";
-    #   inputs.flake-utils.follows = "flake-utils";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixos-wsl, darwin, nixpkgs, home-manager, nixos-generators
-    , nixos-hardware, nur, ... }@inputs:
-    let
-      inherit (self) outputs;
+  outputs =
+    inputs@{ self, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{ withSystem, ... }:
+      {
+        debug = true;
 
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-darwin"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
-
-    in {
-      hosts = {
-        workbook = {
-          type = "darwin";
-          hostPlatform = "aarch64-darwin";
-        };
-
-        wsl = {
-          type = "homeManager";
-          hostPlatform = "x86_64-linux";
-        };
-
-        # CI test hosts 
-        # gha-mac = {
-        #   type = "darwin";
-        #   hostPlatform = "x86_64-darwin";
-        # };
-      };
-
-      overlays = import ./overlays { inherit inputs; };
-
-      darwinConfigurations.workbook = darwin.lib.darwinSystem rec {
-        system = "aarch64-darwin";
-        # pkgs = import nixpkgs {
-        #   inherit system;
-        #   config.allowUnfree = true;
-        # };
-        specialArgs = { inherit inputs outputs; };
-        modules = [
-
-          ./nix/darwin.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.extraSpecialArgs = specialArgs;
-            home-manager.useGlobalPkgs = true;
-          }
-          {
-            nixpkgs = { config.allowUnfree = true; };
-            nix = { registry.nixpkgs.flake = nixpkgs; };
-          }
+        imports = [
+          inputs.git-hooks.flakeModule
+          inputs.treefmt-nix.flakeModule
         ];
-      };
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ];
+        perSystem =
+          ctx@{
+            config,
+            self',
+            inputs',
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
 
-      # darwinConfigurations.gha-mac = darwin.lib.darwinSystem rec {
-      #   system = "x86_64-darwin";
-      #   pkgs = import nixpkgs {
-      #     inherit system;
-      #     config.allowUnfree = true;
-      #   };
-      #   modules = [ ./nix/darwin.nix home-manager.darwinModules.home-manager ];
-      # };
+              overlays = [
+                self.overlays.additions
+                self.overlays.modifications
+                self.overlays.unstable-packages
+                inputs.vim-config.overlays.default
+              ];
+              config = {
+                allowUnfree = true;
+              };
+            };
 
-      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration rec {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs.inputs = inputs;
-        modules = [ ./nix/wsl.nix ];
-      };
+            formatter = config.treefmt.build.wrapper;
+            checks.formatting = config.treefmt.build.check self;
 
-      nixosConfigurations = {
-        wsl = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./nix/nixos.nix
-            home-manager.nixosModules.home-manager
-            nixos-wsl.nixosModules.default
-            { home-manager.extraSpecialArgs.inputs = inputs; }
-          ];
+            devShells = import ./nix/dev-shell.nix ctx;
+
+            pre-commit = {
+              check.enable = true;
+              settings.hooks = {
+                actionlint.enable = true;
+                shellcheck.enable = true;
+                ruff.enable = true;
+                treefmt.enable = true;
+
+                # TODO: re-enable this
+                statix.enable = false;
+                pyright.enable = false;
+              };
+            };
+
+            treefmt = {
+              projectRootFile = "flake.nix";
+              flakeCheck = false; # Covered by git-hooks check
+              programs = {
+                nixfmt.enable = true;
+                ruff-format.enable = true;
+                shfmt = {
+                  enable = true;
+                  indent_size = 0;
+                };
+              };
+            };
+          };
+        flake = {
+          darwinConfigurations = import ./nix/darwin.nix top;
+          nixosConfigurations = import ./nix/nixos.nix top;
+
+          packages = import ./nix/packages.nix top;
+
+          overlays = import ./nix/overlays.nix top;
+
+          githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
+            checks = inputs.nixpkgs.lib.recursiveUpdate self.checks self.packages;
+
+          };
         };
-        # nixosConfigurations = {
-        #   vbox = nixpkgs.lib.nixosSystem {
-        #     system = "x86_64-linux";
-        #     modules = [ ./nix/nixos.nix home-manager.nixosModules.home-manager ];
-        #   };
 
-        #   thinkpad = nixpkgs.lib.nixosSystem {
-        #     system = "x86_64-linux";
-        #     modules = [
-        #       nur.nixosModules.nur
-        #       ./nix/nixos.nix
-        #       home-manager.nixosModules.home-manager
-        #       nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
-        #     ];
-        #   };
-      };
-
-      pkgs = forAllSystems (localSystem:
-        import nixpkgs {
-          inherit localSystem;
-          overlays = [
-            outputs.overlays.additions
-            outputs.overlays.modifications
-            outputs.overlays.unstable-packages
-          ];
-          config.allowUnfree = true;
-          config.allowAliases = true;
-        });
-
-      checks = forAllSystems (import ./nix/checks.nix inputs);
-      devShells = forAllSystems (import ./nix/dev-shell.nix inputs);
-      packages = forAllSystems (import ./nix/packages.nix inputs);
-    };
+      }
+    );
 }

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
     sessionVariables = rec {
       EDITOR = "nvim";
@@ -10,10 +11,10 @@
     };
   };
 
-  home.packages = with pkgs; [ lazygit ];
+  home.packages = with pkgs; [ lucio-neovim ];
 
   programs.neovim = {
-    enable = true;
+    enable = false;
     viAlias = true;
 
     extraConfig = builtins.readFile ./init.vim;

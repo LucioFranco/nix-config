@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   home.file.".cargo/config.toml" = {
     enable = true;
     text = ''

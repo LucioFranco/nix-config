@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.zellij = {
     enable = true;
     enableZshIntegration = false;
@@ -9,7 +10,12 @@
       pane_frames = false;
       hide_session_name = true;
 
-      keybinds = { unbind = [ "Ctrl h" "Ctrl p" ]; };
+      keybinds = {
+        unbind = [
+          "Ctrl h"
+          "Ctrl p"
+        ];
+      };
 
       themes = {
         colorblind = {

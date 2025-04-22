@@ -1,103 +1,45 @@
-{ inputs, outputs, pkgs, config, lib, ... }: {
-  home-manager.users.lucio = { config, ... }: {
-    home.username = "lucio";
-    home.stateVersion = "24.11";
+{
+  withSystem,
+  inputs,
+  ...
+}:
+let
+  inherit (inputs)
+    self
+    darwin
+    home-manager
+    nixpkgs
+    ;
+  inherit (nixpkgs) lib;
+in
 
-    imports = [ ../home ];
-  };
+withSystem "aarch64-darwin" (
+  {
+    self',
+    pkgs,
+    system,
+    ...
+  }:
+  {
+    workbook = darwin.lib.darwinSystem rec {
+      inherit pkgs system;
 
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
-  };
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [
 
-  home-manager.verbose = false;
+        ../hosts/workbook.nix
+        home-manager.darwinModules.home-manager
+        {
+          nix.registry = {
+            p.flake = nixpkgs;
+          };
 
-  users.users.lucio = {
-    name = "lucio";
-    home = "/Users/lucio";
-    shell = pkgs.zsh;
-  };
-
-  homebrew = {
-    enable = true;
-
-    casks = [
-      "firefox"
-      "discord"
-      "steam"
-      "transmission"
-      "the-unarchiver"
-      "spotify"
-      "rectangle"
-      "slack"
-      "private-internet-access"
-      # "chrome"
-    ];
-  };
-
-  environment.systemPackages = with pkgs; [
-    darwin.apple_sdk.frameworks.Security
-    qemu
-    llvmPackages.libclang
-
-    docker
-    colima
-
-    dashlane-cli
-  ];
-
-  programs.zsh.enable = true;
-
-  #services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
-  nix.enable = false;
-
-  system.stateVersion = 5;
-
-  system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
-  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
-  system.defaults.NSGlobalDomain.KeyRepeat = 1;
-  system.defaults.NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticDashSubstitutionEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
-  system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
-  system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
-  system.defaults.NSGlobalDomain._HIHideMenuBar = false;
-  system.defaults.controlcenter.BatteryShowPercentage = true;
-
-  system.defaults.dock.autohide = true;
-  system.defaults.dock.mru-spaces = false;
-  system.defaults.dock.orientation = "bottom";
-  system.defaults.dock.showhidden = true;
-
-  system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder.QuitMenuItem = true;
-  system.defaults.finder.FXEnableExtensionChangeWarning = false;
-
-  system.defaults.trackpad.Clicking = true;
-  system.defaults.trackpad.TrackpadThreeFingerDrag = true;
-
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToControl = true;
-
-  launchd.daemons.limits = {
-    script = ''
-      /bin/launchctl limit maxfiles 524288 524288
-      /bin/launchctl limit maxproc 8192 8192
-    '';
-    serviceConfig.RunAtLoad = true;
-    serviceConfig.KeepAlive = false;
-  };
-
-  security.pam.services.sudo_local = {
-    enable = true;
-    touchIdAuth = true;
-  };
-}
+          home-manager.extraSpecialArgs = specialArgs;
+          home-manager.useGlobalPkgs = true;
+        }
+      ];
+    };
+  }
+)

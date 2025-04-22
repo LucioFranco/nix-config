@@ -1,12 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }:
+{
   programs.zsh = {
     enable = true;
 
     shellAliases = {
-      b = "brazil";
-      bb = "brazil-build";
-      bbb = "brazil-build-recursive";
       http = "xh";
+      nvim-dev = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
     };
 
     #     initExtra = ''

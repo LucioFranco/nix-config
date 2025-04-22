@@ -1,19 +1,29 @@
-{ self, ... }:
-
-localSystem:
-
-with self.pkgs.${localSystem}; {
-  default = mkShell {
+{ pkgs, config, ... }:
+{
+  default = pkgs.mkShell {
     name = "nix-config";
 
-    nativeBuildInputs = [
-      # Nix
+    nativeBuildInputs = with pkgs; [
       nixd
-      nixfmt-classic
+      nixfmt
+      nix-output-monitor
+
+      # Shell
+      shellcheck
+      shfmt
+      config.treefmt.build.wrapper
+
+      # GitHub Actions
+      act
+      actionlint
+      python3
+      python3Packages.pyflakes
+
+      pre-commit
     ];
 
     shellHook = ''
-      ${self.checks.${localSystem}.pre-commit-check.shellHook}
+      ${config.pre-commit.installationScript}
     '';
   };
 }
