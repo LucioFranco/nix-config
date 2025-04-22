@@ -56,12 +56,20 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            const pr = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Hello world! @LucioFranco'
-            })
+              pull_number: context.issue.number,
+            });
+            if pr.data.title == "Update flake.lock" {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: 'Flake lock update @LucioFranco'
+              })
+            } 
+            
 
       # - name: Post PR comment
       #   if: github.event_name == 'pull_request'
