@@ -32,44 +32,46 @@ jobs:
       - uses: cachix/install-nix-action@v30
       - run: nix build -L '.#${{ matrix.attr }}'
 
-  comment:
-    needs: nix-build
-    if: always()  # Always run regardless of test result
-    runs-on: ubuntu-latest
-    steps:
-      - name: Summarize matrix results
-        id: summary
-        run: |
-          for job in "${{ toJson(needs.nix-build.result) }}"; do
-            echo "Got result: $job"
-          done
-
-          # GitHub doesn't provide individual matrix statuses here,
-          # so we infer the top-level status of `needs.test`.
-
-          if [ "${{ needs.nix-build.result }}" = "success" ]; then
-            echo "summary=✅ All matrix jobs passed." >> "$GITHUB_OUTPUT"
-          else
-            echo "summary=❌ One or more matrix jobs failed." >> "$GITHUB_OUTPUT"
-          fi
-      - uses: actions/github-script@v7
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const pr = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-            });
-            if pr.data.title == "Update flake.lock" {
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: 'Flake lock update @LucioFranco'
-              })
-            } 
-            
+  # comment:
+  #   needs: nix-build
+  #   if: always()  # Always run regardless of test result
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Summarize matrix results
+  #       id: summary
+  #       run: |
+  #         for job in "${{ toJson(needs.nix-build.result) }}"; do
+  #           echo "Got result: $job"
+  #         done
+  #
+  #         # GitHub doesn't provide individual matrix statuses here,
+  #         # so we infer the top-level status of `needs.test`.
+  #
+  #         if [ "${{ needs.nix-build.result }}" = "success" ]; then
+  #           echo "summary=✅ All matrix jobs passed." >> "$GITHUB_OUTPUT"
+  #         else
+  #           echo "summary=❌ One or more matrix jobs failed." >> "$GITHUB_OUTPUT"
+  #         fi
+  #     - uses: actions/github-script@v7
+  #       with:
+  #         github-token: ${{secrets.GITHUB_TOKEN}}
+  #         script: |
+  #           console.log(pr);
+  #           if pr.data.title === "Add comment" {
+  #             const conclusion = "${{ job.status }}";
+  #             let message = `✅ Job passed for PR "${{ steps.get-pr.outputs.title }}"`;
+  #             if (conclusion !== "success") {
+  #               message = `❌ Job failed for PR "${{ steps.get-pr.outputs.title }}"`;
+  #             }
+  #
+  #             github.rest.issues.createComment({
+  #               issue_number: context.issue.number,
+  #               owner: context.repo.owner,
+  #               repo: context.repo.repo,
+  #               body: 'Flake lock update @LucioFranco'
+  #             })
+  #           } 
+  #
 
       # - name: Post PR comment
       #   if: github.event_name == 'pull_request'
