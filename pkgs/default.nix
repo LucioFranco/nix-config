@@ -46,4 +46,18 @@ pkgs: {
       chmod +x $out/bin/compare
     '';
   };
+
+  xdg-open-wsl = pkgs.rustPlatform.buildRustPackage (
+    let
+      rustSrc = ./tools/xdg-open-wsl;
+    in
+    {
+      pname = "xdg-open";
+      version = "0.0.0";
+
+      src = rustSrc;
+
+      cargoLock.lockFile = "${rustSrc}/Cargo.lock";
+    }
+  );
 }
