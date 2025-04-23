@@ -117,7 +117,7 @@
     # Add our custom tools from our tools flake
     # lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
     [
-
+      window
       # libclang
       #rustup
       # python312
