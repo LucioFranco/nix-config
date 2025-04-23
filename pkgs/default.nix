@@ -8,7 +8,7 @@ pkgs: {
         owner = "matklad";
         repo = "window";
         rev = "1782327d7e897884ededd0c1cd377fc0a02c8152";
-        sha256 = "sha256-gHMWrzXAnreDNtvx9H0EMbmHx7Eik47LIGCy2oNGS6g=";
+        sha256 = "sha256-EaopYWzVyWSrRjusczrLJgOsscnwHFqAlYhkggKdbLA=";
       };
     in
     {
@@ -20,4 +20,30 @@ pkgs: {
       cargoLock.lockFile = "${rustSrc}/Cargo.lock";
     }
   );
+  n = pkgs.rustPlatform.buildRustPackage (
+    let
+      rustSrc = ./tools/n;
+    in
+    {
+      pname = "n";
+      version = "0.0.0";
+
+      src = rustSrc;
+
+      cargoLock.lockFile = "${rustSrc}/Cargo.lock";
+    }
+  );
+  compare = pkgs.python3Packages.buildPythonApplication {
+    pname = "compare";
+    version = "0.0.0";
+
+    src = ./tools;
+    format = "other";
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp compare.py $out/bin/compare
+      chmod +x $out/bin/compare
+    '';
+  };
 }
