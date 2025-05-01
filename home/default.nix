@@ -19,6 +19,7 @@
     ./alacritty.nix
     ./tmux.nix
     ./zellij.nix
+    ./jj.nix
   ];
 
   # nix = {
