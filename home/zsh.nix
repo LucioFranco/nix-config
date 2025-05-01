@@ -6,6 +6,7 @@
     shellAliases = {
       http = "xh";
       nvim-dev = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
+      nvimd = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
     };
 
     #     initExtra = ''

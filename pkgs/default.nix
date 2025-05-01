@@ -20,6 +20,24 @@ pkgs: {
       cargoLock.lockFile = "${rustSrc}/Cargo.lock";
     }
   );
+  # starship-jj = pkgs.rustPlatform.buildRustPackage (
+  #   let
+  #     rustSrc = pkgs.fetchFromGitLab {
+  #       owner = "lanastara_foss";
+  #       repo = "starship-jj";
+  #       rev = "8eacf1f6704e285f8f26c4b522326c6172b3c9fe";
+  #       sha256 = "";
+  #     };
+  #   in
+  #   {
+  #     pname = "starship-jj";
+  #     version = "0.0.0";
+  #
+  #     src = rustSrc;
+  #
+  #     cargoLock.lockFile = "${rustSrc}/Cargo.lock";
+  #   }
+  # );
   n = pkgs.rustPlatform.buildRustPackage (
     let
       rustSrc = ./tools/n;

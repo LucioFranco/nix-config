@@ -48,6 +48,11 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    starship-jj = {
+      url = "gitlab:lanastara_foss/starship-jj";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -84,6 +89,7 @@
                 self.overlays.modifications
                 self.overlays.unstable-packages
                 inputs.vim-config.overlays.default
+                inputs.starship-jj.overlays.default
               ];
               config = {
                 allowUnfree = true;
