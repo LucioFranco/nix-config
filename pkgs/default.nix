@@ -20,6 +20,7 @@ pkgs: {
       cargoLock.lockFile = "${rustSrc}/Cargo.lock";
     }
   );
+
   # starship-jj = pkgs.rustPlatform.buildRustPackage (
   #   let
   #     rustSrc = pkgs.fetchFromGitLab {
@@ -38,6 +39,7 @@ pkgs: {
   #     cargoLock.lockFile = "${rustSrc}/Cargo.lock";
   #   }
   # );
+
   n = pkgs.rustPlatform.buildRustPackage (
     let
       rustSrc = ./tools/n;
@@ -51,6 +53,7 @@ pkgs: {
       cargoLock.lockFile = "${rustSrc}/Cargo.lock";
     }
   );
+
   compare = pkgs.python3Packages.buildPythonApplication {
     pname = "compare";
     version = "0.0.0";
@@ -62,6 +65,25 @@ pkgs: {
       mkdir -p $out/bin
       cp compare.py $out/bin/compare
       chmod +x $out/bin/compare
+    '';
+  };
+
+  jj-github-pr = pkgs.python3Packages.buildPythonApplication {
+    pname = "jj-github-pr";
+    version = "0.0.0";
+
+    dependencies = with pkgs.python3Packages; [
+      click
+      pygithub
+    ];
+
+    src = ./tools;
+    format = "other";
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp jj_github_pr.py $out/bin/jj-github-pr
+      chmod +x $out/bin/jj-github-pr
     '';
   };
 
