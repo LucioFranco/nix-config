@@ -11,12 +11,7 @@
         "\${custom.jj}"
         "$git_branch"
         "$git_commit"
-        "$git_state"
-        "$git_status"
         "$package"
-        "$haskell"
-        "$python"
-        "$rust"
         "$nix_shell"
         "$line_break"
         "$jobs"
@@ -29,34 +24,100 @@
         symbol = "󱗆 ";
         when = "jj root --ignore-working-copy";
       };
+    };
+  };
 
-      # custom.jj = {
-      #   command = ''
-      #     jj log -r@ -n1 --ignore-working-copy --no-graph --color always -T '
-      #       separate(" ",
-      #         bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
-      #         tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
-      #         surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
-      #         if(conflict, "conflict"),
-      #         if(divergent, "divergent"),
-      #         if(hidden, "hidden"),
-      #       )
-      #     '
-      #   '';
-      #   when = "jj root";
-      #   symbol = "jj";
-      # };
+  xdg.configFile."starship-jj/starship-jj.toml" = {
+    enable = true;
+    text = pkgs.std.serde.toTOML {
+      module_separator = " ";
+      # timeout = 1000;  # commented out in original
 
-      # # `jjstate` module
-      # custom.jjstate = {
-      #   when = "jj root";
-      #   command = ''
-      #     jj log -r@ -n1 --no-graph -T "" --stat \
-      #     | tail -n1 \
-      #     | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' \
-      #     | sd " 0." ""
-      #   '';
-      # };
+      bookmarks = {
+        exclude = [ ];
+        # search_depth = 0;
+      };
+
+      module = [
+        # [[module]] Bookmarks
+        {
+          type = "Bookmarks";
+          separator = " ";
+          color = "Magenta";
+          # bg_color    = "Yellow";
+          behind_symbol = "⇡";
+          # max_bookmarks = 1;
+          # max_length    = 10;
+        }
+
+        # [[module]] Commit
+        {
+          type = "Commit";
+          max_length = 24;
+          # color    = "Green";
+          # bg_color = "Yellow";
+        }
+
+        # [[module]] State (with subtables)
+        {
+          type = "State";
+          separator = " ";
+
+          conflict = {
+            text = "(CONFLICT)";
+            color = "Red";
+            # bg_color = "Yellow";
+          };
+
+          divergent = {
+            text = "(DIVERGENT)";
+            color = "Cyan";
+            # bg_color = "Yellow";
+          };
+
+          hidden = {
+            disabled = false;
+            text = "(HIDDEN)";
+            color = "Yellow";
+            # bg_color = "Yellow";
+          };
+
+          immutable = {
+            disabled = false;
+            text = "(IMMUTABLE)";
+            color = "Yellow";
+          };
+        }
+
+        # [[module]] Metrics (with subtables)
+        {
+          type = "Metrics";
+          color = "Magenta";
+          # bg_color = "Yellow";
+          template = "[{changed} {added}{removed}]";
+
+          changed_files = {
+            # suffix = "";
+            # prefix = "";
+            color = "Cyan";
+            # bg_color = "Yellow";
+          };
+
+          added_lines = {
+            prefix = "+";
+            # suffix = "";
+            color = "Green";
+            # bg_color = "Yellow";
+          };
+
+          removed_lines = {
+            yprefix = "-";
+            # suffix = "";
+            color = "Red";
+            # bg_color = "Yellow";
+          };
+        }
+      ];
     };
   };
 

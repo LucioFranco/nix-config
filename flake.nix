@@ -7,6 +7,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nix-std.url = "github:chessai/nix-std";
 
     tinted-schemes = {
       url = "github:tinted-theming/schemes";
@@ -90,6 +91,9 @@
                 self.overlays.unstable-packages
                 inputs.vim-config.overlays.default
                 inputs.starship-jj.overlays.default
+                (final: prev: {
+                  std = inputs.nix-std.lib;
+                })
               ];
               config = {
                 allowUnfree = true;
