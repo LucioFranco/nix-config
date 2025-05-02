@@ -8,6 +8,13 @@
         email = "luciofranco14@gmail.com";
       };
 
+      ui = {
+        default-command = [
+          "log"
+          "--reversed"
+        ];
+      };
+
       git = {
         push-bookmark-prefix = "lucio/push-";
         private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
