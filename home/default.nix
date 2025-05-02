@@ -113,93 +113,40 @@
     settings.git_protocol = "ssh";
   };
 
-  home.packages =
-    with pkgs;
-    # Add our custom tools from our tools flake
-    # lib.attrValues inputs.tools.packages.${pkgs.system} ++ [
-    [
-      manix
-      window
-      # libclang
-      #rustup
-      # python312
-      # python312Packages.pip
-      # poetry
-      # protobuf
-      openssl
-      # pkg-config
-      git
-      # cmake
-      # gnumake
-      # ninja
-      gh
-      nodePackages.conventional-changelog-cli
-      wget
-      # autoconf
-      # automake
-      # autoconf-archive
-      # libtool
-      # unzip
-      # m4
+  home.packages = with pkgs; [
+    # My custom tools
+    window
+    compare
+    jj-github-pr
 
-      # flakehub
-      fh
+    # Common nix
+    nixd
+    nixfmt
+    manix
 
-      nix-output-monitor
-
-      openssh
-
-      coreutils
-      findutils
-      gawk
-      gnugrep
-      gnused
-      gnutar
-      gnutls
-
-      #rust-analyzer
-
-      # zig
-      # zls
-
-      ripgrep
-      fd
-
-      nixpkgs-fmt
-
-      # neovide
-
-      # helix
-      # zellij
-
-      # nodejs
-      # bun
-
-      # pulumi
-      # pulumiPackages.pulumi-language-python
-      aws-iam-authenticator
-      awscli2
-      kubectl
-      kubernetes-helm
-
-      # nodePackages.pyright
-
-      nerd-fonts.hack
-
-      # sqlite
-      # tcl
-
-      # http
-      xh
-
-      # flyctl
-      podman
-
-      iconv
-
-      # wireguard-tools
-    ]
-    ++ lib.optionals (stdenv.isLinux) [
-      # clang
-    ];
+    openssl
+    git
+    gh
+    wget
+    fh
+    nix-output-monitor
+    openssh
+    coreutils
+    findutils
+    gawk
+    gnugrep
+    gnused
+    gnutar
+    gnutls
+    ripgrep
+    fd
+    aws-iam-authenticator
+    awscli2
+    kubectl
+    kubernetes-helm
+    nerd-fonts.hack
+    xh
+    podman
+    iconv
+  ];
 }
