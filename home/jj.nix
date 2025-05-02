@@ -1,3 +1,4 @@
+# Settings taken from https://zerowidth.com/2025/jj-tips-and-tricks/
 { ... }:
 {
   programs.jujutsu = {
@@ -9,15 +10,62 @@
       };
 
       ui = {
-        default-command = [
+        default-command = "log-recent";
+      };
+
+      aliases = {
+        log-recent = [
           "log"
-          #"--reversed"
+          "-r"
+          "default() & recent()"
         ];
+        c = [ "commit" ];
+        ci = [
+          "commit"
+          "--interactive"
+        ];
+        e = [ "edit" ];
+        i = [
+          "git"
+          "init"
+          "--colocate"
+        ];
+        nb = [
+          "bookmark"
+          "create"
+          "-r @-"
+        ]; # "new bookmark"
+        pull = [
+          "git"
+          "fetch"
+        ];
+        push = [
+          "git"
+          "push"
+          "--allow-new"
+        ];
+        r = [ "rebase" ];
+        s = [ "squash" ];
+        si = [
+          "squash"
+          "--interactive"
+        ];
+      };
+
+      revset-aliases = {
+        # set all remote bookmarks (commits pushed to remote branches) to be immutable
+        "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
+        "recent()" = "committer_date(after:\"3 months ago\")";
+      };
+
+      template-aliases = {
+        "format_short_change_id(id)" = "id.shortest()";
       };
 
       git = {
         push-bookmark-prefix = "lucio/push-";
         private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
+        push-new-bookmarks = true;
       };
 
       merge-tools.diffconflicts = {
