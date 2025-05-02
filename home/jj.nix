@@ -11,7 +11,7 @@
       ui = {
         default-command = [
           "log"
-          "--reversed"
+          #"--reversed"
         ];
       };
 
