@@ -17,7 +17,7 @@
         log-recent = [
           "log"
           "-r"
-          "default() & recent()"
+          "recent()"
         ];
         c = [ "commit" ];
         ci = [
@@ -44,8 +44,18 @@
           "push"
           "--allow-new"
         ];
+        # jj bookmark move --from 'heads(::@- & bookmarks())' --to @-
+        bm = [
+          "bookmark"
+          "move"
+          "--from"
+          "ancestor_bookmark()"
+          "--to"
+          "@-"
+        ];
         r = [ "rebase" ];
         s = [ "squash" ];
+        d = [ "desc" ];
         si = [
           "squash"
           "--interactive"
@@ -54,8 +64,9 @@
 
       revset-aliases = {
         # set all remote bookmarks (commits pushed to remote branches) to be immutable
-        "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
+        # "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
         "recent()" = "committer_date(after:\"3 months ago\")";
+        "ancestor_bookmark()" = "heads(::@- & bookmarks())";
       };
 
       template-aliases = {
