@@ -34,6 +34,9 @@ pkgs: {
       pname = "spr";
       version = "1.3.6-beta.1";
 
+      buildInputs = with pkgs; [ zlib ];
+      nativeBuildInputs = with pkgs; [ pkg-config ];
+
       src = rustSrc;
 
       cargoLock.lockFile = "${rustSrc}/Cargo.lock";
