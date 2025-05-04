@@ -103,14 +103,18 @@
       '';
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
 
-  programs.gh = {
-    enable = true;
-    settings.git_protocol = "ssh";
+    gh = {
+      enable = true;
+      settings.git_protocol = "ssh";
+    };
+
+    atuin.enable = true;
   };
 
   home.packages = with pkgs; [

@@ -9,21 +9,47 @@
       nvimd = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
     };
 
-    #     initExtra = ''
-    #       # If there is a .venv folder (say created from poetry) in the folder that
-    #       # we just `cd` into then activate it, once we exit deactivate it.
-    #       # Ref: https://dev.to/moniquelive/auto-activate-and-deactivate-python-venv-using-zsh-4dlm
-    #       python_venv() {
-    #         MYVENV=.venv
-    #         # when you cd into a folder that contains $MYVENV
-    #         [[ -d $MYVENV ]] && source $MYVENV/bin/activate > /dev/null 2>&1
-    #         # when you cd into a folder that doesn't
-    #         [[ ! -d $MYVENV ]] && deactivate > /dev/null 2>&1
-    #       }
-    #       autoload -U add-zsh-hook
-    #       add-zsh-hook chpwd python_venv
+    enableCompletion = true;
+    enableVteIntegration = pkgs.stdenv.isLinux;
+    autocd = true;
+    autosuggestion.enable = true;
+    history = {
+      expireDuplicatesFirst = true;
+      extended = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+      path = "${config.xdg.dataHome}/zsh/history";
+      save = 10000;
+      share = true;
+    };
 
-    #       python_venv
-    #     '';
+    initContent = ''
+      local ZVM_INIT_MODE=sourcing
+
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      source ${pkgs.zsh-autopair.src}/zsh-autopair.plugin.zsh
+      source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+      bindkey "''${terminfo[kcuu1]}" history-substring-search-up
+      bindkey '^[[A' history-substring-search-up
+      bindkey "''${terminfo[kcud1]}" history-substring-search-down
+      bindkey '^[[B' history-substring-search-down
+
+      ${pkgs.nix-your-shell}/bin/nix-your-shell --nom zsh | source /dev/stdin
+
+      bindkey "''${terminfo[khome]}" beginning-of-line
+      bindkey "''${terminfo[kend]}" end-of-line
+      bindkey "''${terminfo[kdch1]}" delete-char
+      bindkey "^[[1;5C" forward-word
+      bindkey "^[[1;3C" forward-word
+      bindkey "^[[1;5D" backward-word
+      bindkey "^[[1;3D" backward-word
+      bindkey -s "^O" 'fzf | xargs -r $EDITOR^M'
+
+      eval "$(atuin init zsh)"
+    '';
   };
 }
