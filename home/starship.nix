@@ -12,6 +12,7 @@
         "$git_branch"
         "$git_commit"
         "$package"
+        "$direnv"
         "$nix_shell"
         "$line_break"
         "$jobs"
@@ -54,7 +55,7 @@
         {
           type = "Commit";
           max_length = 24;
-          # color    = "Green";
+          color = "Black";
           # bg_color = "Yellow";
         }
 
