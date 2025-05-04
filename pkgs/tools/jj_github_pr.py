@@ -26,8 +26,8 @@ import github
 
 def pr_branch(change_id):
     if change_id == "main":
-        return "main"
-    return f"push-{change_id[:8]}"
+        return "lucio/main"
+    return f"lucio/push-{change_id[:8]}"
 
 
 def run(*args):
@@ -51,8 +51,10 @@ def make_pr(*, commit, change, target_change, repo):
     run("git", "push", "origin", "--force", f"{commit}:refs/heads/{pr_branch(change)}")
 
     prs = list(repo.get_pulls(head=f"{repo.owner.login}:{head}"))
+    print(prs)
     if len(prs) == 0:
-        pr = repo.create_pull(title=title, body=body, head=head, base=base)
+        print(base)
+        pr = repo.create_pull(base, head, title=title, body=body, draft=True)
     elif len(prs) == 1:
         pr = prs[0]
         pr.edit(title=title, body=body, base=base)
@@ -78,7 +80,8 @@ def body_with_relation_chain(*, prs, current_pr):
 
 @click.command()
 @click.argument("revision", default="@-")
-def main(revision):
+@click.option("--dry-run", is_flag=True)
+def main(revision, dry_run):
     auth = github.Auth.Token(run("gh", "auth", "token"))
     g = github.Github(auth=auth)
     g_repo = g.get_repo(get_github_repo())
