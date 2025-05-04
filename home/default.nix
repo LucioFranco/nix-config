@@ -118,6 +118,7 @@
     window
     compare
     jj-github-pr
+    spr
 
     # Common nix
     nixd

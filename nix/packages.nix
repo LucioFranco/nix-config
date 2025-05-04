@@ -10,6 +10,7 @@
         n
         xdg-open-wsl
         jj-github-pr
+        spr
         ;
       wsl = config.flake.nixosConfigurations.wsl.config.system.build.toplevel;
     }
