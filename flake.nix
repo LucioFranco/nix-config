@@ -1,5 +1,5 @@
 {
-  description = "Description for the project";
+  description = "Descriptihome.atuin.on for the project";
 
   inputs = {
     vim-config.url = "github:LucioFranco/vim-config";
@@ -8,6 +8,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nix-std.url = "github:chessai/nix-std";
+
+    ragenix ="github:yaxitech/ragenix";
+    
 
     tinted-schemes = {
       url = "github:tinted-theming/schemes";
@@ -74,10 +77,8 @@
         ];
         perSystem =
           ctx@{
-            config,
-            self',
-            inputs',
             pkgs,
+            config,
             system,
             ...
           }:
@@ -91,6 +92,7 @@
                 self.overlays.unstable-packages
                 inputs.vim-config.overlays.default
                 inputs.starship-jj.overlays.default
+                inputs.ragenix.overlays.default
                 (final: prev: {
                   std = inputs.nix-std.lib;
                 })

@@ -15,6 +15,8 @@ withSystem "x86_64-linux" (
         ../hosts/wsl.nix
         home-manager.nixosModules.home-manager
         inputs.nixos-wsl.nixosModules.default
+        inputs.ragenix.nixosModules.default
+        # inputs.ragenix.homeManagerModules.default
         {
           home-manager.extraSpecialArgs.inputs = inputs;
           home-manager.useGlobalPkgs = true;

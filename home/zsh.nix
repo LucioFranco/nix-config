@@ -48,8 +48,6 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
       bindkey -s "^O" 'fzf | xargs -r $EDITOR^M'
-
-      eval "$(atuin init zsh)"
     '';
   };
 }

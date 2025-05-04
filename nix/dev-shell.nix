@@ -4,6 +4,8 @@
     name = "nix-config";
 
     nativeBuildInputs = with pkgs; [
+      ragenix
+
       nixd
       nixfmt
       nix-output-monitor

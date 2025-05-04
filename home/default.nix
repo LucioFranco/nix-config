@@ -10,6 +10,8 @@
   # home.homeDirectory = "/home/lucio";
 
   imports = [
+    inputs.ragenix.homeManagerModules.default
+    ./atuin
     ./cargo.nix
     ./zsh.nix
     ./starship.nix
@@ -113,8 +115,6 @@
       enable = true;
       settings.git_protocol = "ssh";
     };
-
-    atuin.enable = true;
   };
 
   home.packages = with pkgs; [
