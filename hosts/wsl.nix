@@ -12,7 +12,10 @@
     defaultUser = "lucio";
   };
 
-  environment.systemPackages = with pkgs; [ dashlane-cli ];
+  environment.systemPackages = with pkgs; [
+    dashlane-cli
+    xdg-open-wsl
+  ];
 
   home-manager.users.lucio =
     { ... }:
