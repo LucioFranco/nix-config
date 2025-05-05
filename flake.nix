@@ -97,7 +97,12 @@
                 })
                 (final: prev: {
                   starship-jj = prev.starship-jj.overrideAttrs (old: {
+                    # skip all automatic stripping…
                     dontStrip = true;
+                    # …and override stripPhase so it does nothing
+                    stripPhase = ''
+                      echo "==> stripPhase skipped for starship-jj"
+                    '';
                   });
                 })
               ];
