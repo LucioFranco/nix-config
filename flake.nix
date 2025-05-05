@@ -9,8 +9,7 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nix-std.url = "github:chessai/nix-std";
 
-    ragenix ="github:yaxitech/ragenix";
-    
+    ragenix.url ="github:yaxitech/ragenix";
 
     tinted-schemes = {
       url = "github:tinted-theming/schemes";
