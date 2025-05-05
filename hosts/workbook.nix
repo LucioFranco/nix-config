@@ -57,6 +57,9 @@
     colima
 
     dashlane-cli
+
+    # tmux-yank
+    reattach-to-user-namespace
   ];
 
   programs.zsh.enable = true;

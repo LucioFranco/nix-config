@@ -17,6 +17,7 @@
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       better-mouse-mode
+      yank
       {
         # https://github.com/seebi/tmux-colors-solarized
         plugin = tmux-colors-solarized;
