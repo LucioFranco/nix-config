@@ -115,6 +115,19 @@
       enable = true;
       settings.git_protocol = "ssh";
     };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [
+        "--cmd"
+        "cd"
+      ];
+    };
+    bat = {
+      enable = true;
+      extraPackages = with pkgs.bat-extras; [ batman ];
+    };
   };
 
   home.packages = with pkgs; [
@@ -153,5 +166,6 @@
     xh
     podman
     iconv
+    eza
   ];
 }

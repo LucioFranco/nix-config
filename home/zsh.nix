@@ -4,11 +4,16 @@
     enable = true;
 
     shellAliases = {
+      cat = "bat";
+      cls = "clear";
+      l = "ls";
+      la = "ls --all";
+      ls = "eza --binary --header --long";
+      man = "batman";
       http = "xh";
       nvim-dev = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
       nvimd = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
     };
-
     enableCompletion = true;
     enableVteIntegration = pkgs.stdenv.isLinux;
     autocd = true;
