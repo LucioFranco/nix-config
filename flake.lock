@@ -1256,11 +1256,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1746195651,
-        "narHash": "sha256-a9GAwFCfJF5LQzzjwlgfwnk6uJS4jmQeiHmZwvpP+yI=",
+        "lastModified": 1746463721,
+        "narHash": "sha256-8enyDUBLMGyVgo9KSC/FhkidK43KzkSQcGKcw9w0gXg=",
         "owner": "LucioFranco",
         "repo": "vim-config",
-        "rev": "6b3b9ea4fad7f3fe7c4f4591cf50d814d335fad7",
+        "rev": "f6f696655c4b1c1e595f809644cb085ad4a4e31a",
         "type": "github"
       },
       "original": {

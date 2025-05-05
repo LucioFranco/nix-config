@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   age.secrets.key.file = ./key.age;
 
   programs.atuin = {
