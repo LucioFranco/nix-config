@@ -28,6 +28,9 @@
     ];
 
     extraConfig = ''
+      set -gu default-command
+      set -g default-shell /bin/zsh
+
       set-option -g status-position top
 
       set -g update-environment -r
