@@ -100,9 +100,8 @@
                     # skip all automatic stripping…
                     dontStrip = true;
                     # …and override stripPhase so it does nothing
-                    stripPhase = ''
-                      echo "==> stripPhase skipped for starship-jj"
-                    '';
+                    stripPhase = ''echo "==> stripPhase skipped for starship-jj"'';
+                    fixupPhase = ''echo "==> fixupPhase skipped for starship-jj"'';
                   });
                 })
               ];
