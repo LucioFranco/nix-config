@@ -5,5 +5,6 @@ let
   ];
 in
 {
+  "hosts/wsl/tailscale.age".publicKeys = systems;
   "home/atuin/key.age".publicKeys = systems;
 }
