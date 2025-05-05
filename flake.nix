@@ -100,16 +100,16 @@
                     # skip all automatic stripping…
                     dontStrip = true;
                     # …and override stripPhase so it does nothing
-                  #   stripPhase = ''echo "==> stripPhase skipped for starship-jj"'';
-                  #   fixupPhase = ''echo "==> fixupPhase skipped for starship-jj"'';
-                  #   installPhase = ''
-                  #     echo "==> installPhase skipped; doing manual install"
-                  #     mkdir -p $out/bin
-                  #     ls
-                  #     ls target
-                  #     ls target/release/build
-                  #     cp target/release/starship-jj $out/bin/
-                  #   '';
+                    #   stripPhase = ''echo "==> stripPhase skipped for starship-jj"'';
+                    #   fixupPhase = ''echo "==> fixupPhase skipped for starship-jj"'';
+                    #   installPhase = ''
+                    #     echo "==> installPhase skipped; doing manual install"
+                    #     mkdir -p $out/bin
+                    #     ls
+                    #     ls target
+                    #     ls target/release/build
+                    #     cp target/release/starship-jj $out/bin/
+                    #   '';
                   });
                 })
               ];
