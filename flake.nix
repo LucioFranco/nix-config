@@ -95,6 +95,11 @@
                 (final: prev: {
                   std = inputs.nix-std.lib;
                 })
+                (final: prev: {
+                  starship-jj = prev.starship-jj.overrideAttrs (old: {
+                    dontStrip = true;
+                  });
+                })
               ];
               config = {
                 allowUnfree = true;
