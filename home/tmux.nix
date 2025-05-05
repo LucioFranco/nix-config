@@ -1,23 +1,47 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.tmux = {
     enable = true;
 
     clock24 = false;
-    #terminal = "tmux-256color";
+    terminal = "tmux-256color";
     newSession = true;
-    sensibleOnTop = false;
+    sensibleOnTop = true;
     historyLimit = 30000;
+    escapeTime = 0;
 
     keyMode = "vi";
     prefix = "C-b";
+    secureSocket = false;
 
-    plugins = with pkgs.tmuxPlugins; [ vim-tmux-navigator ];
+    plugins = with pkgs.tmuxPlugins; [
+      vim-tmux-navigator
+      better-mouse-mode
+      {
+        # https://github.com/seebi/tmux-colors-solarized
+        plugin = tmux-colors-solarized;
+        extraConfig = ''
+          set -g @colors-solarized 'light'
+        '';
+      }
+    ];
 
     extraConfig = ''
       set-option -g status-position top
 
-      bind R source-file ~/.tmux.conf \; display-message "Config reloaded..."
+      set -g update-environment -r
+      set-option -g mouse on
+
+      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-256color:Tc"
+
+      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
+      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks"
+      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle"
+
+      bind R source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "Config reloaded..."
+
+      bind L clear-history
+      bind C-a last-window
 
       bind v split-window -h -c "#{pane_current_path}"
       bind s split-window -v -c "#{pane_current_path}"
@@ -32,8 +56,12 @@
       set-option -g automatic-rename on
       set-option -g automatic-rename-format '#{b:pane_current_path}'
 
-      set -g default-terminal "tmux-256color"
-      set -ag terminal-overrides ",xterm-256color:RGB"
+      #set -g default-terminal "tmux-256color"
+      set -g default-terminal "xterm-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+      set-environment -g COLORTERM "truecolor"
+      #set -ag terminal-overrides ",xterm-256color:RGB"
 
       # Start windows and panes at 1, not 0
       set -g base-index 1
@@ -71,4 +99,19 @@
       bind-key -T copy-mode-vi 'C-\' select-pane -l
     '';
   };
+
+  # home.packages = [
+  #   # Open tmux for current project.
+  #   (pkgs.writeShellApplication {
+  #     name = "pux";
+  #     runtimeInputs = [ pkgs.tmux ];
+  #     text = ''
+  #       PRJ="''$(zoxide query -i)"
+  #       echo "Launching tmux for ''$PRJ"
+  #       set -x
+  #       cd "''$PRJ" && \
+  #         exec tmux -S "''$PRJ".tmux attach
+  #     '';
+  #   })
+  # ];
 }
