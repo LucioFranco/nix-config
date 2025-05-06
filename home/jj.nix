@@ -17,7 +17,17 @@
         log-recent = [
           "log"
           "-r"
-          "recent()"
+          "ignore_spr(recent())"
+        ];
+        log-work = [
+          "log"
+          "-r"
+          "mutable_branches()"
+        ];
+        log-trunk = [
+          "log"
+          "-r"
+          "trunk()"
         ];
         c = [ "commit" ];
         ci = [
@@ -42,10 +52,9 @@
         push = [
           "git"
           "push"
-          "--allow-new"
         ];
         # jj bookmark move --from 'heads(::@- & bookmarks())' --to @-
-        bm = [
+        tug = [
           "bookmark"
           "move"
           "--from"
@@ -67,6 +76,8 @@
         # "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
         "recent()" = "committer_date(after:\"3 months ago\")";
         "ancestor_bookmark()" = "heads(::@- & bookmarks())";
+        "ignore_spr(x)" = "x ~ subject(\"[spr]\")";
+        "mutable_branches()" = "all:trunk().. ~ (trunk()..(remote_bookmarks()|immutable_heads()))::";
       };
 
       template-aliases = {
@@ -79,6 +90,11 @@
         push-new-bookmarks = true;
       };
 
+      merge-tools.hunk = {
+        program = "nvim";
+        merge-args = ["-c" "DiffEditor" "$left" "$right" "$output"];
+        merge-tool-edits-conflict-markers = true;
+      };
       merge-tools.diffconflicts = {
         program = "nvim";
         merge-args = [
