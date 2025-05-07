@@ -29,7 +29,7 @@
 
     extraConfig = ''
       set -gu default-command
-      set -g default-shell /bin/zsh
+      set -g default-shell ${pkgs.zsh}/bin/zsh
 
       set-option -g status-position top
 
