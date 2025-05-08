@@ -12,6 +12,8 @@
     defaultUser = "lucio";
   };
 
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+
   environment.systemPackages = with pkgs; [
     dashlane-cli
     xdg-open-wsl

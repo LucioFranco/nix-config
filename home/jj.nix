@@ -92,7 +92,13 @@
 
       merge-tools.hunk = {
         program = "nvim";
-        merge-args = ["-c" "DiffEditor" "$left" "$right" "$output"];
+        merge-args = [
+          "-c"
+          "DiffEditor"
+          "$left"
+          "$right"
+          "$output"
+        ];
         merge-tool-edits-conflict-markers = true;
       };
       merge-tools.diffconflicts = {
