@@ -36,11 +36,11 @@
       set -g update-environment -r
       set-option -g mouse on
 
-      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-256color:Tc"
-
-      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
-      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks"
-      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle"
+      # set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-256color:Tc"
+      #
+      # set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
+      # set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks"
+      # set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle"
 
       bind R source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "Config reloaded..."
 
@@ -60,11 +60,13 @@
       set-option -g automatic-rename on
       set-option -g automatic-rename-format '#{b:pane_current_path}'
 
-      #set -g default-terminal "tmux-256color"
       set -g default-terminal "xterm-256color"
-      set -ga terminal-overrides ",*256col*:Tc"
-      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-      set-environment -g COLORTERM "truecolor"
+	    set -ag terminal-overrides ",xterm-256color:Tc"
+      #set -g default-terminal "tmux-256color"
+      # set -g default-terminal "xterm-256color"
+      # set -ga terminal-overrides ",*256col*:Tc"
+      # set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+      # set-environment -g COLORTERM "truecolor"
       #set -ag terminal-overrides ",xterm-256color:RGB"
 
       # Start windows and panes at 1, not 0

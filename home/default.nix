@@ -63,6 +63,14 @@
     TERM = "xterm-256color";
   };
 
+  home.file.".terminfo".source = pkgs.symlinkJoin {
+    name = "terminfo-dirs";
+    paths = with pkgs; [
+      (ncurses + "/share/terminfo")
+      (ghostty + "/share/terminfo")
+    ];
+  };
+
   home.sessionPath = [
     "${config.home.homeDirectory}/.toolbox/bin"
     "${config.home.homeDirectory}/.npm_global/bin"
