@@ -12,6 +12,8 @@
       home.username = "lucio";
       home.stateVersion = "24.11";
 
+      programs.wezterm.enable = true;
+
       imports = [ ../home ];
     };
 
@@ -35,6 +37,7 @@
     enable = true;
 
     casks = [
+      "iterm2"
       "firefox"
       "discord"
       "steam"
@@ -61,6 +64,10 @@
     # tmux-yank
     reattach-to-user-namespace
   ];
+
+  services.tailscale = {
+    enable = true;
+  };
 
   programs.zsh.enable = true;
 

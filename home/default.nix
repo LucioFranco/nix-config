@@ -67,7 +67,6 @@
     name = "terminfo-dirs";
     paths = with pkgs; [
       (ncurses + "/share/terminfo")
-      (ghostty + "/share/terminfo")
     ];
   };
 
@@ -181,5 +180,6 @@
     podman
     iconv
     eza
+    mosh
   ];
 }
