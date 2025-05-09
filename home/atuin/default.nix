@@ -5,9 +5,10 @@
   programs.atuin = {
     enable = true;
     enableZshIntegration = true;
-    # TODO: figure out how to configure the file to read my own secert
-    # settings = {
-    #   key_path = config.age.secrets.key.path;
-    # };
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      auto_sync = false;
+      # key_path = config.age.secrets.key.path;
+    };
   };
 }
