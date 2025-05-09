@@ -36,8 +36,11 @@ withSystem "aarch64-darwin" (
             p.flake = nixpkgs;
           };
 
-          home-manager.extraSpecialArgs = specialArgs;
-          home-manager.useGlobalPkgs = true;
+          home-manager = {
+            extraSpecialArgs.inputs = inputs;
+            useGlobalPkgs = true;
+            backupFileExtension = "hm-bak";
+          };
         }
       ];
     };

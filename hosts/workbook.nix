@@ -1,13 +1,10 @@
 {
-  inputs,
-  outputs,
   pkgs,
-  lib,
   ...
 }:
 {
   home-manager.users.lucio =
-    { config, ... }:
+    { ... }:
     {
       home.username = "lucio";
       home.stateVersion = "24.11";
@@ -16,16 +13,6 @@
 
       imports = [ ../home ];
     };
-
-  #   nixpkgs = {
-  #     overlays = [
-  #       overlays.additions
-  #       # outputs.overlays.modifications
-  #       # outputs.overlays.unstable-packages
-  #     ];
-  #   };
-
-  home-manager.verbose = false;
 
   users.users.lucio = {
     name = "lucio";
@@ -71,11 +58,12 @@
 
   programs.zsh.enable = true;
 
+  # Can't enable this with determintesys nix
   #services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
   nix.enable = false;
 
-  system.stateVersion = 5;
+  system.stateVersion = 24.11;
 
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
