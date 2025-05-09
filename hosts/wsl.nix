@@ -14,6 +14,7 @@
 
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
+  system.stateVersion = "24.11";
   environment.systemPackages = with pkgs; [
     dashlane-cli
     xdg-open-wsl

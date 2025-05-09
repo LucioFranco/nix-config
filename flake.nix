@@ -52,6 +52,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    jujutsu = {
+      url = "github:jj-vcs/jj/v0.29.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     starship-jj = {
       url = "gitlab:lanastara_foss/starship-jj";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,25 +97,9 @@
                 inputs.vim-config.overlays.default
                 inputs.starship-jj.overlays.default
                 inputs.ragenix.overlays.default
+                inputs.jujutsu.overlays.default
                 (final: prev: {
                   std = inputs.nix-std.lib;
-                })
-                (final: prev: {
-                  starship-jj = prev.starship-jj.overrideAttrs (old: {
-                    # skip all automatic stripping…
-                    dontStrip = true;
-                    # …and override stripPhase so it does nothing
-                    #   stripPhase = ''echo "==> stripPhase skipped for starship-jj"'';
-                    #   fixupPhase = ''echo "==> fixupPhase skipped for starship-jj"'';
-                    #   installPhase = ''
-                    #     echo "==> installPhase skipped; doing manual install"
-                    #     mkdir -p $out/bin
-                    #     ls
-                    #     ls target
-                    #     ls target/release/build
-                    #     cp target/release/starship-jj $out/bin/
-                    #   '';
-                  });
                 })
               ];
               config = {
