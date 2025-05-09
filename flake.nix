@@ -108,7 +108,7 @@
                 inputs.vim-config.overlays.default
                 inputs.starship-jj.overlays.default
                 inputs.ragenix.overlays.default
-                inputs.jujutsu.overlays.default
+                #inputs.jujutsu.overlays.default
                 (final: prev: {
                   std = inputs.nix-std.lib;
                 })
@@ -165,10 +165,8 @@
 
           githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
             checks = inputs.nixpkgs.lib.recursiveUpdate self.checks self.packages;
-
           };
         };
-
       }
     );
 }
