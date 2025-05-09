@@ -65,9 +65,7 @@
 
   home.file.".terminfo".source = pkgs.symlinkJoin {
     name = "terminfo-dirs";
-    paths = with pkgs; [
-      (ncurses + "/share/terminfo")
-    ];
+    paths = with pkgs; [ (ncurses + "/share/terminfo") ];
   };
 
   home.sessionPath = [

@@ -74,9 +74,9 @@
       revset-aliases = {
         # set all remote bookmarks (commits pushed to remote branches) to be immutable
         # "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
-        "recent()" = "committer_date(after:\"3 months ago\")";
+        "recent()" = ''committer_date(after:"3 months ago")'';
         "ancestor_bookmark()" = "heads(::@- & bookmarks())";
-        "ignore_spr(x)" = "x ~ subject(\"[spr]\")";
+        "ignore_spr(x)" = ''x ~ subject("[spr]")'';
         "mutable_branches()" = "all:trunk().. ~ (trunk()..(remote_bookmarks()|immutable_heads()))::";
       };
 

@@ -1,6 +1,15 @@
 {
   description = "Descriptihome.atuin.on for the project";
 
+  nixConfig = {
+    extra-trusted-substituters = [
+      "https://luciofranco-nix-config.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "luciofranco-nix-config.cachix.org-1:thnuvxy1yQPda8HSo8vRHauactm+/wWdwLKoR+XXflQ="
+    ];
+  };
+
   inputs = {
     vim-config.url = "github:LucioFranco/vim-config";
 
@@ -132,7 +141,10 @@
               projectRootFile = "flake.nix";
               flakeCheck = false; # Covered by git-hooks check
               programs = {
-                nixfmt.enable = true;
+                nixfmt = {
+                  enable = true;
+                  package = pkgs.nixfmt;
+                };
                 ruff-format.enable = true;
                 shfmt = {
                   enable = true;
