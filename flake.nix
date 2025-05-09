@@ -4,9 +4,11 @@
   nixConfig = {
     extra-trusted-substituters = [
       "https://luciofranco-nix-config.cachix.org"
+      "https://luciofranco-vim-config.cachix.org"
     ];
     extra-trusted-public-keys = [
       "luciofranco-nix-config.cachix.org-1:thnuvxy1yQPda8HSo8vRHauactm+/wWdwLKoR+XXflQ="
+      "luciofranco-vim-config.cachix.org-1:YdHNe6sVl60hQpxA7QwHSesd1CUi4idCOhw1yUo2FZ0="
     ];
   };
 
