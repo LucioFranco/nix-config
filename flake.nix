@@ -64,7 +64,7 @@
     };
 
     jujutsu = {
-      url = "github:jj-vcs/jj/v0.29.0";
+      url = "github:jj-vcs/jj";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -102,16 +102,17 @@
               inherit system;
 
               overlays = [
-                self.overlays.additions
-                self.overlays.modifications
-                self.overlays.unstable-packages
                 inputs.vim-config.overlays.default
                 inputs.starship-jj.overlays.default
                 inputs.ragenix.overlays.default
-                #inputs.jujutsu.overlays.default
+                inputs.jujutsu.overlays.default
                 (final: prev: {
                   std = inputs.nix-std.lib;
                 })
+
+                self.overlays.additions
+                self.overlays.modifications
+                self.overlays.unstable-packages
               ];
               config = {
                 allowUnfree = true;
