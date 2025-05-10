@@ -12,6 +12,7 @@
   imports = [
     inputs.ragenix.homeManagerModules.default
     ./atuin
+    ./direnv.nix
     ./cargo.nix
     ./zsh.nix
     ./starship.nix
@@ -111,17 +112,6 @@
   };
 
   programs = {
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      silent = true;
-      config = {
-        global = {
-          warn_timeout = "30s";
-        };
-      };
-    };
-
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
