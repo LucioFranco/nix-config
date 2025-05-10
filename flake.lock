@@ -1020,15 +1020,15 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1744636970,
-        "narHash": "sha256-ss2aV6H5+zwczZrE01lf8S9N1UQZYGanrD5MySzaDgQ=",
-        "owner": "lanastara_foss",
+        "lastModified": 1746911455,
+        "narHash": "sha256-V+NYedqf9UFKputaq3EV0TcMphrxJO6T+xMXc8On8Fg=",
+        "owner": "luciofranco",
         "repo": "starship-jj",
-        "rev": "8eacf1f6704e285f8f26c4b522326c6172b3c9fe",
+        "rev": "1f1e365dacd3d65f826a96138dff739ff4258e3e",
         "type": "gitlab"
       },
       "original": {
-        "owner": "lanastara_foss",
+        "owner": "luciofranco",
         "repo": "starship-jj",
         "type": "gitlab"
       }
