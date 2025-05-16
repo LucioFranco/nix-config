@@ -654,11 +654,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1746891406,
-        "narHash": "sha256-PSJXUdycinwm/6Kr4XXuuhIjFcis+vU3H+f9nFim1IY=",
+        "lastModified": 1747382112,
+        "narHash": "sha256-fMZTs6lnHOgEJ0YEpGql2nN97c/zxiuDr717POvWoyk=",
         "owner": "jj-vcs",
         "repo": "jj",
-        "rev": "d08f19dc3eb299da7cdd33dead4f697b4695a93e",
+        "rev": "0b0d3135839cad0b48b8ccb5edde82306dfbb22b",
         "type": "github"
       },
       "original": {
@@ -1020,15 +1020,15 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1746911455,
-        "narHash": "sha256-V+NYedqf9UFKputaq3EV0TcMphrxJO6T+xMXc8On8Fg=",
-        "owner": "luciofranco",
+        "lastModified": 1747075136,
+        "narHash": "sha256-cn8iI32BKPLwjW1ZC62AKJVPMu2BsKERkfCpvDXRa+4=",
+        "owner": "lanastara_foss",
         "repo": "starship-jj",
-        "rev": "1f1e365dacd3d65f826a96138dff739ff4258e3e",
+        "rev": "478596707e7c58c9bd6155751a1804857530b472",
         "type": "gitlab"
       },
       "original": {
-        "owner": "luciofranco",
+        "owner": "lanastara_foss",
         "repo": "starship-jj",
         "type": "gitlab"
       }

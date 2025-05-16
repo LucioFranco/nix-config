@@ -69,7 +69,7 @@
     };
 
     starship-jj = {
-      url = "gitlab:luciofranco/starship-jj";
+      url = "gitlab:lanastara_foss/starship-jj";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
