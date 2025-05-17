@@ -34,6 +34,7 @@
       "rectangle"
       "slack"
       "private-internet-access"
+      "caffeine"
       # "chrome"
     ];
   };

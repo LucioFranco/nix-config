@@ -88,6 +88,7 @@
         push-bookmark-prefix = "lucio/push-";
         private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
         push-new-bookmarks = true;
+        write-change-id-header = true;
       };
 
       merge-tools.hunk = {
