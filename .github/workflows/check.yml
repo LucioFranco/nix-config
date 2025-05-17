@@ -29,7 +29,6 @@ jobs:
       matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
     steps:
       - uses: actions/checkout@v4
-      - uses: wimpysworld/nothing-but-nix@main
       - uses: cachix/install-nix-action@v30
       - uses: cachix/cachix-action@v14
         with:
