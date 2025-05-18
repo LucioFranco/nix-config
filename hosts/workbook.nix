@@ -65,6 +65,7 @@
   nix.enable = false;
 
   system.stateVersion = 24.11;
+  system.primaryUser = "lucio";
 
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
