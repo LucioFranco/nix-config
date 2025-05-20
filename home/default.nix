@@ -171,5 +171,8 @@
     iconv
     eza
     mosh
+
+    jjj
+    jq
   ];
 }
