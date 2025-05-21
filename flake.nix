@@ -126,6 +126,10 @@
 
             devShells = import ./nix/dev-shell.nix ctx;
 
+            packages = {
+              inherit (pkgs) nix-fast-build;
+            };
+
             pre-commit = {
               check.enable = true;
               settings.hooks = {

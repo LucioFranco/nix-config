@@ -5,8 +5,6 @@
     { pkgs, ... }:
     {
       inherit (pkgs)
-        # CI util
-        nix-fast-build
         window
         compare
         n
