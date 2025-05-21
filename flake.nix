@@ -77,7 +77,7 @@
   outputs =
     inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
-      top@{ withSystem, ... }:
+      top@{ withSystem, lib, ... }:
       {
         debug = true;
 
@@ -168,9 +168,23 @@
 
           overlays = import ./nix/overlays.nix top;
 
-          githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-            checks = inputs.nixpkgs.lib.recursiveUpdate self.checks self.packages;
-          };
+          githubActions = inputs.nix-github-actions.lib.mkGithubMatrix (
+            let
+              filterPkgs = (
+                allowedNames: packages:
+                lib.mapAttrs (_system: pkgs: lib.filterAttrs (name: _: lib.elem name allowedNames) pkgs) packages
+              );
+              packages = [
+                "wsl"
+                "workbook"
+                "formatting"
+                "pre-commit"
+              ];
+            in
+            {
+              checks = filterPkgs packages (lib.recursiveUpdate self.checks self.packages);
+            }
+          );
         };
       }
     );
