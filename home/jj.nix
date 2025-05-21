@@ -93,6 +93,20 @@
         "format_short_change_id(id)" = "id.shortest()";
       };
 
+      templates = {
+        draft_commit_description = ''
+          concat(
+            coalesce(description, default_commit_description, "\n"),
+            surround(
+              "\nJJ: This commit contains the following changes:\n", "",
+              indent("JJ:     ", diff.stat(72)),
+            ),
+            "\nJJ: ignore-rest\n",
+            diff.git(),
+          )
+        '';
+      };
+
       git = {
         push-bookmark-prefix = "lucio/push-";
         private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
