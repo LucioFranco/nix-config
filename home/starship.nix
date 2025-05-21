@@ -9,8 +9,6 @@
         "$hostname"
         "$directory"
         "\${custom.jj}"
-        "$git_branch"
-        "$git_commit"
         "$package"
         "$direnv"
         "$nix_shell"
