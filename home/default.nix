@@ -142,6 +142,8 @@
     nixd
     nixfmt
     manix
+    nixpkgs-review
+    hydra-check
 
     openssl
     git
@@ -169,5 +171,8 @@
     iconv
     eza
     mosh
+
+    jjj
+    jq
   ];
 }

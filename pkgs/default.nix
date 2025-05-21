@@ -103,4 +103,23 @@ pkgs: {
       cargoLock.lockFile = "${rustSrc}/Cargo.lock";
     }
   );
+
+  jjj = pkgs.rustPlatform.buildRustPackage (
+    let
+      rustSrc = pkgs.fetchFromGitHub {
+        owner = "icorbrey";
+        repo = "jjj";
+        rev = "71f38d83c9206d9a2a95e108babaf2c34311618f";
+        sha256 = "sha256-zBN+gJcsZXRQPAbKET4XN0MXs9TdFXbX2bYAfxa8r38=";
+      };
+    in
+    {
+      pname = "jjj";
+      version = "0.0.0";
+
+      src = rustSrc;
+
+      cargoLock.lockFile = "${rustSrc}/Cargo.lock";
+    }
+  );
 }

@@ -6,6 +6,13 @@ on:
     branches:
       - master
 
+env:
+  nix-conf: |-
+    accept-flake-config = true
+    always-allow-substitutes = true
+    builders-use-substitutes = true
+    max-jobs = auto
+
 jobs:
   nix-matrix:
     runs-on: ubuntu-latest
@@ -29,9 +36,13 @@ jobs:
       matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v30
+      - uses: DeterminateSystems/nix-installer-action@v17
+        with:
+          extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v14
         with:
           name: luciofranco-nix-config
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix build -L '.#${{ matrix.attr }}'
+          extraPullNames: luciofranco-vim-config, nix-community
+      - run: |
+          nix run .#nix-fast-build -- --no-nom --skip-cached --retries=3 --flake '.#${{ matrix.attr }}'

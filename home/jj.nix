@@ -9,6 +9,15 @@
         email = "luciofranco14@gmail.com";
       };
 
+      colors = {
+        "diff added" = {
+          fg = "blue";
+        };
+        "diff removed" = {
+          fg = "red";
+        };
+      };
+
       ui = {
         default-command = "log-recent";
       };
