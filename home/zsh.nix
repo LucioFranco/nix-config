@@ -14,6 +14,7 @@
       nvim-dev = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
       nvimd = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
       direnv-reload = "nix-direnv-reload";
+      k = "kubectl";
     };
     enableCompletion = true;
     enableVteIntegration = pkgs.stdenv.isLinux;
