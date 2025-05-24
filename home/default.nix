@@ -171,6 +171,7 @@
     iconv
     eza
     mosh
+    htop
 
     jjj
     jq
