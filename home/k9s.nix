@@ -6,7 +6,7 @@
 
     settings.k9s = {
       ui = {
-        skin = "transparent";
+        skin = "transparent-custom";
         headless = false;
         crumbsless = false;
         splashless = true;
@@ -28,6 +28,64 @@
       {
         solarized-light = "${src}/skins/solarized-light.yaml";
         transparent = "${src}/skins/transparent.yaml";
+        transparent-custom = {
+          k9s = {
+            body = {
+              bgColor = "default";
+            };
+            prompt = {
+              bgColor = "default";
+            };
+            info = {
+              sectionColor = "default";
+            };
+            dialog = {
+              bgColor = "default";
+              labelFgColor = "default";
+              fieldFgColor = "default";
+            };
+            frame = {
+              crumbs = {
+                bgColor = "default";
+              };
+              title = {
+                bgColor = "default";
+                counterColor = "default";
+              };
+              menu = {
+                fgColor = "default";
+              };
+            };
+            views = {
+              charts = {
+                bgColor = "default";
+              };
+              table = {
+                bgColor = "default";
+                header = {
+                  fgColor = "default";
+                  bgColor = "default";
+                };
+              };
+              xray = {
+                bgColor = "default";
+              };
+              logs = {
+                bgColor = "default";
+                fgColor = "#657b83";
+                indicator = {
+                  bgColor = "default";
+                  toggleOnColor = "default";
+                  toggleOffColor = "default";
+                };
+              };
+              yaml = {
+                colonColor = "default";
+                valueColor = "default";
+              };
+            };
+          };
+        };
       };
   };
 }
