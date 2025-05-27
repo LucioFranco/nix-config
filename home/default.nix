@@ -15,6 +15,7 @@
     ./direnv.nix
     ./cargo.nix
     ./zsh.nix
+    ./k9s.nix
     ./starship.nix
     ./git.nix
     ./fzf.nix
