@@ -97,18 +97,29 @@
     '';
   };
 
-  # home.packages = [
-  #   # Open tmux for current project.
-  #   (pkgs.writeShellApplication {
-  #     name = "pux";
-  #     runtimeInputs = [ pkgs.tmux ];
-  #     text = ''
-  #       PRJ="''$(zoxide query -i)"
-  #       echo "Launching tmux for ''$PRJ"
-  #       set -x
-  #       cd "''$PRJ" && \
-  #         exec tmux -S "''$PRJ".tmux attach
-  #     '';
-  #   })
-  # ];
+  home.packages = [
+    # Open jj watchers
+    (pkgs.writeShellApplication {
+      name = "watch-jj";
+      runtimeInputs = with pkgs; [ tmux jujutsu ];
+      text = ''
+        #!/usr/bin/env zsh
+
+        # Width of the right column as a percentage of the full window
+        RIGHT_PCT=35
+
+        # Get current pane (this will be left)
+        LEFT_PANE=$(tmux display-message -p '#{pane_id}')
+
+        # Step 1: Split horizontally, right pane gets $RIGHT_PCT of width
+        tmux split-window -h -p $RIGHT_PCT -t "$LEFT_PANE" "zsh -i -c 'watch-log'"
+
+        # Get the new right pane ID (top right)
+        TOP_RIGHT_PANE=$(tmux display-message -p -t "$LEFT_PANE".+1 '#{pane_id}')
+
+        # Step 2: Split right pane vertically in half (default is 50/50)
+        tmux split-window -v -t "$TOP_RIGHT_PANE" "zsh -i -c 'watch-st'"
+      '';
+    })
+  ];
 }

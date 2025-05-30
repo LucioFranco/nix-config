@@ -15,6 +15,8 @@
       nvimd = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
       direnv-reload = "nix-direnv-reload";
       k = "kubectl";
+      watch-log = ''watch -t --color "jj --no-pager --limit 20 --color=always"'';
+      watch-st = ''watch -t --color "jj st --no-pager --color=always"'';
     };
     enableCompletion = true;
     enableVteIntegration = pkgs.stdenv.isLinux;
