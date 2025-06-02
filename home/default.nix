@@ -164,6 +164,7 @@
     fd
     aws-iam-authenticator
     awscli2
+    eksctl
     kubectl
     kubernetes-helm
     nerd-fonts.hack

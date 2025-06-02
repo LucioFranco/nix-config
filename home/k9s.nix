@@ -37,10 +37,12 @@
               bgColor = "default";
             };
             info = {
+              fgColor = "#657b83";
               sectionColor = "default";
             };
             dialog = {
               bgColor = "default";
+              fgColor = "#657b83";
               labelFgColor = "default";
               fieldFgColor = "default";
             };
@@ -53,17 +55,19 @@
                 counterColor = "default";
               };
               menu = {
-                fgColor = "default";
+                fgColor = "#657b83";
               };
             };
             views = {
               charts = {
+                fgColor = "#657b83";
                 bgColor = "default";
               };
               table = {
                 bgColor = "default";
+                fgColor = "#657b83";
                 header = {
-                  fgColor = "default";
+                  fgColor = "#657b83";
                   bgColor = "default";
                 };
               };
