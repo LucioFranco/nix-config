@@ -51,6 +51,8 @@
 
     # tmux-yank
     reattach-to-user-namespace
+
+    unixtools.watch
   ];
 
   services.tailscale = {
