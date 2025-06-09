@@ -95,7 +95,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMlNhZ2sZv0tgGXJ73vC9r7TvlSzFLPmnn5NMbEkoQlB";
   };
 
-  networking.extraHosts  = ''
+  networking.extraHosts = ''
     127.0.0.1 minio.minio.svc.cluster.local
     127.0.0.1 k3d-polars-local-registry
     127.0.0.1 polars-cloud-compute.local
