@@ -101,7 +101,10 @@
     # Open jj watchers
     (pkgs.writeShellApplication {
       name = "watch-jj";
-      runtimeInputs = with pkgs; [ tmux jujutsu ];
+      runtimeInputs = with pkgs; [
+        tmux
+        jujutsu
+      ];
       text = ''
         #!/usr/bin/env zsh
 
