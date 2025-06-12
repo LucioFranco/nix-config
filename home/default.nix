@@ -23,7 +23,7 @@
     ./alacritty.nix
     ./tmux.nix
     ./zellij.nix
-    ./jj.nix
+    ./jujutsu.nix
   ];
 
   # nix = {

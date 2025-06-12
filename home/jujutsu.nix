@@ -19,7 +19,7 @@
       };
 
       ui = {
-        default-command = "log-recent";
+        # default-command = "log-recent";
       };
 
       aliases = {
@@ -85,7 +85,7 @@
         # "immutable_heads()" = "builtin_immutable_heads() | remote_bookmarks()";
         "recent()" = ''committer_date(after:"3 months ago")'';
         "ancestor_bookmark()" = "heads(::@- & bookmarks())";
-        "ignore_spr(x)" = ''x ~ subject("[spr]") ~ trunk()..remote_bookmarks("lucio/spr")'';
+        "ignore_spr(x)" = ''x ~ subject("[spr]") ~ trunk()..remote_bookmarks("lucio/spr") ~ ..untracked_remote_bookmarks()'';
         "mutable_branches()" = "all:trunk().. ~ (trunk()..(remote_bookmarks()|immutable_heads()))::";
       };
 

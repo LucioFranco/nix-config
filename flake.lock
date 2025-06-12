@@ -294,11 +294,11 @@
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
-        "lastModified": 1743550720,
-        "narHash": "sha256-hIshGgKZCgWh6AYJpJmRgFdR3WUbkY04o82X05xqQiY=",
+        "lastModified": 1748821116,
+        "narHash": "sha256-F82+gS044J1APL0n4hH50GYdPRv/5JWm34oCJYmVKdE=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "c621e8422220273271f52058f618c94e405bb0f5",
+        "rev": "49f0870db23e8c1ca0b5259734a02cd9e1e371a1",
         "type": "github"
       },
       "original": {
@@ -609,16 +609,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1737371634,
-        "narHash": "sha256-fTVAWzT1UMm1lT+YxHuVPtH+DATrhYfea3B0MxG/cGw=",
+        "lastModified": 1748294338,
+        "narHash": "sha256-FVO01jdmUNArzBS7NmaktLdGA5qA3lUMJ4B7a05Iynw=",
         "owner": "NuschtOS",
         "repo": "ixx",
-        "rev": "a1176e2a10ce745ff8f63e4af124ece8fe0b1648",
+        "rev": "cc5f390f7caf265461d4aab37e98d2292ebbdb85",
         "type": "github"
       },
       "original": {
         "owner": "NuschtOS",
-        "ref": "v0.0.7",
+        "ref": "v0.0.8",
         "repo": "ixx",
         "type": "github"
       }
@@ -754,11 +754,11 @@
     },
     "nixpkgs-lib_2": {
       "locked": {
-        "lastModified": 1743296961,
-        "narHash": "sha256-b1EdN3cULCqtorQ4QeWgLMrd5ZGOjLSLemfa00heasc=",
+        "lastModified": 1748740939,
+        "narHash": "sha256-rQaysilft1aVMwF14xIdGS3sj1yHlI6oKQNBRTF40cc=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "e4822aea2a6d1cdd36653c134cacfd64c97ff4fa",
+        "rev": "656a64127e9d791a334452c6b6606d17539476e2",
         "type": "github"
       },
       "original": {
@@ -801,11 +801,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1748026106,
-        "narHash": "sha256-6m1Y3/4pVw1RWTsrkAK2VMYSzG4MMIj7sqUy7o8th1o=",
+        "lastModified": 1749143949,
+        "narHash": "sha256-QuUtALJpVrPnPeozlUG/y+oIMSLdptHxb3GK6cpSVhA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "063f43f2dbdef86376cc29ad646c45c46e93234c",
+        "rev": "d3d2d80a2191a73d1e86456a751b83aa13085d7d",
         "type": "github"
       },
       "original": {
@@ -829,11 +829,11 @@
         "systems": "systems_7"
       },
       "locked": {
-        "lastModified": 1748088865,
-        "narHash": "sha256-xfAT2ykSAWcYgxkyZN5n6xRHab93u56zbBjuhoDFKFg=",
+        "lastModified": 1749200997,
+        "narHash": "sha256-In+NjXI8kfJpamTmtytt+rnBzQ213Y9KW55IXvAAK/4=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "2c0a9ff1e2bcc6aab15caa504a7c9670f6e0a929",
+        "rev": "00524c7935f05606fd1b09e8700e9abcc4af7be8",
         "type": "github"
       },
       "original": {
@@ -879,11 +879,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745046075,
-        "narHash": "sha256-8v4y6k16Ra/fiecb4DxhsoOGtzLKgKlS+9/XJ9z0T2I=",
+        "lastModified": 1748298102,
+        "narHash": "sha256-PP11GVwUt7F4ZZi5A5+99isuq39C59CKc5u5yVisU/U=",
         "owner": "NuschtOS",
         "repo": "search",
-        "rev": "066afe8643274470f4a294442aadd988356a478f",
+        "rev": "f8a1c221afb8b4c642ed11ac5ee6746b0fe1d32f",
         "type": "github"
       },
       "original": {
@@ -1306,11 +1306,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747912973,
-        "narHash": "sha256-XgxghfND8TDypxsMTPU2GQdtBEsHTEc3qWE6RVEk8O0=",
+        "lastModified": 1749194973,
+        "narHash": "sha256-eEy8cuS0mZ2j/r/FE0/LYBSBcIs/MKOIVakwHVuqTfk=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "020cb423808365fa3f10ff4cb8c0a25df35065a3",
+        "rev": "a05be418a1af1198ca0f63facb13c985db4cb3c5",
         "type": "github"
       },
       "original": {
@@ -1329,11 +1329,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1748186415,
-        "narHash": "sha256-ngLvUqRI3rIXyDh3MZaAicjTP0fyidI8D7erx/fueKs=",
+        "lastModified": 1749825883,
+        "narHash": "sha256-ZQcR7uqfIK8Ct+U8W8ovnNV3GENBbg2Yey11EeI2Sj4=",
         "owner": "LucioFranco",
         "repo": "vim-config",
-        "rev": "0b425873299d9292fc1766b1e819faeb145e045c",
+        "rev": "006f5f486b59b769d92276288c78018760e0e038",
         "type": "github"
       },
       "original": {
