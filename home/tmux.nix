@@ -122,6 +122,8 @@
 
         # Step 2: Split right pane vertically in half (default is 50/50)
         tmux split-window -v -t "$TOP_RIGHT_PANE" "zsh -i -c 'watch-st'"
+
+        tmux select-pane -t "$LEFT_PANE"
       '';
     })
   ];
