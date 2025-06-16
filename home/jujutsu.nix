@@ -19,7 +19,7 @@
       };
 
       ui = {
-        # default-command = "log-recent";
+        default-command = "log";
       };
 
       aliases = {
@@ -109,7 +109,7 @@
       };
 
       git = {
-        push-bookmark-prefix = "lucio/push-";
+        push-bookmark-prefix = "lucio-push-";
         private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
         push-new-bookmarks = true;
         write-change-id-header = true;
