@@ -35,6 +35,7 @@
       ".envrc"
       ".direnv"
       "CLAUDE.md"
+      ".claude/**"
       "*.log"
       "*.log.*"
       "window.toml"

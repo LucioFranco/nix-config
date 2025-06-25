@@ -72,6 +72,11 @@
       url = "gitlab:lanastara_foss/starship-jj";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # claude-code = {
+    #   url = "github:LucioFranco/claude-code.nix/lucio-push-pzrztsnnkwvk";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
@@ -106,6 +111,7 @@
                 inputs.starship-jj.overlays.default
                 inputs.ragenix.overlays.default
                 inputs.jujutsu.overlays.default
+
                 (final: prev: {
                   std = inputs.nix-std.lib;
                 })

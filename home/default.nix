@@ -11,7 +11,9 @@
 
   imports = [
     inputs.ragenix.homeManagerModules.default
+    # inputs.claude-code.homeManagerModules.claude-code
     ./atuin
+    ./claude.nix
     ./direnv.nix
     ./cargo.nix
     ./zsh.nix
@@ -177,5 +179,7 @@
 
     jjj
     jq
+
+    asciinema_3
   ];
 }
