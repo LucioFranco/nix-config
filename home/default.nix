@@ -13,7 +13,7 @@
     inputs.ragenix.homeManagerModules.default
     # inputs.claude-code.homeManagerModules.claude-code
     ./atuin
-    ./claude.nix
+    ./claude
     ./direnv.nix
     ./cargo.nix
     ./zsh.nix
