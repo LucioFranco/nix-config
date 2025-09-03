@@ -78,6 +78,7 @@
     "${config.home.homeDirectory}/go/bin"
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.cargo/bin"
+    "${config.home.homeDirectory}/code/install/bin"
   ];
 
   # Disable hm's darwin linking logic that conflicts with the custom
