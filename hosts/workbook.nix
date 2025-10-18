@@ -40,7 +40,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    darwin.apple_sdk.frameworks.Security
     qemu
     llvmPackages.libclang
 
