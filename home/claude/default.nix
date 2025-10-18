@@ -3,9 +3,13 @@
 { pkgs, ... }:
 {
 
-  home.packages = [ pkgs.claude-code ];
-
-  # Create and manage ~/.claude directory
-  home.file.".claude/settings.json".source = ./settings.json;
-  home.file.".claude/CLAUDE.md".source = ./root-claude.md;
+  # home.packages = [ pkgs.claude-code ];
+  #
+  # # Create and manage ~/.claude directory
+  # home.file.".claude/settings.json".source = ./settings.json;
+  # home.file.".claude/CLAUDE.md".source = ./root-claude.md;
+  programs.claude-code = {
+    enable = true;
+    memory.source = ./root-claude.md;
+  };
 }

@@ -1,6 +1,17 @@
 { withSystem, config, ... }:
 {
-  "aarch64-darwin".workbook = config.flake.darwinConfigurations.workbook.system;
+  "aarch64-darwin" = withSystem "aarch64-darwin" (
+    { pkgs, ... }:
+    {
+      inherit (pkgs)
+        window
+        compare
+        jj-github-pr
+        spr
+        ;
+      workbook = config.flake.darwinConfigurations.workbook.system;
+    }
+  );
   "x86_64-linux" = withSystem "x86_64-linux" (
     { pkgs, ... }:
     {

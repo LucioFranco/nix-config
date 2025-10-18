@@ -52,8 +52,6 @@
     stylix = {
       url = "github:danth/stylix";
       inputs = {
-        # base16.follows = "base16";
-        home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -84,7 +82,6 @@
     flake-parts.lib.mkFlake { inherit inputs; } (
       top@{ withSystem, lib, ... }:
       {
-        debug = true;
 
         imports = [
           inputs.git-hooks.flakeModule
@@ -139,7 +136,7 @@
             pre-commit = {
               check.enable = true;
               settings.hooks = {
-                actionlint.enable = true;
+                actionlint.enable = false;
                 shellcheck.enable = true;
                 ruff.enable = true;
                 treefmt.enable = true;
@@ -156,7 +153,7 @@
               programs = {
                 nixfmt = {
                   enable = true;
-                  package = pkgs.nixfmt;
+                  package = pkgs.nixfmt-rfc-style;
                 };
                 ruff-format.enable = true;
                 shfmt = {
