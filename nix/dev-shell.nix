@@ -17,7 +17,7 @@
 
       # GitHub Actions
       act
-      actionlint
+      #actionlint
       python3
       python3Packages.pyflakes
 

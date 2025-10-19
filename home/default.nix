@@ -166,7 +166,7 @@
     ripgrep
     fd
     aws-iam-authenticator
-    awscli2
+    #awscli2
     eksctl
     kubectl
     kubernetes-helm
