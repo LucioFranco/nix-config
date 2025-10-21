@@ -36,11 +36,6 @@ in
           cyan = "#9C88D0";
           white = "#898F8F";
           orange = "#C96438";
-
-          # Pane border colors for better visibility
-          frame_unselected = "#898F8F"; # Gray for unfocused panes
-          frame_selected = "#A3BE8C"; # Green for focused pane
-          frame_highlight = "#EBCB8B"; # Yellow when in special modes
         };
       };
     };

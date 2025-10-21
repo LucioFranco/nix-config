@@ -20,7 +20,7 @@
     {
       mode = "n";
       key = "<C-h>";
-      action = lib.nixvim.mkRaw "require('zellij-nav').left";
+      action = lib.nixvim.mkRaw "require('zellij-nav').left_tab";
       options = {
         silent = true;
         desc = "Navigate left (Neovim/Zellij)";
@@ -47,7 +47,7 @@
     {
       mode = "n";
       key = "<C-l>";
-      action = lib.nixvim.mkRaw "require('zellij-nav').right";
+      action = lib.nixvim.mkRaw "require('zellij-nav').right_tab";
       options = {
         silent = true;
         desc = "Navigate right (Neovim/Zellij)";

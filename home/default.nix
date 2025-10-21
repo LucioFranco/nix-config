@@ -135,8 +135,7 @@
     # My custom tools
     window
     compare
-    jj-github-pr
-    spr
+    jj-spr
 
     # Common nix
     nixd
@@ -174,7 +173,6 @@
     mosh
     htop
 
-    jjj
     jq
 
     asciinema_3

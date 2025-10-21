@@ -42,6 +42,7 @@
       ".pre-commit-config.yaml"
       ".spec-workflow"
       ".serena"
+      "result"
     ];
   };
 

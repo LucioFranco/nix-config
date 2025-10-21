@@ -6,8 +6,7 @@
       inherit (pkgs)
         window
         compare
-        jj-github-pr
-        spr
+        linctl
         ;
       workbook = config.flake.darwinConfigurations.workbook.system;
     }
@@ -20,8 +19,7 @@
         compare
         n
         xdg-open-wsl
-        jj-github-pr
-        spr
+        linctl
         ;
       wsl = config.flake.nixosConfigurations.wsl.config.system.build.toplevel;
     }

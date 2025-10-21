@@ -79,6 +79,11 @@
       url = "github:sadjow/claude-code-nix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    jj-spr = {
+      url = "github:LucioFranco/jj-spr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -116,6 +121,7 @@
 
                 (final: prev: {
                   std = inputs.nix-std.lib;
+                  jj-spr = inputs.jj-spr.packages.${system}.default;
                 })
 
                 self.overlays.default

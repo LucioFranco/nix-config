@@ -21,28 +21,6 @@ pkgs: {
     }
   );
 
-  spr = pkgs.rustPlatform.buildRustPackage (
-    let
-      rustSrc = pkgs.fetchFromGitHub {
-        owner = "sunshowers";
-        repo = "spr";
-        rev = "a9055941ecb32527d5453165ddbdda4815ead46c";
-        sha256 = "sha256-9LbvZKQFsOrifoBTMJzwouiCtghLlf50qWM8P5OkS9U=";
-      };
-    in
-    {
-      pname = "spr";
-      version = "1.3.6-beta.1";
-
-      buildInputs = with pkgs; [ zlib ];
-      nativeBuildInputs = with pkgs; [ pkg-config ];
-
-      src = rustSrc;
-
-      cargoLock.lockFile = "${rustSrc}/Cargo.lock";
-    }
-  );
-
   n = pkgs.rustPlatform.buildRustPackage (
     let
       rustSrc = ./tools/n;
@@ -104,22 +82,23 @@ pkgs: {
     }
   );
 
-  jjj = pkgs.rustPlatform.buildRustPackage (
-    let
-      rustSrc = pkgs.fetchFromGitHub {
-        owner = "icorbrey";
-        repo = "jjj";
-        rev = "71f38d83c9206d9a2a95e108babaf2c34311618f";
-        sha256 = "sha256-zBN+gJcsZXRQPAbKET4XN0MXs9TdFXbX2bYAfxa8r38=";
-      };
-    in
-    {
-      pname = "jjj";
-      version = "0.0.0";
+  linctl = pkgs.buildGoModule {
+    pname = "linctl";
+    version = "0.0.1";
 
-      src = rustSrc;
+    src = pkgs.fetchFromGitHub {
+      owner = "dorkitude";
+      repo = "linctl";
+      rev = "b5996a38ba076ac97a7cc4a1dcc59cfbedbcf266";
+      sha256 = "sha256-YIhI9pSkJ2w5eZQ+IyUTdD6risfc9L2j9ntQtmCJDd0=";
+    };
 
-      cargoLock.lockFile = "${rustSrc}/Cargo.lock";
-    }
-  );
+    vendorHash = "sha256-Nt/V5IS0UY4ROh7epKmtAN3VDFJlCnqmKRk1AVRASgQ=";
+
+    meta = with pkgs.lib; {
+      description = "A comprehensive command-line interface for Linear's API";
+      homepage = "https://github.com/dorkitude/linctl";
+      license = licenses.mit;
+    };
+  };
 }

@@ -1,17 +1,49 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
   home-manager.users.lucio =
-    { ... }:
+    { config, ... }:
     {
       home.username = "lucio";
       home.stateVersion = "24.11";
 
-      programs.wezterm.enable = true;
+      home.sessionPath = [ "${config.home.homeDirectory}/code/moose/result/bin" ];
 
       imports = [ ../home ];
+
+      home.packages = with pkgs; [
+        linctl
+      ];
+
+      programs.ssh = {
+        enable = true;
+        matchBlocks."github.com" = {
+          identityFile = "~/.ssh/id_ed25519_github";
+          identitiesOnly = true;
+        };
+      };
+
+      xdg.configFile."ghostty/config" = {
+        text = ''
+          # Ghostty configuration
+          theme = Builtin Solarized Light
+          font-family = "Hack Nerd Font Mono"
+          #font-size = 12
+
+          # Add your custom settings here
+          #window-padding-x = 10
+          #window-padding-y = 10
+          # Remove window decorations (borders, title bar)
+          window-decoration = false
+
+          # Optional: also remove internal padding
+          window-padding-x = 0
+          window-padding-y = 0
+        '';
+      };
     };
 
   users.users.lucio = {
@@ -36,6 +68,9 @@
       # "private-internet-access"
       "caffeine"
       # "chrome"
+      "ghostty"
+      "figma"
+      "claude"
     ];
   };
 
@@ -60,13 +95,18 @@
 
   programs.zsh.enable = true;
 
-  # Can't enable this with determintesys nix
-  #services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
-  nix.enable = false;
+  nix.enable = true;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [ config.users.users.lucio.name ];
 
-  system.stateVersion = 24.11;
-  system.primaryUser = "lucio";
+  networking.hostName = "caserta";
+
+  system.stateVersion = 6;
+  system.primaryUser = config.users.users.lucio.name;
 
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;

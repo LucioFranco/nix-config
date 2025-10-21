@@ -21,6 +21,30 @@ withSystem "aarch64-darwin" (
     ...
   }:
   {
+    caserta = darwin.lib.darwinSystem rec {
+      inherit pkgs system;
+
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [
+
+        ../hosts/caserta.nix
+        home-manager.darwinModules.home-manager
+        {
+          nix.registry = {
+            p.flake = nixpkgs;
+          };
+
+          home-manager = {
+            extraSpecialArgs.inputs = inputs;
+            useGlobalPkgs = true;
+            backupFileExtension = "hm-bak";
+          };
+        }
+      ];
+    };
+
     workbook = darwin.lib.darwinSystem rec {
       inherit pkgs system;
 
