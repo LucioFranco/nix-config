@@ -101,6 +101,9 @@
       };
 
       templates = {
+        git_push_bookmark = ''
+          "lucio/push-" ++ change_id.short()
+        '';
         draft_commit_description = ''
           concat(
             coalesce(description, default_commit_description, "\n"),
@@ -115,7 +118,6 @@
       };
 
       git = {
-        push-bookmark-prefix = "lucio-push-";
         private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
         push-new-bookmarks = true;
         write-change-id-header = true;

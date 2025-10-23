@@ -6,16 +6,15 @@
     settings = {
       theme = "colorblind";
       # copy_command = "wl-copy";
-      default_layout = "compact";
+      #default_layout = "compact";
       pane_frames = false;
-      hide_session_name = true;
-
-      keybinds = {
-        unbind = [
-          "Ctrl h"
-          "Ctrl p"
-        ];
+      ui = {
+        pane_frames = {
+          hide_session_name = true;
+        };
       };
+
+      web_server = true;
 
       themes = {
         colorblind = {
@@ -33,5 +32,24 @@
         };
       };
     };
+
+    # Use extraConfig for keybinds with spaces (home-manager's structured settings don't handle them well)
+    extraConfig = ''
+      keybinds {
+        unbind "Ctrl g"
+
+        normal {
+          bind "Ctrl l" {
+            SwitchToMode "Locked"
+          }
+        }
+
+        locked {
+          bind "Ctrl l" {
+            SwitchToMode "Normal"
+          }
+        }
+      }
+    '';
   };
 }
