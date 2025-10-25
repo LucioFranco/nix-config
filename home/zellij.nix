@@ -1,4 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  zellij-autolock = pkgs.fetchurl {
+    url = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm";
+    sha256 = "69c95607bfd97e075d6762a44fdbc703a82a3c4909dbbbe43952f020487b8ea4";
+  };
+in
 {
   programs.zellij = {
     enable = true;
@@ -7,10 +13,11 @@
       theme = "colorblind";
       # copy_command = "wl-copy";
       #default_layout = "compact";
-      pane_frames = false;
+      pane_frames = true;
       ui = {
         pane_frames = {
           hide_session_name = true;
+          rounded_corners = true;
         };
       };
 
@@ -29,27 +36,103 @@
           cyan = "#9C88D0";
           white = "#898F8F";
           orange = "#C96438";
+
+          # Pane border colors for better visibility
+          frame_unselected = "#898F8F"; # Gray for unfocused panes
+          frame_selected = "#A3BE8C"; # Green for focused pane
+          frame_highlight = "#EBCB8B"; # Yellow when in special modes
         };
       };
     };
 
-    # Use extraConfig for keybinds with spaces (home-manager's structured settings don't handle them well)
+    # Use extraConfig for plugin configuration and keybinds
     extraConfig = ''
+      plugins {
+        autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+          is_enabled true
+          triggers "nvim|vim|v|nv|nvim-dev|fzf|zoxide|atuin"
+          reaction_seconds "0.3"
+          print_to_log false
+        }
+      }
+
+      load_plugins {
+        autolock
+      }
+
       keybinds {
         unbind "Ctrl g"
+        
+        // Unbind default Alt+hjkl navigation so they pass through when locked
+        unbind "Alt h"
+        unbind "Alt j"  
+        unbind "Alt k"
+        unbind "Alt l"
 
         normal {
-          bind "Ctrl l" {
-            SwitchToMode "Locked"
+          bind "Ctrl p" {
+            SwitchToMode "Pane";
+          }
+        }
+
+
+
+        normal {
+          bind "Enter" {
+            WriteChars "\u{000D}";
+            MessagePlugin "autolock" {};
           }
         }
 
         locked {
+          bind "Alt z" {
+            MessagePlugin "autolock" {payload "disable";};
+            SwitchToMode "Normal";
+          }
+        }
+
+        shared {
+          bind "Alt Shift z" {
+            MessagePlugin "autolock" {payload "enable";};
+          }
+        }
+
+        shared_except "locked" {
+          bind "Alt z" {
+            MessagePlugin "autolock" {payload "disable";};
+            SwitchToMode "Locked";
+          }
+
+          bind "Ctrl h" {
+            MoveFocusOrTab "Left";
+          }
           bind "Ctrl l" {
-            SwitchToMode "Normal"
+            MoveFocusOrTab "Right";
+          }
+          bind "Ctrl j" {
+            MoveFocus "Down";
+          }
+          bind "Ctrl k" {
+            MoveFocus "Up";
+          }
+
+          bind "Alt h" {
+            Resize "Increase Left";
+          }
+          bind "Alt l" {
+            Resize "Increase Right";
+          }
+          bind "Alt j" {
+            Resize "Increase Down";
+          }
+          bind "Alt k" {
+            Resize "Increase Up";
           }
         }
       }
     '';
   };
+
+  # Install zellij-autolock plugin
+  xdg.configFile."zellij/plugins/zellij-autolock.wasm".source = zellij-autolock;
 }

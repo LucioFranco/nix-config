@@ -34,9 +34,9 @@
           "WebFetch"
           "WebSearch"
 
-          # Allow default installed mcp tools 
+          # Allow default installed mcp tools
           "mcp__serena"
-          "mcp__sequential_thinking"
+          "mcp__sequential-thinking"
         ];
 
         deny = [

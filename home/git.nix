@@ -41,6 +41,7 @@
       "window.toml"
       ".pre-commit-config.yaml"
       ".spec-workflow"
+      ".serena"
     ];
   };
 
