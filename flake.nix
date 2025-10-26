@@ -4,21 +4,25 @@
   nixConfig = {
     extra-trusted-substituters = [
       "https://luciofranco-nix-config.cachix.org"
-      "https://luciofranco-vim-config.cachix.org"
     ];
     extra-trusted-public-keys = [
       "luciofranco-nix-config.cachix.org-1:thnuvxy1yQPda8HSo8vRHauactm+/wWdwLKoR+XXflQ="
-      "luciofranco-vim-config.cachix.org-1:YdHNe6sVl60hQpxA7QwHSesd1CUi4idCOhw1yUo2FZ0="
     ];
   };
 
   inputs = {
-    vim-config.url = "github:LucioFranco/vim-config";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nix-std.url = "github:chessai/nix-std";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
 
     ragenix.url = "github:yaxitech/ragenix";
 
@@ -86,6 +90,7 @@
         imports = [
           inputs.git-hooks.flakeModule
           inputs.treefmt-nix.flakeModule
+          ./nix/vim.nix
         ];
         systems = [
           "x86_64-linux"
@@ -104,7 +109,6 @@
               inherit system;
 
               overlays = [
-                inputs.vim-config.overlays.default
                 inputs.starship-jj.overlays.default
                 inputs.ragenix.overlays.default
                 inputs.jujutsu.overlays.default
@@ -114,6 +118,7 @@
                   std = inputs.nix-std.lib;
                 })
 
+                self.overlays.default
                 self.overlays.additions
                 self.overlays.modifications
                 self.overlays.unstable-packages

@@ -11,8 +11,8 @@
       ls = "eza --binary --header --long";
       man = "batman";
       http = "xh";
-      nvim-dev = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
-      nvimd = "${config.home.homeDirectory}/code/vim-config/result/bin/nvim";
+      nvim-dev = "${config.home.homeDirectory}/code/nix-config/result/bin/nvim";
+      nvimd = "${config.home.homeDirectory}/code/nix-config/result/bin/nvim";
       direnv-reload = "nix-direnv-reload";
       k = "kubectl";
       watch-log = ''watch -t --color "jj --no-pager --limit 20 --color=always"'';
