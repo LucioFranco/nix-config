@@ -69,6 +69,8 @@
         helm_ls = {
           enable = true;
         };
+
+        vtsls.enable = true;
       };
     };
 

@@ -12,7 +12,7 @@ in
     settings = {
       theme = "colorblind";
       # copy_command = "wl-copy";
-      #default_layout = "compact";
+      default_layout = "compact";
       pane_frames = true;
       ui = {
         pane_frames = {

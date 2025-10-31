@@ -10,8 +10,6 @@
       home.username = "lucio";
       home.stateVersion = "24.11";
 
-      home.sessionPath = [ "${config.home.homeDirectory}/code/moose/result/bin" ];
-
       imports = [ ../home ];
 
       home.packages = with pkgs; [

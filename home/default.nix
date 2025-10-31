@@ -79,6 +79,7 @@
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.cargo/bin"
     "${config.home.homeDirectory}/code/install/bin"
+    "${config.home.homeDirectory}/code/moosestack/result/bin"
   ];
 
   # Disable hm's darwin linking logic that conflicts with the custom
