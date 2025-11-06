@@ -43,6 +43,7 @@
       ".spec-workflow"
       ".serena"
       "result"
+      "work/*"
     ];
   };
 

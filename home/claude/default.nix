@@ -29,6 +29,7 @@
           "Bash(nix :*)"
           "Bash(cargo :*)"
           "Bash(npm :*)"
+          "Bash(linctl :*)"
 
           # Web tools
           "WebFetch"
@@ -37,6 +38,7 @@
           # Allow default installed mcp tools
           "mcp__serena"
           "mcp__sequential-thinking"
+          "mcp__moose-dev"
         ];
 
         deny = [
@@ -60,40 +62,40 @@
     };
 
     # MCP Servers
-    mcpServers = {
-      serena = {
-        command = "nix";
-        type = "stdio";
-        args = [
-          "run"
-          "github:oraios/serena"
-          "--"
-          "start-mcp-server"
-          "--transport"
-          "stdio"
-          "--enable-web-dashboard"
-          "false"
-        ];
-      };
-
-      # spec-workflow = {
-      #   command = "npx";
-      #   type = "stdio";
-      #   args = [
-      #     "-y"
-      #     "@pimzino/spec-workflow-mcp@latest"
-      #     "--AutoStartDashboard"
-      #   ];
-      # };
-
-      sequential-thinking = {
-        command = "npx";
-        type = "stdio";
-        args = [
-          "-y"
-          "@modelcontextprotocol/server-sequential-thinking"
-        ];
-      };
-    };
+    # mcpServers = {
+    #   serena = {
+    #     command = "nix";
+    #     type = "stdio";
+    #     args = [
+    #       "run"
+    #       "github:oraios/serena"
+    #       "--"
+    #       "start-mcp-server"
+    #       "--transport"
+    #       "stdio"
+    #       "--enable-web-dashboard"
+    #       "false"
+    #     ];
+    #   };
+    #
+    #   # spec-workflow = {
+    #   #   command = "npx";
+    #   #   type = "stdio";
+    #   #   args = [
+    #   #     "-y"
+    #   #     "@pimzino/spec-workflow-mcp@latest"
+    #   #     "--AutoStartDashboard"
+    #   #   ];
+    #   # };
+    #
+    #   # sequential-thinking = {
+    #   #   command = "npx";
+    #   #   type = "stdio";
+    #   #   args = [
+    #   #     "-y"
+    #   #     "@modelcontextprotocol/server-sequential-thinking"
+    #   #   ];
+    #   # };
+    # };
   };
 }

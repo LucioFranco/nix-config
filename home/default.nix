@@ -26,6 +26,7 @@
     ./tmux.nix
     ./zellij.nix
     ./jujutsu.nix
+    ./zed.nix
   ];
 
   # nix = {
@@ -129,6 +130,9 @@
     bat = {
       enable = true;
       extraPackages = with pkgs.bat-extras; [ batman ];
+    };
+    obsidian = {
+      enable = true;
     };
   };
 

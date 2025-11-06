@@ -5,17 +5,18 @@
     settings = {
       add_newline = false;
       format = lib.concatStrings [
-        "$username"
-        "$hostname"
         "$directory"
         "\${custom.jj}"
-        "$package"
         "$direnv"
         "$nix_shell"
         "$line_break"
         "$jobs"
         "$character"
       ];
+
+      nix-shell = {
+        format = "via ($name)";
+      };
 
       custom.jj = {
         command = "starship-jj --ignore-working-copy starship prompt";
@@ -39,23 +40,23 @@
 
       module = [
         # [[module]] Bookmarks
-        {
-          type = "Bookmarks";
-          separator = " ";
-          color = "Magenta";
-          # bg_color    = "Yellow";
-          behind_symbol = "⇡";
-          # max_bookmarks = 1;
-          # max_length    = 10;
-        }
+        # {
+        #   type = "Bookmarks";
+        #   separator = " ";
+        #   color = "Magenta";
+        #   # bg_color    = "Yellow";
+        #   behind_symbol = "⇡";
+        #   # max_bookmarks = 1;
+        #   # max_length    = 10;
+        # }
 
         # [[module]] Commit
-        {
-          type = "Commit";
-          max_length = 24;
-          color = "Black";
-          # bg_color = "Yellow";
-        }
+        # {
+        #   type = "Commit";
+        #   max_length = 24;
+        #   color = "Black";
+        #   # bg_color = "Yellow";
+        # }
 
         # [[module]] State (with subtables)
         {

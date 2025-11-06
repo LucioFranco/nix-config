@@ -69,6 +69,8 @@
       "ghostty"
       "figma"
       "claude"
+      "zen"
+      "figma"
     ];
   };
 
