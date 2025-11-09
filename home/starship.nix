@@ -14,7 +14,7 @@
         "$character"
       ];
 
-      nix-shell = {
+      nix_shell = {
         format = "via ($name)";
       };
 
