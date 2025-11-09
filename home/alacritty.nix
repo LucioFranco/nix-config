@@ -4,6 +4,10 @@
     enable = true;
 
     settings = {
+      env = {
+        TERM = "xterm-256color";
+      };
+
       window = {
         dynamic_padding = false;
         decorations = "none";
