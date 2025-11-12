@@ -71,6 +71,8 @@
       "claude"
       "zen"
       "figma"
+      "logi-options+"
+      "tailscale"
     ];
   };
 

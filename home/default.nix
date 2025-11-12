@@ -181,5 +181,12 @@
     jq
 
     asciinema_3
+
+    (google-cloud-sdk.withExtraComponents (
+      with google-cloud-sdk.components;
+      [
+        gke-gcloud-auth-plugin
+      ]
+    ))
   ];
 }

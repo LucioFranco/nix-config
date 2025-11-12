@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   programs.claude-code = {
     enable = true;
 
@@ -26,6 +25,7 @@
 
           # Bash commands (scoped for safety)
           "Bash(git :*)"
+          "Bash(jj :*)"
           "Bash(nix :*)"
           "Bash(cargo :*)"
           "Bash(npm :*)"
@@ -52,6 +52,10 @@
         ];
       };
 
+      enabledPlugins = {
+        "superpowers@superpowers-marketplace" = true;
+      };
+
       # Environment variables for better performance
       env = {
         DISABLE_NON_ESSENTIAL_MODEL_CALLS = "1";
@@ -62,40 +66,40 @@
     };
 
     # MCP Servers
-    # mcpServers = {
-    #   serena = {
-    #     command = "nix";
-    #     type = "stdio";
-    #     args = [
-    #       "run"
-    #       "github:oraios/serena"
-    #       "--"
-    #       "start-mcp-server"
-    #       "--transport"
-    #       "stdio"
-    #       "--enable-web-dashboard"
-    #       "false"
-    #     ];
-    #   };
-    #
-    #   # spec-workflow = {
-    #   #   command = "npx";
-    #   #   type = "stdio";
-    #   #   args = [
-    #   #     "-y"
-    #   #     "@pimzino/spec-workflow-mcp@latest"
-    #   #     "--AutoStartDashboard"
-    #   #   ];
-    #   # };
-    #
-    #   # sequential-thinking = {
-    #   #   command = "npx";
-    #   #   type = "stdio";
-    #   #   args = [
-    #   #     "-y"
-    #   #     "@modelcontextprotocol/server-sequential-thinking"
-    #   #   ];
-    #   # };
-    # };
+    mcpServers = {
+      serena = {
+        command = "nix";
+        type = "stdio";
+        args = [
+          "run"
+          "github:oraios/serena"
+          "--"
+          "start-mcp-server"
+          "--transport"
+          "stdio"
+          "--enable-web-dashboard"
+          "false"
+        ];
+      };
+
+      # spec-workflow = {
+      #   command = "npx";
+      #   type = "stdio";
+      #   args = [
+      #     "-y"
+      #     "@pimzino/spec-workflow-mcp@latest"
+      #     "--AutoStartDashboard"
+      #   ];
+      # };
+
+      # sequential-thinking = {
+      #   command = "npx";
+      #   type = "stdio";
+      #   args = [
+      #     "-y"
+      #     "@modelcontextprotocol/server-sequential-thinking"
+      #   ];
+      # };
+    };
   };
 }
