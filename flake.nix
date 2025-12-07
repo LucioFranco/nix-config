@@ -1,5 +1,5 @@
 {
-  description = "Descriptihome.atuin.on for the project";
+  description = "Description for the project";
 
   nixConfig = {
     extra-trusted-substituters = [
