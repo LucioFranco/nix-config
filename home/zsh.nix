@@ -17,6 +17,7 @@
       k = "kubectl";
       watch-log = ''watch -t --color "jj --no-pager --limit 20 --color=always"'';
       watch-st = ''watch -t --color "jj st --no-pager --color=always"'';
+      ov = ''cd ~/Documents/"Obsidian Vault" && claude'';
     };
     enableCompletion = true;
     enableVteIntegration = pkgs.stdenv.isLinux;

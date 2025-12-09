@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "serena": {
+      "command": "nix",
+      "type": "stdio",
+      "args": [
+        "run",
+        "github:oraios/serena",
+        "--",
+        "start-mcp-server",
+        "--transport",
+        "stdio",
+        "--enable-web-dashboard",
+        "false"
+      ]
+    }
+  }
+}

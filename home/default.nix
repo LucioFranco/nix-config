@@ -188,5 +188,7 @@
         gke-gcloud-auth-plugin
       ]
     ))
+
+    k6
   ];
 }

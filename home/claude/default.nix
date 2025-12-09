@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.claude-code = {
     enable = true;
 
@@ -66,22 +67,22 @@
     };
 
     # MCP Servers
-    mcpServers = {
-      serena = {
-        command = "nix";
-        type = "stdio";
-        args = [
-          "run"
-          "github:oraios/serena"
-          "--"
-          "start-mcp-server"
-          "--transport"
-          "stdio"
-          "--enable-web-dashboard"
-          "false"
-        ];
-      };
-
+    # mcpServers = {
+    #   serena = {
+    #     command = "nix";
+    #     type = "stdio";
+    #     args = [
+    #       "run"
+    #       "github:oraios/serena"
+    #       "--"
+    #       "start-mcp-server"
+    #       "--transport"
+    #       "stdio"
+    #       "--enable-web-dashboard"
+    #       "false"
+    #     ];
+    #   };
+    #
       # spec-workflow = {
       #   command = "npx";
       #   type = "stdio";
@@ -100,6 +101,6 @@
       #     "@modelcontextprotocol/server-sequential-thinking"
       #   ];
       # };
-    };
+    # };
   };
 }
