@@ -65,42 +65,5 @@
         CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       };
     };
-
-    # MCP Servers
-    # mcpServers = {
-    #   serena = {
-    #     command = "nix";
-    #     type = "stdio";
-    #     args = [
-    #       "run"
-    #       "github:oraios/serena"
-    #       "--"
-    #       "start-mcp-server"
-    #       "--transport"
-    #       "stdio"
-    #       "--enable-web-dashboard"
-    #       "false"
-    #     ];
-    #   };
-    #
-      # spec-workflow = {
-      #   command = "npx";
-      #   type = "stdio";
-      #   args = [
-      #     "-y"
-      #     "@pimzino/spec-workflow-mcp@latest"
-      #     "--AutoStartDashboard"
-      #   ];
-      # };
-
-      # sequential-thinking = {
-      #   command = "npx";
-      #   type = "stdio";
-      #   args = [
-      #     "-y"
-      #     "@modelcontextprotocol/server-sequential-thinking"
-      #   ];
-      # };
-    # };
   };
 }

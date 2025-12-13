@@ -12,8 +12,13 @@
 
       imports = [ ../home ];
 
+      home.sessionVariables = {
+        FOO = "bar";
+      };
+
       home.packages = with pkgs; [
         linctl
+        _1password-cli
       ];
 
       programs.ssh = {
