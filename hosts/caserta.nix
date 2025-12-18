@@ -19,6 +19,7 @@
       home.packages = with pkgs; [
         linctl
         _1password-cli
+        warp-terminal
       ];
 
       programs.ssh = {
@@ -33,18 +34,18 @@
         text = ''
           # Ghostty configuration
           theme = Builtin Solarized Light
-          font-family = "Hack Nerd Font Mono"
-          #font-size = 12
+          #font-family = "Hack Nerd Font Mono"
+          # #font-size = 12
 
-          # Add your custom settings here
-          #window-padding-x = 10
-          #window-padding-y = 10
-          # Remove window decorations (borders, title bar)
-          window-decoration = false
+          # # Add your custom settings here
+          # #window-padding-x = 10
+          # #window-padding-y = 10
+          # # Remove window decorations (borders, title bar)
+          # window-decoration = false
 
-          # Optional: also remove internal padding
-          window-padding-x = 0
-          window-padding-y = 0
+          # # Optional: also remove internal padding
+          # window-padding-x = 0
+          # window-padding-y = 0
         '';
       };
     };
@@ -67,7 +68,7 @@
       "the-unarchiver"
       "spotify"
       "rectangle"
-      "slack"
+      # "slack"
       # "private-internet-access"
       "caffeine"
       # "chrome"

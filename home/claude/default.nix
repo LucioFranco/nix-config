@@ -57,12 +57,12 @@
         "superpowers@superpowers-marketplace" = true;
       };
 
+      model = "claude-opus-4-5-20251101";
+
       # Environment variables for better performance
       env = {
-        DISABLE_NON_ESSENTIAL_MODEL_CALLS = "1";
         DISABLE_TELEMETRY = "1";
-        MAX_MCP_OUTPUT_TOKENS = "50000";
-        CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
+        ENABLE_TOOL_SEARCH = "true";
       };
     };
   };
