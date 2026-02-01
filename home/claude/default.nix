@@ -57,7 +57,7 @@
         "superpowers@superpowers-marketplace" = true;
       };
 
-      model = "claude-opus-4-5-20251101";
+      model = "opusplan";
 
       # Environment variables for better performance
       env = {

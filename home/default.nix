@@ -19,6 +19,7 @@
     ./zsh.nix
     ./k9s.nix
     ./starship.nix
+    ./ghostty.nix
     ./git.nix
     ./fzf.nix
     ./nvim

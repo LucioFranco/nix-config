@@ -19,35 +19,37 @@
       home.packages = with pkgs; [
         linctl
         _1password-cli
-        warp-terminal
+        awscli2
+        terraform
+        graphite-cli
       ];
 
       programs.ssh = {
         enable = true;
         matchBlocks."github.com" = {
-          identityFile = "~/.ssh/id_ed25519_github";
+          identityFile = "~/.ssh/id_ed25519";
           identitiesOnly = true;
         };
       };
 
-      xdg.configFile."ghostty/config" = {
-        text = ''
-          # Ghostty configuration
-          theme = Builtin Solarized Light
-          #font-family = "Hack Nerd Font Mono"
-          # #font-size = 12
+      #xdg.configFile."ghostty/config" = {
+      #   text = ''
+      #     # Ghostty configuration
+      #     theme = Builtin Solarized Light
+      #     font-family = "Hack Nerd Font Mono"
+      #     font-size = 14
 
-          # # Add your custom settings here
-          # #window-padding-x = 10
-          # #window-padding-y = 10
-          # # Remove window decorations (borders, title bar)
-          # window-decoration = false
+      #     # # Add your custom settings here
+      #     # #window-padding-x = 10
+      #     # #window-padding-y = 10
+      #     # # Remove window decorations (borders, title bar)
+      #     # window-decoration = false
 
-          # # Optional: also remove internal padding
-          # window-padding-x = 0
-          # window-padding-y = 0
-        '';
-      };
+      #     # # Optional: also remove internal padding
+      #     # window-padding-x = 0
+      #     # window-padding-y = 0
+      #   '';
+      # };
     };
 
   users.users.lucio = {
