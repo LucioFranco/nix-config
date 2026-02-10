@@ -4,7 +4,7 @@
     enable = true;
 
     # Memory/context file
-    memory.source = ./root-claude.md;
+    # memory.source = ./root-claude.md;
 
     # Model and environment settings
     settings = {
@@ -31,6 +31,7 @@
           "Bash(cargo :*)"
           "Bash(npm :*)"
           "Bash(linctl :*)"
+          "Bash(pnpm :*)"
 
           # Web tools
           "WebFetch"
@@ -57,7 +58,7 @@
         "superpowers@superpowers-marketplace" = true;
       };
 
-      model = "opusplan";
+      model = "opus";
 
       # Environment variables for better performance
       env = {
