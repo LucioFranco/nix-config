@@ -17,12 +17,18 @@
       };
 
       home.packages = with pkgs; [
-        linctl
+        linear-cli
         _1password-cli
         awscli2
         terraform
         graphite-cli
       ];
+
+      home.file.".moose/config.toml".text = ''
+        [telemetry]
+        enabled = true
+        is_moose_developer = true
+      '';
 
       programs.ssh = {
         enable = true;
@@ -81,6 +87,8 @@
       "figma"
       "logi-options+"
       "tailscale"
+      "claude"
+      # "linear"
     ];
   };
 
@@ -136,6 +144,8 @@
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.orientation = "bottom";
   system.defaults.dock.showhidden = true;
+  system.defaults.dock.show-recents = false;
+  system.defaults.dock.tilesize = 32;
 
   system.defaults.finder.AppleShowAllExtensions = true;
   system.defaults.finder.QuitMenuItem = true;

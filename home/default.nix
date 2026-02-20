@@ -100,7 +100,7 @@
         apps = pkgs.buildEnv {
           name = "home-manager-applications";
           paths = config.home.packages;
-          pathsToLink = "/Applications";
+          pathsToLink = [ "/Applications" ];
         };
       in
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -191,5 +191,8 @@
     ))
 
     k6
+
+    # Needed so copyApplications picks up Zed.app for Spotlight/CLI
+    zed-editor
   ];
 }

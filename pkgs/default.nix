@@ -2,6 +2,7 @@
 # You can build them using 'nix build .#example'
 pkgs: {
   dashlane-cli = pkgs.callPackage ./dashlane.nix { pkgs = pkgs; };
+  linear-cli = pkgs.callPackage ./linear-cli.nix { pkgs = pkgs; };
   window = pkgs.rustPlatform.buildRustPackage (
     let
       rustSrc = pkgs.fetchFromGitHub {
@@ -82,23 +83,4 @@ pkgs: {
     }
   );
 
-  linctl = pkgs.buildGoModule {
-    pname = "linctl";
-    version = "0.0.1";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "dorkitude";
-      repo = "linctl";
-      rev = "b5996a38ba076ac97a7cc4a1dcc59cfbedbcf266";
-      sha256 = "sha256-YIhI9pSkJ2w5eZQ+IyUTdD6risfc9L2j9ntQtmCJDd0=";
-    };
-
-    vendorHash = "sha256-Nt/V5IS0UY4ROh7epKmtAN3VDFJlCnqmKRk1AVRASgQ=";
-
-    meta = with pkgs.lib; {
-      description = "A comprehensive command-line interface for Linear's API";
-      homepage = "https://github.com/dorkitude/linctl";
-      license = licenses.mit;
-    };
-  };
 }

@@ -55,7 +55,8 @@
       };
 
       enabledPlugins = {
-        "superpowers@superpowers-marketplace" = true;
+        "superpowers@superpowers-marketplace" = false;
+        "linear-cli@linear-cli" = true;
       };
 
       model = "opus";
@@ -63,7 +64,8 @@
       # Environment variables for better performance
       env = {
         DISABLE_TELEMETRY = "1";
-        ENABLE_TOOL_SEARCH = "true";
+        ENABLE_TOOL_SEARCH = "1";
+        CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
       };
     };
   };

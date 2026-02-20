@@ -19,6 +19,7 @@
       watch-log = ''watch -t --color "jj --no-pager --limit 20 --color=always"'';
       watch-st = ''watch -t --color "jj st --no-pager --color=always"'';
       ov = ''cd ~/Documents/"Obsidian Vault" && claude'';
+      zed = "zeditor";
     };
     enableCompletion = true;
     enableVteIntegration = pkgs.stdenv.isLinux;
@@ -39,7 +40,7 @@
 
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
       source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source ${pkgs.zsh-autopair.src}/zsh-autopair.plugin.zsh
       source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -59,6 +60,8 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
       bindkey -s "^O" 'fzf | xargs -r $EDITOR^M'
+
+      ${builtins.readFile ./worktree.zsh}
     '';
   };
 }

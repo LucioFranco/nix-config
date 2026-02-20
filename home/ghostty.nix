@@ -1,9 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.ghostty = {
     enable = true;
     # Ghostty on macos via nixpkgs is not available so use homebrew
-    package = null;
+    package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
     enableZshIntegration = true;
 
     settings = {

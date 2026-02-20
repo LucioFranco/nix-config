@@ -6,7 +6,7 @@
       inherit (pkgs)
         window
         compare
-        linctl
+        linear-cli
         ;
       workbook = config.flake.darwinConfigurations.workbook.system;
     }
@@ -19,7 +19,6 @@
         compare
         n
         xdg-open-wsl
-        linctl
         ;
       wsl = config.flake.nixosConfigurations.wsl.config.system.build.toplevel;
     }

@@ -52,7 +52,7 @@
             pyright.disableOrganizeInports = true;
             python.analysis = {
               # Ignore all files for analysis to exclusively use Ruff for linting
-              ignore.__raw = ''{ '*' }'';
+              ignore.__raw = "{ '*' }";
             };
           };
         };

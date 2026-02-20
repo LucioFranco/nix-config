@@ -111,6 +111,11 @@
         show = "auto";
         git_diff = true;
       };
+
+      # Trust all projects under ~/code
+      trusted_repositories = {
+        "~/code" = true;
+      };
     };
   };
 }
