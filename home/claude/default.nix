@@ -4,7 +4,7 @@
     enable = true;
 
     # Memory/context file
-    # memory.source = ./root-claude.md;
+    memory.source = ./root-claude.md;
 
     # Model and environment settings
     settings = {

@@ -21,7 +21,6 @@
         _1password-cli
         awscli2
         terraform
-        graphite-cli
       ];
 
       home.file.".moose/config.toml".text = ''
@@ -66,6 +65,10 @@
 
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+    };
 
     casks = [
       "iterm2"
@@ -84,10 +87,9 @@
       "figma"
       "claude"
       "zen"
-      "figma"
       "logi-options+"
       "tailscale"
-      "claude"
+      "finch"
       # "linear"
     ];
   };

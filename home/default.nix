@@ -22,7 +22,7 @@
     ./ghostty.nix
     ./git.nix
     ./fzf.nix
-    ./nvim
+    # ./nvim # temporarily disabled to speed up builds
     ./alacritty.nix
     ./tmux.nix
     ./zellij.nix
@@ -141,7 +141,7 @@
     # My custom tools
     window
     compare
-    jj-spr
+    # jj-spr
 
     # Common nix
     nixd
@@ -194,5 +194,7 @@
 
     # Needed so copyApplications picks up Zed.app for Spotlight/CLI
     zed-editor
+
+    codex
   ];
 }

@@ -23,12 +23,12 @@
       };
 
       aliases = {
-        spr = [
-          "util"
-          "exec"
-          "--"
-          "jj-spr"
-        ];
+        # spr = [
+        #   "util"
+        #   "exec"
+        #   "--"
+        #   "jj-spr"
+        # ];
         log-recent = [
           "log"
           "-r"

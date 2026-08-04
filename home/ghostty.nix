@@ -7,7 +7,7 @@
     enableZshIntegration = true;
 
     settings = {
-      theme = "Builtin Solarized Light";
+      theme = "iTerm2 Solarized Light";
       font-family = "Hack Nerd Font Mono";
       font-size = 14;
       # "macos-titlebar-style" = "hidden";

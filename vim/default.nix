@@ -82,7 +82,7 @@
     gitsigns.enable = true;
     guess-indent.enable = true;
     hardtime = {
-      enable = true;
+      enable = false;
       settings.disabled_filetypes = [
         "qf"
         "netrw"

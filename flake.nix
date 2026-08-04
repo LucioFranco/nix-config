@@ -80,10 +80,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    jj-spr = {
-      url = "github:LucioFranco/jj-spr";
+    codex-cli = {
+      url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # jj-spr = {
+    #   url = "github:LucioFranco/jj-spr";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
@@ -118,10 +123,11 @@
                 inputs.ragenix.overlays.default
                 inputs.jujutsu.overlays.default
                 inputs.claude-code.overlays.default
+                inputs.codex-cli.overlays.default
 
                 (final: prev: {
                   std = inputs.nix-std.lib;
-                  jj-spr = inputs.jj-spr.packages.${system}.default;
+                  # jj-spr = inputs.jj-spr.packages.${system}.default;
                 })
 
                 self.overlays.default
