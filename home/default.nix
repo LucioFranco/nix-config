@@ -25,9 +25,9 @@
     # ./nvim # temporarily disabled to speed up builds
     ./alacritty.nix
     ./tmux.nix
-    ./zellij.nix
-    ./jujutsu.nix
-    ./zed.nix
+    #./zellij.nix
+    #./jujutsu.nix
+    #./zed.nix
   ];
 
   # nix = {
@@ -193,7 +193,7 @@
     k6
 
     # Needed so copyApplications picks up Zed.app for Spotlight/CLI
-    zed-editor
+#    zed-editor
 
     codex
   ];
