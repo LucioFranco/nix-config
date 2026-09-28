@@ -2,8 +2,13 @@
 
 To deploy this config:
 
-```
-./bin/deploy <host> 
+```bash
+# macOS
+sudo darwin-rebuild switch --flake .#caserta
+sudo darwin-rebuild switch --flake .#workbook
+
+# NixOS/WSL
+sudo nixos-rebuild switch --flake .#wsl
 ```
 
 ## WSL

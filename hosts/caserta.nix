@@ -12,10 +12,6 @@
 
       imports = [ ../home ];
 
-      home.sessionVariables = {
-        FOO = "bar";
-      };
-
       home.packages = with pkgs; [
         linear-cli
         _1password-cli
@@ -31,30 +27,26 @@
 
       programs.ssh = {
         enable = true;
-        matchBlocks."github.com" = {
-          identityFile = "~/.ssh/id_ed25519";
-          identitiesOnly = true;
+        enableDefaultConfig = false;
+        settings = {
+          "*" = {
+            ForwardAgent = false;
+            AddKeysToAgent = "no";
+            Compression = false;
+            ServerAliveInterval = 0;
+            ServerAliveCountMax = 3;
+            HashKnownHosts = false;
+            UserKnownHostsFile = "~/.ssh/known_hosts";
+            ControlMaster = "no";
+            ControlPath = "~/.ssh/master-%r@%n:%p";
+            ControlPersist = "no";
+          };
+          "github.com" = {
+            IdentityFile = "~/.ssh/id_ed25519";
+            IdentitiesOnly = true;
+          };
         };
       };
-
-      #xdg.configFile."ghostty/config" = {
-      #   text = ''
-      #     # Ghostty configuration
-      #     theme = Builtin Solarized Light
-      #     font-family = "Hack Nerd Font Mono"
-      #     font-size = 14
-
-      #     # # Add your custom settings here
-      #     # #window-padding-x = 10
-      #     # #window-padding-y = 10
-      #     # # Remove window decorations (borders, title bar)
-      #     # window-decoration = false
-
-      #     # # Optional: also remove internal padding
-      #     # window-padding-x = 0
-      #     # window-padding-y = 0
-      #   '';
-      # };
     };
 
   users.users.lucio = {
@@ -79,18 +71,14 @@
       "the-unarchiver"
       "spotify"
       "rectangle"
-      # "slack"
-      # "private-internet-access"
       "caffeine"
-      # "chrome"
       "ghostty"
       "figma"
       "claude"
       "zen"
       "logi-options+"
-      "tailscale"
+      "tailscale-app"
       "finch"
-      # "linear"
     ];
   };
 
@@ -103,7 +91,6 @@
 
     dashlane-cli
 
-    # tmux-yank
     reattach-to-user-namespace
 
     unixtools.watch

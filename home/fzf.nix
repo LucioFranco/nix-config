@@ -3,7 +3,8 @@
   programs.fzf = {
     enable = true;
     defaultCommand = "rg --files --hidden --glob !.git";
-    fileWidgetCommand = "rg --files --hidden --glob !.git";
-    changeDirWidgetCommand = "fd --type d";
+    fileWidget.command = "rg --files --hidden --glob !.git";
+    changeDirWidget.command = "fd --type d";
+    historyWidget.command = "";
   };
 }

@@ -11,11 +11,4 @@
       };
     })
   ];
-
-  extraConfigLua = ''
-    -- require('solarized').setup({
-    --   options = {
-    --   },
-    -- });
-  '';
 }

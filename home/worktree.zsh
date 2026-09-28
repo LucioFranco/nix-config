@@ -1,3 +1,6 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash disable=SC2296
+
 # Helper: strip user prefix from branch name for worktree folder
 # e.g. "lucio/eng-2109-fix" -> "eng-2109-fix", "eng-2109-fix" -> "eng-2109-fix"
 _wt_folder() {
@@ -92,7 +95,8 @@ _cdw_new() {
     return 1
   fi
 
-  local folder=$(_wt_folder "$branch")
+  local folder
+  folder=$(_wt_folder "$branch")
   git worktree add "work/$folder" -b "$branch" || return 1
   cd "work/$folder" || return 1
   _wt_setup
@@ -186,7 +190,8 @@ _cdw_pick() {
 
   for b in "${local_branches[@]}"; do
     [[ -n "${used_map[$b]}" ]] && continue
-    local folder=$(_wt_folder "$b")
+    local folder
+    folder=$(_wt_folder "$b")
     entries+=("LOCAL"$'\t'"$b"$'\t'"work/$folder")
   done
 
@@ -197,7 +202,8 @@ _cdw_pick() {
 
   for b in "${remote_branches[@]}"; do
     [[ -n "${local_map[$b]}" ]] && continue
-    local folder=$(_wt_folder "$b")
+    local folder
+    folder=$(_wt_folder "$b")
     entries+=("REMOTE"$'\t'"$b"$'\t'"work/$folder")
   done
 
@@ -222,7 +228,8 @@ _cdw_pick() {
     else
       display_target="create -> $row_target"
     fi
-    local display_line="$(printf '%-6s  %-*s  %s' "$row_kind" "$branch_width" "$row_branch" "$display_target")"
+    local display_line
+    display_line="$(printf '%-6s  %-*s  %s' "$row_kind" "$branch_width" "$row_branch" "$display_target")"
     display_entries+=("$row_kind"$'\t'"$row_branch"$'\t'"$row_target"$'\t'"$display_line")
   done
 
@@ -239,13 +246,15 @@ _cdw_pick() {
       cd "$target" || return 1
       ;;
     LOCAL)
-      local folder=$(_wt_folder "$branch")
+      local folder
+      folder=$(_wt_folder "$branch")
       git worktree add "work/$folder" "$branch" || return 1
       cd "work/$folder" || return 1
       _wt_setup
       ;;
     REMOTE)
-      local folder=$(_wt_folder "$branch")
+      local folder
+      folder=$(_wt_folder "$branch")
       git worktree add --track -b "$branch" "work/$folder" "origin/$branch" || return 1
       cd "work/$folder" || return 1
       _wt_setup

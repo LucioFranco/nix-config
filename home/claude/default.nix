@@ -3,8 +3,7 @@
   programs.claude-code = {
     enable = true;
 
-    # Memory/context file
-    memory.source = ./root-claude.md;
+    context = ./root-claude.md;
 
     # Model and environment settings
     settings = {

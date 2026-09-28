@@ -1,5 +1,5 @@
 {
-  description = "Descriptihome.atuin.on for the project";
+  description = "Lucio's Nix system configurations";
 
   nixConfig = {
     extra-trusted-substituters = [
@@ -26,11 +26,6 @@
 
     ragenix.url = "github:yaxitech/ragenix";
 
-    tinted-schemes = {
-      url = "github:tinted-theming/schemes";
-      flake = false;
-    };
-
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,25 +48,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    jujutsu = {
-      url = "github:jj-vcs/jj";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    starship-jj = {
-      url = "gitlab:lanastara_foss/starship-jj";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -85,10 +63,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # jj-spr = {
-    #   url = "github:LucioFranco/jj-spr";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs =
@@ -100,7 +74,6 @@
         imports = [
           inputs.git-hooks.flakeModule
           inputs.treefmt-nix.flakeModule
-          ./nix/vim.nix
         ];
         systems = [
           "x86_64-linux"
@@ -119,28 +92,20 @@
               inherit system;
 
               overlays = [
-                inputs.starship-jj.overlays.default
                 inputs.ragenix.overlays.default
-                inputs.jujutsu.overlays.default
                 inputs.claude-code.overlays.default
                 inputs.codex-cli.overlays.default
 
                 (final: prev: {
                   std = inputs.nix-std.lib;
-                  # jj-spr = inputs.jj-spr.packages.${system}.default;
                 })
 
-                self.overlays.default
                 self.overlays.additions
-                self.overlays.modifications
-                self.overlays.unstable-packages
               ];
               config = {
                 allowUnfree = true;
               };
             };
-
-            packages.starship-jj = pkgs.starship-jj;
 
             formatter = config.treefmt.build.wrapper;
             checks.formatting = config.treefmt.build.check self;
@@ -171,7 +136,7 @@
               programs = {
                 nixfmt = {
                   enable = true;
-                  package = pkgs.nixfmt-rfc-style;
+                  package = pkgs.nixfmt;
                 };
                 ruff-format.enable = true;
                 shfmt = {

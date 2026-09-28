@@ -80,11 +80,7 @@
             mix_violet = '#eee8df',
             mix_yellow = '#f5ebcc',
           }
-          local foreground = colors.base2
-
-          -- if vim.o.background == 'light' then
-          foreground = colors.base02
-          -- end
+          local foreground = colors.base02
 
           local custom_theme = {
             normal = {

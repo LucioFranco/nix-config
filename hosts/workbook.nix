@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -33,9 +34,7 @@
       "spotify"
       "rectangle"
       "slack"
-      # "private-internet-access"
       "caffeine"
-      # "chrome"
     ];
   };
 
@@ -48,7 +47,6 @@
 
     dashlane-cli
 
-    # tmux-yank
     reattach-to-user-namespace
 
     unixtools.watch
@@ -60,12 +58,15 @@
 
   programs.zsh.enable = true;
 
-  # Can't enable this with determintesys nix
-  #services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
-  nix.enable = false;
+  nix.enable = true;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [ config.users.users.lucio.name ];
 
-  system.stateVersion = 24.11;
+  system.stateVersion = 6;
   system.primaryUser = "lucio";
 
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;

@@ -8,7 +8,6 @@
     flags = [ "--disable-up-arrow" ];
     settings = {
       auto_sync = false;
-      # key_path = config.age.secrets.key.path;
     };
   };
 }

@@ -4,7 +4,6 @@
     { pkgs, ... }:
     {
       inherit (pkgs)
-        window
         compare
         linear-cli
         ;
@@ -15,7 +14,6 @@
     { pkgs, ... }:
     {
       inherit (pkgs)
-        window
         compare
         n
         xdg-open-wsl

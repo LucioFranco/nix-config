@@ -6,12 +6,8 @@
   ...
 }:
 {
-  # home.username = "lucio";
-  # home.homeDirectory = "/home/lucio";
-
   imports = [
     inputs.ragenix.homeManagerModules.default
-    # inputs.claude-code.homeManagerModules.claude-code
     ./atuin
     ./claude
     ./direnv.nix
@@ -22,26 +18,9 @@
     ./ghostty.nix
     ./git.nix
     ./fzf.nix
-    # ./nvim # temporarily disabled to speed up builds
     ./alacritty.nix
     ./tmux.nix
-    #./zellij.nix
-    #./jujutsu.nix
-    #./zed.nix
   ];
-
-  # nix = {
-  #   registry = {
-  #     # Register this flake itself on the registry
-  #     me.flake = inputs.self;
-
-  #     nixpkgs.flake = inputs.nixpkgs;
-  #     # nixpkgs-stable.flake = inputs.nixpkgs-stable;
-  #     # nixpkgs-master.flake = inputs.nixpkgs-master;
-  #     home-manager.flake = inputs.home-manager;
-  #     flake-utils.flake = inputs.flake-utils;
-  #   };
-  # };
 
   fonts.fontconfig.enable = true;
 
@@ -94,7 +73,7 @@
   # MacOS spotlight doesn't understand symlinks so instead we will just copy.
   #
   # Ref: https://github.com/nix-community/home-manager/issues/1341#issuecomment-1190875080
-  home.activation = lib.mkIf pkgs.stdenv.isDarwin {
+  home.activation = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     copyApplications =
       let
         apps = pkgs.buildEnv {
@@ -139,9 +118,7 @@
 
   home.packages = with pkgs; [
     # My custom tools
-    window
     compare
-    # jj-spr
 
     # Common nix
     nixd
@@ -167,7 +144,6 @@
     ripgrep
     fd
     aws-iam-authenticator
-    #awscli2
     eksctl
     kubectl
     kubernetes-helm
@@ -181,7 +157,7 @@
 
     jq
 
-    asciinema_3
+    asciinema
 
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
@@ -191,9 +167,6 @@
     ))
 
     k6
-
-    # Needed so copyApplications picks up Zed.app for Spotlight/CLI
-#    zed-editor
 
     codex
   ];

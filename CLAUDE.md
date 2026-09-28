@@ -30,7 +30,7 @@ This is a personal Nix configuration repository using **flake-parts** for modula
 
 - **Entry point**: `home/default.nix`
 - **Modular imports**: Each tool/program has its own file (zsh.nix, git.nix, nvim/, etc.)
-- **Platform awareness**: Uses `pkgs.stdenv.isDarwin` for macOS-specific logic
+- **Platform awareness**: Uses `pkgs.stdenv.hostPlatform.isDarwin` for macOS-specific logic
 - **Application handling**: Custom activation script copies apps to `~/Applications/Home Manager Apps/` (Darwin only)
 
 ### Custom Packages
@@ -38,11 +38,8 @@ This is a personal Nix configuration repository using **flake-parts** for modula
 - **Location**: `pkgs/default.nix`
 - **Overlay**: Exposed via `overlays.additions` in `nix/overlays.nix`
 - **Custom tools**:
-  - `window`: Rust-based window management (matklad/window)
-  - `spr`: Stack pull requests (sunshowers/spr)
-  - `jj-github-pr`: Python tool for jujutsu GitHub PR integration
   - `compare`: Python comparison utility
-  - `n`, `xdg-open-wsl`, `jjj`: Various utilities
+  - `n`, `xdg-open-wsl`: Various utilities
 
 ## Development Commands
 
@@ -81,9 +78,6 @@ nix develop
 
 ```bash
 # Build custom packages
-nix build .#window
-nix build .#spr
-nix build .#jj-github-pr
 nix build .#compare
 
 # Build system packages
@@ -138,9 +132,9 @@ The repository uses GitHub Actions for CI (`.github/workflows/ci.yml`). Pre-comm
 - `nixpkgs`: Main package set (nixos-unstable)
 - `home-manager`: User environment management
 - `darwin`: nix-darwin for macOS system configuration
-- `vim-config`: Custom vim configuration (LucioFranco/vim-config)
-- `jujutsu`: Version control system (jj)
-- `stylix`: System-wide theming
+- `nixvim`: Available for the currently disabled custom Neovim configuration
+- `claude-code`: Claude Code package and Home Manager module
+- `codex-cli`: Codex CLI package
 - `ragenix`: Age-based secret management
 - `treefmt-nix`: Code formatting framework
 
@@ -154,14 +148,11 @@ The repository uses GitHub Actions for CI (`.github/workflows/ci.yml`). Pre-comm
 ### Overlays Chain
 
 The overlay order matters (defined in flake.nix perSystem):
-1. `vim-config.overlays.default`
-2. `starship-jj.overlays.default`
-3. `ragenix.overlays.default`
-4. `jujutsu.overlays.default`
-5. `nix-std` library overlay
-6. `self.overlays.additions` (custom packages)
-7. `self.overlays.modifications` (currently empty)
-8. `self.overlays.unstable-packages` (currently empty)
+1. `ragenix.overlays.default`
+2. `claude-code.overlays.default`
+3. `codex-cli.overlays.default`
+4. `nix-std` library overlay
+5. `self.overlays.additions` (custom packages)
 
 ## Notes for Claude
 
@@ -169,4 +160,4 @@ The overlay order matters (defined in flake.nix perSystem):
 - **Formatting is enforced**: All changes must pass `nix fmt` and pre-commit hooks
 - **Flake-parts pattern**: Understand the `withSystem` and `perSystem` structure
 - **Home-manager integration**: Both nixos and darwin modules use identical home-manager setup pattern
-- **Custom tools are important**: The user maintains several custom tools (window, spr, jj-github-pr, etc.)
+- **Custom tools are important**: The user maintains several custom tools (compare, n, xdg-open-wsl, etc.)

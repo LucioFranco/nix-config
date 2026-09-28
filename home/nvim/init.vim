@@ -23,9 +23,8 @@ set textwidth=80
 syntax enable
 set background=light
 colorscheme solarized
-"colorscheme jellybeans
-"
-"" Treat :W as :w for when typos happen
+
+" Treat :W as :w for when typos happen
 command! W w
 command! Wa wa
 
@@ -108,9 +107,7 @@ local navic = require("nvim-navic")
 
 local opts = {
     tools = { -- rust-tools options
-        --autoSetHints = true,
         reload_workspace_from_cargo_toml = true,
-        --hover_with_actions = true,
         inlay_hints = {
             auto = false,
             show_parameter_hints = false,
@@ -127,7 +124,6 @@ local opts = {
           navic.attach(client, bufnr)
         end,
         capabilities=capabilities,
-        -- cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
         cmd = "rust-analyzer",
         settings = {
             -- to enable rust-analyzer settings visit:
@@ -151,7 +147,6 @@ local opts = {
 }
 
 
---require('rust-tools').setup(opts)
 vim.g.rustaceanvim = {
   -- Plugin configuration
   tools = {
@@ -159,7 +154,6 @@ vim.g.rustaceanvim = {
   },
   -- LSP configuration
   server = {
-    --cmd = { os.getenv("HOME") .."/.cargo/bin/rust-analyzer" },
     on_attach = function(client, bufnr)
       -- you can also put keymaps in here
     end,
@@ -174,9 +168,7 @@ vim.g.rustaceanvim = {
             enable = true;
           },
         },
-        cargo = {
-            --features = "all"
-        }
+        cargo = {}
       },
     },
   },
@@ -298,11 +290,6 @@ vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
 vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
 vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 
--- require('zellij').setup({
---           vimTmuxNavigatorKeybinds = true,
---         })
-
-
 require('lualine').setup({
     sections = {
       lualine_c = {
@@ -310,14 +297,6 @@ require('lualine').setup({
       } 
     }
 })
-
--- require("copilot").setup({
---   suggestion = { enabled = false },
---   panel = { enabled = false },
--- })
--- require("copilot_cmp").setup()
-
--- require("harpoon").setup({})
 
 require('avante_lib').load()
 require('avante').setup ({
@@ -344,15 +323,12 @@ autocmd BufWritePre * lua vim.lsp.buf.format(nil, 200)
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <silent> <c-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-"nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
-"nnoremap <silent> grr   <cmd>RustRunnables<CR>
 
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold

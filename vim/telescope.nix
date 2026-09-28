@@ -36,16 +36,6 @@
 
     settings.pickers.colorscheme.enable_preview = true;
 
-    #   luaConfig.post = ''
-    #   -- make it globally available
-    #   function jj_files()
-    #     require("telescope.builtin").find_files {
-    #       prompt_title = "jj Files",
-    #       find_command = { "jj", "file", "list", "--no-pager" },
-    #     }
-    #   end
-    # '';
-
     keymaps = {
       "<C-p>" = {
         action = "git_files";

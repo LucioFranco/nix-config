@@ -26,7 +26,7 @@ async def run_and_compare(cmd, log1_path="run1.log", log2_path="run2.log"):
     )
 
     # Open log files for writing
-    with open(log1_path, "w") as log1, open(log2_path, "w") as log2:
+    with open(log1_path, "w") as log1, open(log2_path, "w") as log2:  # noqa: ASYNC230
         line_num = 1
         async for line1, line2 in async_zip(
             read_lines(proc1.stdout, log1), read_lines(proc2.stdout, log2)

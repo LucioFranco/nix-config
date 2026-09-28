@@ -41,8 +41,6 @@
   # TODO: not sure why I have this? Probably slow load times?
   withRuby = false;
 
-  # lualoader.enable = true;
-
   plugins = {
     bufferline = {
       enable = false;
@@ -67,17 +65,6 @@
       '';
       settings.indent.char = "▏";
       settings.indent.highlight = "SolarizedLight";
-      # settings= {
-      #   indent = {
-      #     highlight = ["CursorColumn" "Whitespace"];
-      #     char = "";
-      #   };
-      #
-      #   whitespace = {
-      #     highlight = ["CursorColumn" "Whitespace"];
-      #     remove_blankline_trail = false;
-      #   };
-      # };
     };
     gitsigns.enable = true;
     guess-indent.enable = true;
@@ -141,7 +128,6 @@
           "help"
         ];
         highlight = true;
-        # highlight_ctermbg = "DiffDelete";
         highlight_bg = lib.nixvim.mkRaw ''
           vim.api.nvim_get_hl(0, {name= 'DiffDelete'}).bg
         '';
@@ -161,19 +147,7 @@
     zen-mode.enable = true;
   };
 
-  extraPlugins = with pkgs.vimPlugins; [
-    hunk-nvim
-
-    (pkgs.vimUtils.buildVimPlugin {
-      name = "jj-diffconflicts";
-      src = pkgs.fetchFromGitHub {
-        owner = "rafikdraoui";
-        repo = "jj-diffconflicts";
-        rev = "20acec2eba0f1af6621880e59ae692ab34210416";
-        sha256 = "sha256-UWYsJbt9ol9WuuttG43YT/YNSmNsFp9KlKt1b13+SnI=";
-      };
-    })
-  ];
+  extraPlugins = with pkgs.vimPlugins; [ hunk-nvim ];
 
   extraConfigLua = ''
     require('hunk').setup()

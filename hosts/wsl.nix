@@ -40,7 +40,6 @@
 
   virtualisation.docker = {
     enable = true;
-    # setSocketVariable = true;
   };
 
   time = {
@@ -64,19 +63,14 @@
       "networkmanager"
       "docker"
     ];
-    # uid = 1000;
     password = "demo";
     shell = pkgs.zsh;
   };
 
   programs.zsh.enable = true;
 
-  # age.secrets.tailscale.file = ./wsl/tailscale.age;
-  # age.identityPaths = [ "/home/lucio/.ssh/id_ed25519" ];
-
   services.tailscale = {
     enable = true;
-    # authKeyFile = config.age.secrets.tailscale.path;
     useRoutingFeatures = "both";
   };
 
@@ -123,7 +117,6 @@
     # allow the Tailscale UDP port through the firewall
     allowedUDPPorts = [ config.services.tailscale.port ];
 
-    # # let you SSH in over the public internet
-    # allowedTCPPorts = [ 22 ];
+    # SSH is intentionally limited to trusted interfaces.
   };
 }

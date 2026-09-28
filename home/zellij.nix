@@ -11,7 +11,6 @@ in
     enableZshIntegration = false;
     settings = {
       theme = "colorblind";
-      # copy_command = "wl-copy";
       default_layout = "compact";
       pane_frames = true;
       ui = {
@@ -45,7 +44,7 @@ in
       plugins {
         autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
           is_enabled true
-          triggers "nvim|vim|v|nv|nvim-dev|fzf|zoxide|atuin"
+          triggers "nvim|vim|v|nv|fzf|zoxide|atuin"
           reaction_seconds "0.3"
           print_to_log false
         }

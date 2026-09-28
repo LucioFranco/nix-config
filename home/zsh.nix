@@ -11,18 +11,14 @@
       ls = "eza --binary --header --long";
       man = "batman";
       http = "xh";
-      nvim-dev = "${config.home.homeDirectory}/code/nix-config/result/bin/nvim";
-      nvimd = "${config.home.homeDirectory}/code/nix-config/result/bin/nvim";
       direnv-reload = "nix-direnv-reload";
       shell-reload = "unset __HM_SESS_VARS_SOURCED && source ~/.nix-profile/etc/profile.d/hm-session-vars.sh";
       k = "kubectl";
-      watch-log = ''watch -t --color "jj --no-pager --limit 20 --color=always"'';
-      watch-st = ''watch -t --color "jj st --no-pager --color=always"'';
       ov = ''cd ~/Documents/"Obsidian Vault" && claude'';
       zed = "zeditor";
     };
     enableCompletion = true;
-    enableVteIntegration = pkgs.stdenv.isLinux;
+    enableVteIntegration = pkgs.stdenv.hostPlatform.isLinux;
     autocd = true;
     autosuggestion.enable = true;
     history = {
